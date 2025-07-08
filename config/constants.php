@@ -13,8 +13,9 @@ return [
 
     'package_display_names' => [
         'admin/admins'    => 'Admin Manager',
+        'admin/admin_role_permissions'    => 'Admin Role Permissions Manager',
         'admin/banners'   => 'Banner Manager',
-        'admin/categories'=> 'Category Manager',
+        'admin/categories' => 'Category Manager',
         'admin/emails'    => 'Email Manager',
         'admin/faqs'      => 'Faq Manager',
         'admin/pages'     => 'Page Manager',
@@ -47,6 +48,9 @@ return [
         ],
         'healthcare' => [
             'admin/admins',
+            'admin/admin_role_permissions',
+            'admin/banners',
+            'admin/categories',
             'admin/emails',
             'admin/pages',
             'admin/settings',
@@ -99,6 +103,9 @@ return [
         // 'admin/user_roles' => [
         //     'description' => 'Define and manage user roles to organize responsibilities, and access levels across the application.',
         // ],
+        'admin/admin_role_permissions' => [
+            'description' => 'Manage and configure role-based permissions for administrators within the system.',
+        ],
     ],
 
 ];

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7ec7133c8ab3596e27f3fcaeab8a4058",
+    "content-hash": "97e94bec4f651c289e305e6923704cfc",
     "packages": [
         {
             "name": "admin/admin_auth",
@@ -12,7 +12,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/admin/admin_auth",
-                "reference": "a10900e0e684a7fedbf0cb1dd6d55fbfc198c032"
+                "reference": "114b683712214efb5472947bb43b2ff9b6d4220c"
             },
             "type": "library",
             "extra": {
@@ -36,13 +36,49 @@
             }
         },
         {
-            "name": "admin/admins",
+            "name": "admin/admin_role_permissions",
             "version": "1.0.0",
             "dist": {
                 "type": "path",
-                "url": "packages/admin/admins",
-                "reference": "5275e2f22e91a1f269a79c3d8b103af2b573ad76"
+                "url": "packages/admin/admin_role_permissions",
+                "reference": "ca76c94b742fa1496c35b89a85f85d0f17ecaa4a"
             },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "admin\\admin_role_permissions\\AdminRolePermissionServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "admin\\admin_role_permissions\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Manage admins roles and permissions",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "admin/admins",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pavanraj92/admin-admins.git",
+                "reference": "aca2d637ced42699de97c8e0a8d2a6c667ddcb1c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pavanraj92/admin-admins/zipball/aca2d637ced42699de97c8e0a8d2a6c667ddcb1c",
+                "reference": "aca2d637ced42699de97c8e0a8d2a6c667ddcb1c",
+                "shasum": ""
+            },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -60,183 +96,11 @@
                 "MIT"
             ],
             "description": "Manage administrator accounts, assign roles, and control access to backend features and settings.",
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
-            "name": "admin/banners",
-            "version": "1.0.0",
-            "dist": {
-                "type": "path",
-                "url": "packages/admin/banners",
-                "reference": "5f540b60856ea77348a258bf75bc0e8abfca4c33"
+            "support": {
+                "source": "https://github.com/pavanraj92/admin-admins/tree/main",
+                "issues": "https://github.com/pavanraj92/admin-admins/issues"
             },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "admin\\banners\\BannerServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "admin\\banners\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Manage promotional banners and visual advertisements displayed throughout the site to enhance marketing and user engagement.",
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
-            "name": "admin/categories",
-            "version": "1.0.0",
-            "dist": {
-                "type": "path",
-                "url": "packages/admin/categories",
-                "reference": "553ce691f34e8e9694a73aceef50be30a6809ea8"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "admin\\categories\\CategoryServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "admin\\categories\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Create, edit, and organize categories to structure content or products for easier navigation and management.",
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
-            "name": "admin/emails",
-            "version": "1.0.0",
-            "dist": {
-                "type": "path",
-                "url": "packages/admin/emails",
-                "reference": "e687abb877835b86f44b4143c66f97ab57ba4c20"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "admin\\emails\\EmailTemplateServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "admin\\emails\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Manage and configure email templates used across the system for various notifications and communications.",
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
-            "name": "admin/faqs",
-            "version": "1.0.0",
-            "dist": {
-                "type": "path",
-                "url": "packages/admin/faqs",
-                "reference": "8d2c78accf5168b36011cac50fb07f71f31bcc31"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "admin\\faqs\\FaqServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "admin\\faqs\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Add, edit, or remove frequently asked questions to help users quickly find answers to common queries.",
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
-            "name": "admin/pages",
-            "version": "1.0.0",
-            "dist": {
-                "type": "path",
-                "url": "packages/admin/pages",
-                "reference": "94dfb3c84151099b37875ba5df2d63f3a4f78734"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "admin\\pages\\PagesModuleServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "admin\\pages\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Create and manage static content pages (e.g., About Us, Terms & Conditions) to keep the site content updated and organized.",
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
-            "name": "admin/settings",
-            "version": "1.0.0",
-            "dist": {
-                "type": "path",
-                "url": "packages/admin/settings",
-                "reference": "1e2381f91f8574826ca47cf0108cb7347b8dc044"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "admin\\settings\\SettingServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "admin\\settings\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Configure general system settings, preferences, and options to customize the application’s behavior and appearance.",
-            "transport-options": {
-                "relative": true
-            }
+            "time": "2025-07-08T10:12:10+00:00"
         },
         {
             "name": "brick/math",
@@ -8384,13 +8248,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "admin/admin_auth": 20,
-        "admin/admins": 20,
-        "admin/banners": 20,
-        "admin/categories": 20,
-        "admin/emails": 20,
-        "admin/faqs": 20,
-        "admin/pages": 20,
-        "admin/settings": 20
+        "admin/admin_role_permissions": 20,
+        "admin/admins": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

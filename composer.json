@@ -3,18 +3,16 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "keywords": [
+        "laravel",
+        "framework"
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.2",
         "admin/admin_auth": "@dev",
+        "admin/admin_role_permissions": "@dev",
         "admin/admins": "@dev",
-        "admin/banners": "@dev",
-        "admin/categories": "@dev",
-        "admin/emails": "@dev",
-        "admin/faqs": "@dev",
-        "admin/pages": "@dev",
-        "admin/settings": "@dev",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
         "spatie/laravel-sluggable": "^3.7"
@@ -34,7 +32,8 @@
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
             "Packages\\Admin\\Users\\": "packages/admin/users/",
-            "Packages\\Admin\\Settings\\": "packages/admin/settings/"
+            "Packages\\Admin\\Settings\\": "packages/admin/settings/",
+            "Packages\\Admin\\AdminRolePermissions\\": "packages/admin/admin_role_permissions/"
         }
     },
     "autoload-dev": {
@@ -85,24 +84,24 @@
     "prefer-stable": true,
     "repositories": [
         {
-            "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-auth.git"           
+            "type": "path",
+            "url": "packages/admin/admin_auth"
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-admins.git"           
+            "url": "https://github.com/pavanraj92/admin-admins.git"
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-users.git"           
+            "url": "https://github.com/pavanraj92/admin-users.git"
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-categories.git"           
+            "url": "https://github.com/pavanraj92/admin-categories.git"
         },
         {
-            "type": "vcs", 
-            "url": "https://github.com/pavanraj92/admin-emails.git"           
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-emails.git"
         },
         {
             "type": "vcs",
@@ -110,16 +109,19 @@
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-faqs.git"           
-        },        
-        {
-            "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-banners.git"           
+            "url": "https://github.com/pavanraj92/admin-faqs.git"
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-settings.git"           
-        }       
+            "url": "https://github.com/pavanraj92/admin-banners.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-settings.git"
+        },
+        {
+            "type": "path",
+            "url": "packages/admin/admin_role_permissions"
+        }
     ]
-
 }

@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Validator as FacadesValidator;
 
 class WizardController extends Controller
 {
-     /**
+    /**
      * Display a list of installed packages.
      *
      * @return \Illuminate\View\View
@@ -53,7 +53,6 @@ class WizardController extends Controller
                 'info'         => $packageInfo,
                 'display_name' => $displayName,
             ];
-           
         }
 
         return view('wizard.index', compact('packageList'));
@@ -64,7 +63,7 @@ class WizardController extends Controller
     public function storeIndustry(Request $request)
     {
         $validator = FacadesValidator::make($request->all(), [
-            'industry' => 'required|string',          
+            'industry' => 'required|string',
         ]);
 
         if ($validator->fails()) {
@@ -162,25 +161,25 @@ class WizardController extends Controller
 
     // 3. Store packages in session
     public function storePackages(Request $request)
-    {       
+    {
         $validator = FacadesValidator::make($request->all(), [
             'packages' => 'required|array|min:1',
         ]);
-    
+
         if ($validator->fails()) {
             return response()->json([
                 'status' => 'error',
                 'message' => $validator->messages()->first()
             ], 422);
         }
-    
+
         $userSelectedPackages = $request->packages;
         $defaultPackage = ['admin/admin_auth'];
-    
+
         // Always include default package, but avoid duplicates
         $allPackages = array_unique(array_merge($defaultPackage, $userSelectedPackages));
         Session::put('packages', $allPackages);
-    
+
         $industryName = Session::get('industry');
 
         $missingPackages = [];
@@ -198,19 +197,19 @@ class WizardController extends Controller
                 'message' => 'Missing packages: ' . implode(', ', $missingPackages)
             ], 400);
         }
-    
+
         try {
             set_time_limit(0); // Extend execution time
             chdir(base_path());
-    
+
             // Build composer require command including default package
             $packageString = implode(' ', array_map(fn($pkg) => "{$pkg}:@dev", $allPackages));
             $command = "composer require {$packageString}";
-    
+
             ob_start();
             passthru($command, $exitCode);
             $output = ob_get_clean();
-    
+
             if ($exitCode === 0) {
                 // Artisan::call('migrate', ['--force' => true]);
                 $message = "✅ All selected packages installed successfully.";
@@ -221,14 +220,13 @@ class WizardController extends Controller
                     'message' => $message
                 ], 500);
             }
-    
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => "❌ Exception: " . $e->getMessage()
             ], 500);
         }
-    
+
         return response()->json([
             'status' => 'success',
             'message' => $message,
@@ -244,16 +242,16 @@ class WizardController extends Controller
             'admin_email' => [
                 'required',
                 'email',
-                'max:255', 
+                'max:255',
                 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
             ],
-           'admin_password' => [
+            'admin_password' => [
                 'required',
                 'string',
                 'min:8',
                 'max:255',
                 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).+$/',
-            ],     
+            ],
         ], [
             'admin_password.regex' => 'Password must be at least 8 characters and include at least one uppercase letter, one lowercase letter, one number, and one special character.',
         ]);
@@ -265,52 +263,60 @@ class WizardController extends Controller
 
         // Update mysql connection config
         $connection = config('database.connections.mysql');
-        $connection['database'] = Session::get('db.dbName');        
+        $connection['database'] = Session::get('db.dbName');
         config(['database.connections.mysql' => $connection]);
         // Purge and reconnect to use new database
         DB::purge('mysql');
         DB::reconnect('mysql');
 
         // migrate the database
-        Artisan::call('migrate', ['--force' => true]);    
+        Artisan::call('migrate', ['--force' => true]);
 
         // run the package seeder
         // Only run the seeder if the admin/users package is installed
         if (is_dir(base_path('vendor/admin/users'))) {
             Artisan::call('db:seed', [
-            '--class' => 'Packages\\Admin\\Users\\Database\\Seeders\\SeedUserRolesSeeder',
-            '--force' => true,
+                '--class' => 'Packages\\Admin\\Users\\Database\\Seeders\\SeedUserRolesSeeder',
+                '--force' => true,
             ]);
         }
 
         if (is_dir(base_path('vendor/admin/settings'))) {
             Artisan::call('db:seed', [
-            '--class' => 'Packages\\Admin\\Settings\\Database\\Seeders\\SettingSeeder',
-            '--force' => true,
+                '--class' => 'Packages\\Admin\\Settings\\Database\\Seeders\\SettingSeeder',
+                '--force' => true,
             ]);
         }
+
+        if (is_dir(base_path('vendor/admin/admin_role_permissions'))) {
+            Artisan::call('db:seed', [
+                '--class' => 'Packages\\Admin\\AdminRolePermissions\\database\\seeders\\AssignAdminRoleSeeder',
+                '--force' => true,
+            ]);
+        }
+
 
         // Use the correct connection for schema and queries
         $schema = Schema::connection('mysql');
         $db = DB::connection('mysql');
-     
+
         // Check if the database is set correctly
         $currentDb = DB::connection()->getDatabaseName();
-        
+
         if ($currentDb !== Session::get('db.dbName')) {
             return response()->json(['status' => 'error', 'message' => 'Database connection is not set correctly.'], 500);
         }
-      
+
         // Check if admin already exists
         $existingAdmin = $db->table('admins')->where('email', $request->admin_email)->first();
-        
+
         if ($existingAdmin) {
             return response()->json(['status' => 'error', 'message' => 'Admin with this email already exists.'], 400);
         }
 
         $websiteName = Session::get('db.websiteName');
         $websiteSlug = Str::slug($websiteName);
-    
+
         // Store admin using Eloquent (if model exists), otherwise use Query Builder       
         $adminId = DB::table('admins')->insert([
             'email' => $request->admin_email,
@@ -320,10 +326,10 @@ class WizardController extends Controller
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-      
+
         $this->updateEnvDbName(Session::get('db.dbName'));
         // Artisan::call('optimize:clear');
-       
+
         // forgot all session data
         Session::flush();
         Session::forget(['industry', 'db', 'packages']);
@@ -340,7 +346,7 @@ class WizardController extends Controller
 
         // Replace the current DB_DATABASE value
         $env = preg_replace('/^DB_DATABASE=.*$/m', 'DB_DATABASE=' . $newDbName, $env);
-        
+
         // update  DB_USERNAME and DB_PASSWORD if they are set in the session
         $dbUser = Session::get('db.dbUser');
         $dbPassword = Session::get('db.dbPassword');
@@ -350,22 +356,21 @@ class WizardController extends Controller
         if ($dbPassword) {
             $env = preg_replace('/^DB_PASSWORD=.*$/m', 'DB_PASSWORD=' . $dbPassword, $env);
         }
-      
+
         file_put_contents($envPath, $env);
-      
+
         // Optionally, reload config cache
         // Artisan::call('config:clear');
         // Artisan::call('config:cache');
         // Artisan::call('cache:clear');
         // Artisan::call('view:clear');
         // Artisan::call('route:clear');
-       
+
         Artisan::call('optimize:clear');
-        
-      
     }
 
-    public function viewThankYouPage(){
+    public function viewThankYouPage()
+    {
         return view('thankyou');
     }
 
@@ -395,7 +400,7 @@ class WizardController extends Controller
             Artisan::call('view:clear');
             Artisan::call('route:clear');
             Artisan::call('optimize:clear');
-            
+
             return response()->json(['status' => 'success', 'message' => 'Migration executed successfully.']);
         } catch (\Exception $e) {
             return response()->json(['status' => 'error', 'message' => $e->getMessage()], 500);
@@ -405,10 +410,10 @@ class WizardController extends Controller
     protected function setEnvValue($key, $value)
     {
         $path = base_path('.env');
-    
+
         if (file_exists($path)) {
             $envContents = file_get_contents($path);
-    
+
             if (preg_match("/^{$key}=.*/m", $envContents)) {
                 // Key exists, replace the line
                 $envContents = preg_replace(
@@ -420,10 +425,10 @@ class WizardController extends Controller
                 // Key does not exist, append it
                 $envContents .= "\n{$key}={$value}";
             }
-    
+
             file_put_contents($path, $envContents);
         }
-    }    
+    }
 
     public function checkPackageInstalled(Request $request)
     {
@@ -438,5 +443,4 @@ class WizardController extends Controller
             return response()->json(['status' => 'not_installed']);
         }
     }
-
 }
