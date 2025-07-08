@@ -1,17 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PackageManagerController;
 use App\Http\Controllers\WizardController;
-use App\Http\Controllers\PackageInstallerController;
 
 Route::middleware('installer.check')->group(function () {
     Route::get('/', function () {
         return view('welcome');
     });
-
-    Route::get('/packages', [PackageManagerController::class, 'index'])->name('packages.index');
-    Route::post('/install', [PackageManagerController::class, 'install'])->name('packages.install');
 
     Route::get('/wizard-install', [WizardController::class, 'index'])->name('wizard-install');
     Route::post('/store-industry', [WizardController::class, 'storeIndustry'])->name('store-industry');
@@ -20,10 +15,6 @@ Route::middleware('installer.check')->group(function () {
     Route::get('/clear-session', [WizardController::class, 'clearSession'])->name('clearSession');
     Route::get('/run-migration', [WizardController::class, 'runMigration'])->name('runMigration');
 
-    //Route::get('execute-command', [PackageManagerController::class, 'runComposerCommand'])->name('packages.execute-command');
-
-    // routes/web.php
-    Route::get('/install-package', [PackageInstallerController::class, 'install']);
 });
 
 Route::post('/store-admin-credentails', [WizardController::class, 'storeAdmin'])->name('store-admin-credentails');

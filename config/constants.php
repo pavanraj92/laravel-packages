@@ -32,10 +32,12 @@ return [
         'ecommerce' => [
             'admin/admins',
             'admin/banners',
+            'admin/categories',
             'admin/emails',
             'admin/faqs',
             'admin/pages',
             'admin/settings',
+            'admin/users',
         ],
         'finance' => [
             'admin/categories',
@@ -45,10 +47,7 @@ return [
         ],
         'healthcare' => [
             'admin/admins',
-            'admin/banners',
-            'admin/categories',
             'admin/emails',
-            'admin/faqs',
             'admin/pages',
             'admin/settings',
             'admin/users',
@@ -97,6 +96,9 @@ return [
         'admin/admins' => [
             'description' => 'Manage administrator accounts, assign roles, and control access to backend features and settings.',
         ],
+        // 'admin/user_roles' => [
+        //     'description' => 'Define and manage user roles to organize responsibilities, and access levels across the application.',
+        // ],
     ],
 
 ];
