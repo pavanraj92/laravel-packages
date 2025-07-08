@@ -270,9 +270,25 @@ class WizardController extends Controller
         // Purge and reconnect to use new database
         DB::purge('mysql');
         DB::reconnect('mysql');
-    
+
         // migrate the database
         Artisan::call('migrate', ['--force' => true]);    
+
+        // run the package seeder
+        // Only run the seeder if the admin/users package is installed
+        if (is_dir(base_path('vendor/admin/users'))) {
+            Artisan::call('db:seed', [
+            '--class' => 'Packages\\Admin\\Users\\Database\\Seeders\\SeedUserRolesSeeder',
+            '--force' => true,
+            ]);
+        }
+
+        if (is_dir(base_path('vendor/admin/settings'))) {
+            Artisan::call('db:seed', [
+            '--class' => 'Packages\\Admin\\Settings\\Database\\Seeders\\SettingSeeder',
+            '--force' => true,
+            ]);
+        }
 
         // Use the correct connection for schema and queries
         $schema = Schema::connection('mysql');

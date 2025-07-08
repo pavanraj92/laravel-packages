@@ -109,3 +109,34 @@ $(document).ready(function () {
     this.value = this.value.replace(/[^a-zA-Z\s]/g, "");
   });
 });
+
+//dynamic global modal implementation
+$(document).on('click', '.open-dynamic-modal', function () {
+  const config = $(this).data('config') || {};
+
+  $('#globalModalTitle').text(config.title || 'Modal Title');
+  $('#globalDynamicForm').attr('action', config.action_url || '#');
+  $('#globalModalBody').html(config.body_html || '<p>No content</p>');
+
+  // If Select2 is needed
+  if (config.init_select2) {
+      $('#globalModalBody').find('select.select2').select2({
+          dropdownParent: $('#globalDynamicModal'),
+          placeholder: config.placeholder || 'Select',
+          width: '100%',
+          ajax: config.ajax_url ? {
+              url: config.ajax_url,
+              dataType: 'json',
+              delay: 250,
+              processResults: function (data) {
+                  return {
+                      results: data
+                  };
+              },
+              cache: true
+          } : undefined
+      });
+  }
+
+  $('#globalDynamicModal').modal('show');
+});
