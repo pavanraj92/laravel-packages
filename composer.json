@@ -10,12 +10,10 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "admin/admin_auth": "@dev",
-        "admin/admin_role_permissions": "@dev",
-        "admin/admins": "@dev",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
-        "spatie/laravel-sluggable": "^3.7"
+        "spatie/laravel-sluggable": "^3.7",
+        "nwidart/laravel-modules": "^12.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -29,6 +27,7 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
+            "Modules\\": "Modules/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
             "Packages\\Admin\\AdminRolePermissions\\": "packages/admin/admin_role_permissions/",
@@ -84,8 +83,8 @@
     "prefer-stable": true,
  "repositories": [
         {
-            "type": "path",
-            "url": "packages/admin/admin_auth"
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-auth.git"
         },
         {
             "type": "vcs",
@@ -104,8 +103,8 @@
             "url": "https://github.com/pavanraj92/admin-emails.git"
         },
         {
-            "type": "path",
-            "url": "packages/admin/banners"           
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-banners.git"           
         },
         {
             "type": "vcs",
@@ -120,8 +119,8 @@
             "url": "https://github.com/pavanraj92/admin-settings.git"
         },
         {
-            "type": "path",
-            "url": "packages/admin/admin_role_permissions"
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-role-permission.git"
         }
     ]
 }
