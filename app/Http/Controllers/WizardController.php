@@ -54,7 +54,7 @@ class WizardController extends Controller
                 'display_name' => $displayName,
             ];
         }
-
+        
         return view('wizard.index', compact('packageList'));
     }
 

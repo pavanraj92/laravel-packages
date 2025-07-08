@@ -4,133 +4,208 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Landing Page</title>
+    <title>Laravel Admin Panel Installation - Professional Package Setup</title>
 
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet" />
+   
+    <!-- theme CSS -->
+    <link rel="stylesheet" href="{{ asset('backend/theme.css') }}" />
 
-    <!-- jQuery CDN -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <style>
-        .hero {
-            background: #f8f9fa;
-            padding: 100px 0;
-            text-align: center;
-        }
-
-        .feature-icon {
-            font-size: 2rem;
-            color: #0d6efd;
-        }
-    </style>
+    @stack('theme-css')
+      
 </head>
 
-<body>
+<body>    
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
-        <div class="container">
-            <a class="navbar-brand" href="#">MyBrand</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('wizard-install') }}">Install Wizard</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    @include('layouts.nav-header')
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1 class="display-4">Welcome to Our Service</h1>
-            <p class="lead">We provide the best solutions to grow your business.</p>
-            <a href="#" class="btn btn-primary btn-lg mt-3">Get Started</a>
+            <div class="row align-items-center">
+                <div class="col-lg-12 text-center">
+                    <h1 class="display-4">Empowering Businesses With<br><span style="color: #f48120;">Laravel Admin Panel Solutions</span></h1>
+                    <p class="lead mb-4">Professional Laravel packages with industry-standard admin panels tailored to your business needs. Transform your development process with our comprehensive administrative solutions that deliver exceptional performance and security.</p>
+                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+                        <a href="{{ route('wizard-install') }}" class="install-wizard-btn">
+                            <i class="bi bi-rocket-takeoff"></i>
+                            <span>Start Installation</span>
+                        </a>                      
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section class="py-5">
+    <section class="section-padding" id="services">
         <div class="container">
-            <div class="row text-center">
+            <div class="row">
+                <div class="col-lg-12 text-center mb-5">
+                    <h2>Why Choose Our Laravel Admin Panel?</h2>
+                    <p class="lead">Discover the powerful features that make our admin panel the perfect choice for your business</p>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-4 mb-4">
-                    <div class="feature-icon mb-3">
-                        <i class="bi bi-lightning-charge-fill"></i>
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">
+                            <i class="bi bi-lightning-charge-fill" style="color: #f48120;"></i>
+                        </div>
+                        <h5>Exceptional Performance</h5>
+                        <p>Benefit from optimized speed and seamless operations, ensuring your workflows remain efficient and responsive at all times.</p>
                     </div>
-                    <h5>Fast Performance</h5>
-                    <p>Experience blazing fast speed and efficiency in our system.</p>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="feature-icon mb-3">
-                        <i class="bi bi-shield-lock-fill"></i>
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">
+                            <i class="bi bi-shield-lock-fill" style="color: #f48120;"></i>
+                        </div>
+                        <h5>Enterprise-Grade Security</h5>
+                        <p>Protect your data with advanced security protocols and best-in-class infrastructure, giving you peace of mind for your business.</p>
                     </div>
-                    <h5>Secure System</h5>
-                    <p>Your data is safe with our robust security infrastructure.</p>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="feature-icon mb-3">
-                        <i class="bi bi-people-fill"></i>
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">
+                            <i class="bi bi-people-fill" style="color: #f48120;"></i>
+                        </div>
+                        <h5>Intuitive User Experience</h5>
+                        <p>Enjoy a thoughtfully designed interface that prioritizes usability, making complex tasks simple for users of all skill levels.</p>
                     </div>
-                    <h5>User Friendly</h5>
-                    <p>Designed with simplicity and ease of use for everyone.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section-padding bg-light" id="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2>Built by Experts, Trusted by Businesses</h2>
+                    <p class="lead mb-4">With over 23+ years of experience in software development, Dotsquares has been empowering businesses with cutting-edge solutions.</p>
+                    <div class="row">
+                        <div class="col-sm-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                <span>15,000+ Happy Clients</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                <span>27,000+ Projects Completed</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                <span>1,000+ Technical Experts</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                <span>95% Customer Satisfaction</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="feature-card">
+                        <h4 class="mb-4">Our Technology Stack</h4>
+                        <div class="row">
+                            <div class="col-4 mb-3 text-center">
+                                <i class="bi bi-code-square" style="font-size: 2rem; color: #f48120;"></i>
+                                <small class="d-block mt-2">Laravel</small>
+                            </div>
+                            <div class="col-4 mb-3 text-center">
+                                <i class="bi bi-bootstrap" style="font-size: 2rem; color: #f48120;"></i>
+                                <small class="d-block mt-2">Bootstrap</small>
+                            </div>
+                            <div class="col-4 mb-3 text-center">
+                                <i class="bi bi-database" style="font-size: 2rem; color: #f48120;"></i>
+                                <small class="d-block mt-2">MySQL</small>
+                            </div>
+                            <div class="col-4 mb-3 text-center">
+                                <i class="bi bi-git" style="font-size: 2rem; color: #f48120;"></i>
+                                <small class="d-block mt-2">Git</small>
+                            </div>
+                            <div class="col-4 mb-3 text-center">
+                                <i class="bi bi-cloud" style="font-size: 2rem; color: #f48120;"></i>
+                                <small class="d-block mt-2">AWS</small>
+                            </div>
+                            <div class="col-4 mb-3 text-center">
+                                <i class="bi bi-gear" style="font-size: 2rem; color: #f48120;"></i>
+                                <small class="d-block mt-2">DevOps</small>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section class="py-5 bg-light" id="contact">
+    <section class="section-padding bg-light" id="contact">
         <div class="container">
-            <h2 class="text-center mb-4">Get in Touch</h2>
+            <div class="row">
+                <div class="col-lg-12 text-center mb-5">
+                    <h2>Get Customized Solutions for Your Requirements</h2>
+                    <p class="lead">Ready to transform your business with our Laravel admin panel? Let's discuss your project requirements.</p>
+                </div>
+            </div>
             <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <form id="contactForm">
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" id="name" placeholder="John Doe" required>
+                <div class="col-lg-8">
+                    <div class="feature-card">
+                        <form id="contactForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="name" class="form-label">Full Name</label>
+                                    <input type="text" class="form-control" id="name" placeholder="John Doe" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" id="email" placeholder="john@example.com" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Project Requirements</label>
+                                <textarea class="form-control" id="message" rows="5" placeholder="Tell us about your project requirements..." required></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn-outline-success">
+                                    <i class="bi bi-envelope-fill me-2"></i>
+                                    Send Message
+                                </button>
+                            </div>
+                        </form>
+                        <div class="alert alert-success mt-3 d-none" id="successMessage">
+                            <i class="bi bi-check-circle-fill me-2"></i>
+                            Message sent successfully! We'll get back to you soon.
                         </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="email" placeholder="john@example.com"
-                                required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="message" class="form-label">Your Message</label>
-                            <textarea class="form-control" id="message" rows="5" placeholder="Type your message..." required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
-                    </form>
-                    <div class="alert alert-success mt-3 d-none" id="successMessage">Message sent successfully!</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+    
+    @include('layouts.footer')
 
-
-    <!-- Footer -->
-    <footer class="bg-light text-center py-4">
-        <div class="container">
-            <p class="mb-0">&copy; 2025 MyBrand. All rights reserved.</p>
-        </div>
-    </footer>
+     <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- Bootstrap Bundle JS (includes Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- jQuery Example Script -->
-    <script>
-        $(document).ready(function() {
-            $('.btn-primary').click(function(e) {
-                e.preventDefault();
-                alert("Get Started Clicked!");
-            });
-        });
-    </script>
+    <script src="{{ asset('backend/theme.js') }}"></script>
+
+    @stack('scripts')       
 
 </body>
 
