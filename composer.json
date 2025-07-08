@@ -13,16 +13,6 @@
         "admin/admin_auth": "@dev",
         "admin/admin_role_permissions": "@dev",
         "admin/admins": "@dev",
-<<<<<<< HEAD
-=======
-        "admin/banners": "@dev",
-        "admin/categories": "@dev",
-        "admin/emails": "@dev",
-        "admin/faqs": "@dev",
-        "admin/pages": "@dev",
-        "admin/settings": "@dev",
-        "admin/users": "@dev",
->>>>>>> e19253c (seeder path chnaged)
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
         "spatie/laravel-sluggable": "^3.7"
@@ -41,14 +31,9 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-<<<<<<< HEAD
-            "Packages\\Admin\\Users\\": "packages/admin/users/",
-            "Packages\\Admin\\Settings\\": "packages/admin/settings/",
-            "Packages\\Admin\\AdminRolePermissions\\": "packages/admin/admin_role_permissions/"
-=======
+            "Packages\\Admin\\AdminRolePermissions\\": "packages/admin/admin_role_permissions/",
             "packages\\admin\\users\\": "packages/admin/users/",
             "packages\\admin\\settings\\": "packages/admin/settings/"
->>>>>>> e19253c (seeder path chnaged)
         }
     },
     "autoload-dev": {
@@ -100,7 +85,6 @@
  "repositories": [
         {
             "type": "path",
-<<<<<<< HEAD
             "url": "packages/admin/admin_auth"
         },
         {
@@ -118,37 +102,12 @@
         {
             "type": "vcs",
             "url": "https://github.com/pavanraj92/admin-emails.git"
-=======
-            "url": "packages/admin/admin_auth"           
-        },
-        {
-            "type": "path",
-            "url": "packages/admin/users"           
-        },
-        {
-            "type": "path", 
-            "url": "packages/admin/emails"           
-        },
-
-        {
-            "type": "path",
-            "url": "packages/admin/pages"
-        },
-        {
-            "type": "path",
-            "url": "packages/admin/faqs"           
-        },
-        {
-            "type": "path",
-            "url": "packages/admin/settings"           
->>>>>>> e19253c (seeder path chnaged)
         },
         {
             "type": "path",
             "url": "packages/admin/banners"           
         },
         {
-<<<<<<< HEAD
             "type": "vcs",
             "url": "https://github.com/pavanraj92/admin-faqs.git"
         },
@@ -163,14 +122,6 @@
         {
             "type": "path",
             "url": "packages/admin/admin_role_permissions"
-=======
-            "type": "path",
-            "url": "packages/admin/admins"           
-        },
-        {
-            "type": "path",
-            "url": "packages/admin/categories"           
->>>>>>> e19253c (seeder path chnaged)
         }
     ]
 }
