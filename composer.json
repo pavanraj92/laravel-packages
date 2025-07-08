@@ -128,6 +128,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/pavanraj92/admin-settings.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-role-permission.git"
         }
     ]
 }

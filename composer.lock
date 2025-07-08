@@ -4,23 +4,24 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "69aeff34deaaf3785d14954bd7806b12",
+<<<<<<< HEAD
+    "content-hash": "97e94bec4f651c289e305e6923704cfc",
+=======
+    "content-hash": "eae57ec35405cf4dd6241a6b5b5f13f9",
+>>>>>>> e19253c (seeder path chnaged)
     "packages": [
         {
             "name": "admin/admin_auth",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/pavanraj92/admin-auth.git",
-                "reference": "114b683712214efb5472947bb43b2ff9b6d4220c"
-            },
+            "version": "1.0.0",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/pavanraj92/admin-auth/zipball/114b683712214efb5472947bb43b2ff9b6d4220c",
-                "reference": "114b683712214efb5472947bb43b2ff9b6d4220c",
-                "shasum": ""
+                "type": "path",
+                "url": "packages/admin/admin_auth",
+<<<<<<< HEAD
+                "reference": "114b683712214efb5472947bb43b2ff9b6d4220c"
+=======
+                "reference": "74addf205093c816d19ae9faed04f4bb799732d4"
+>>>>>>> e19253c (seeder path chnaged)
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -38,9 +39,30 @@
                 "MIT"
             ],
             "description": "Admin module form package for Laravel",
-            "support": {
-                "source": "https://github.com/pavanraj92/admin-auth/tree/main",
-                "issues": "https://github.com/pavanraj92/admin-auth/issues"
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "admin/admin_role_permissions",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+<<<<<<< HEAD
+                "url": "packages/admin/admin_role_permissions",
+                "reference": "ca76c94b742fa1496c35b89a85f85d0f17ecaa4a"
+=======
+                "url": "packages/admin/admins",
+                "reference": "5e9b391360e325fbe099e56824ef6f6849329fb8"
+>>>>>>> e19253c (seeder path chnaged)
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "admin\\admin_role_permissions\\AdminRolePermissionServiceProvider"
+                    ]
+                }
             },
             "time": "2025-07-08T10:09:00+00:00"
         },
@@ -81,247 +103,255 @@
                 "issues": "https://github.com/pavanraj92/admin-admins/issues"
             },
             "time": "2025-07-08T10:12:10+00:00"
+=======
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "admin/banners",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/pavanraj92/admin-banners.git",
-                "reference": "85e7148238003d7481d9c43067c7f617575b0909"
-            },
+            "version": "1.0.0",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/pavanraj92/admin-banners/zipball/85e7148238003d7481d9c43067c7f617575b0909",
-                "reference": "85e7148238003d7481d9c43067c7f617575b0909",
-                "shasum": ""
+                "type": "path",
+                "url": "packages/admin/banners",
+                "reference": "8c3d2b0a1ee23530c7dacd92a412e99a59b6f51c"
             },
             "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
                     "providers": [
-                        "admin\\banners\\BannerServiceProvider"
+                        "Laravel\\Tinker\\TinkerServiceProvider"
                     ]
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "admin\\banners\\": "src/"
+                    "Laravel\\Tinker\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "Manage promotional banners and visual advertisements displayed throughout the site to enhance marketing and user engagement.",
-            "support": {
-                "source": "https://github.com/pavanraj92/admin-banners/tree/main",
-                "issues": "https://github.com/pavanraj92/admin-banners/issues"
-            },
-            "time": "2025-07-08T10:14:34+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "admin/categories",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/pavanraj92/admin-categories.git",
-                "reference": "e59fa66b9ad521f4d963353ce325c35e7c8c5c75"
-            },
+            "version": "1.0.0",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/pavanraj92/admin-categories/zipball/e59fa66b9ad521f4d963353ce325c35e7c8c5c75",
-                "reference": "e59fa66b9ad521f4d963353ce325c35e7c8c5c75",
-                "shasum": ""
+                "type": "path",
+                "url": "packages/admin/categories",
+                "reference": "ee3801f0f20ce96d1320d87219d9519b90b428c3"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
                     "providers": [
-                        "admin\\categories\\CategoryServiceProvider"
+                        "Carbon\\Laravel\\ServiceProvider"
                     ]
+                },
+                "phpstan": {
+                    "includes": [
+                        "extension.neon"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-2.x": "2.x-dev",
+                    "dev-master": "3.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "admin\\categories\\": "src/"
+                    "Carbon\\": "src/Carbon/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "Create, edit, and organize categories to structure content or products for easier navigation and management.",
-            "support": {
-                "source": "https://github.com/pavanraj92/admin-categories/tree/main",
-                "issues": "https://github.com/pavanraj92/admin-categories/issues"
-            },
-            "time": "2025-07-08T10:16:35+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "admin/emails",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/pavanraj92/admin-emails.git",
-                "reference": "32c3059a84324f219aadb73f32e774c826e229a2"
-            },
+            "version": "1.0.0",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/pavanraj92/admin-emails/zipball/32c3059a84324f219aadb73f32e774c826e229a2",
-                "reference": "32c3059a84324f219aadb73f32e774c826e229a2",
-                "shasum": ""
+                "type": "path",
+                "url": "packages/admin/emails",
+                "reference": "3658bcca1396249653a96874f867a7b3b883019d"
             },
             "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
                     "providers": [
-                        "admin\\emails\\EmailTemplateServiceProvider"
+                        "Termwind\\Laravel\\TermwindServiceProvider"
                     ]
+                },
+                "branch-alias": {
+                    "dev-2.x": "2.x-dev"
                 }
             },
             "autoload": {
+                "files": [
+                    "src/Functions.php"
+                ],
                 "psr-4": {
-                    "admin\\emails\\": "src/"
+                    "Termwind\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "Manage and configure email templates used across the system for various notifications and communications.",
-            "support": {
-                "source": "https://github.com/pavanraj92/admin-emails/tree/main",
-                "issues": "https://github.com/pavanraj92/admin-emails/issues"
-            },
-            "time": "2025-07-08T12:10:27+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "admin/faqs",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/pavanraj92/admin-faqs.git",
-                "reference": "5e734dc0210fb917a7a806cbab81f631897f75d8"
-            },
+            "version": "1.0.0",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/pavanraj92/admin-faqs/zipball/5e734dc0210fb917a7a806cbab81f631897f75d8",
-                "reference": "5e734dc0210fb917a7a806cbab81f631897f75d8",
-                "shasum": ""
+                "type": "path",
+                "url": "packages/admin/faqs",
+                "reference": "54631c26333c1a03929b6b8332c8ca07717603b0"
             },
             "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
                     "providers": [
-                        "admin\\faqs\\FaqServiceProvider"
+                        "Laravel\\Pail\\PailServiceProvider"
                     ]
+                },
+                "branch-alias": {
+                    "dev-main": "1.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "admin\\faqs\\": "src/"
+                    "Laravel\\Pail\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "Add, edit, or remove frequently asked questions to help users quickly find answers to common queries.",
-            "support": {
-                "source": "https://github.com/pavanraj92/admin-faqs/tree/main",
-                "issues": "https://github.com/pavanraj92/admin-faqs/issues"
-            },
-            "time": "2025-07-08T12:12:22+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "admin/pages",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/pavanraj92/admin-pages.git",
-                "reference": "9ab0f4491d0a72c0d4e5c51715c21130202d3648"
-            },
+            "version": "1.0.0",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/pavanraj92/admin-pages/zipball/9ab0f4491d0a72c0d4e5c51715c21130202d3648",
-                "reference": "9ab0f4491d0a72c0d4e5c51715c21130202d3648",
-                "shasum": ""
+                "type": "path",
+                "url": "packages/admin/pages",
+                "reference": "862239dee837488192156b93d0453a4f1a168cb8"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
                     "providers": [
-                        "admin\\pages\\PagesModuleServiceProvider"
+                        "Laravel\\Sail\\SailServiceProvider"
                     ]
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "admin\\pages\\": "src/"
+                    "Laravel\\Sail\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "Create and manage static content pages (e.g., About Us, Terms & Conditions) to keep the site content updated and organized.",
-            "support": {
-                "source": "https://github.com/pavanraj92/admin-pages/tree/main",
-                "issues": "https://github.com/pavanraj92/admin-pages/issues"
-            },
-            "time": "2025-07-08T12:17:16+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "admin/settings",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/pavanraj92/admin-settings.git",
-                "reference": "77cb8265847db80c2dfcb9e8f5ef0a747b386237"
-            },
+            "version": "1.0.0",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/pavanraj92/admin-settings/zipball/77cb8265847db80c2dfcb9e8f5ef0a747b386237",
-                "reference": "77cb8265847db80c2dfcb9e8f5ef0a747b386237",
-                "shasum": ""
+                "type": "path",
+                "url": "packages/admin/settings",
+                "reference": "d1f17d2ff2591f8964f9b5c475950324f5f8eb23"
             },
             "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
                     "providers": [
-                        "admin\\settings\\SettingServiceProvider"
+                        "admin\\admin_auth\\AdminModuleServiceProvider"
                     ]
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "admin\\settings\\": "src/"
+                    "admin\\admin_auth\\": "src/"
                 }
             },
             "license": [
                 "MIT"
             ],
             "description": "Configure general system settings, preferences, and options to customize the application’s behavior and appearance.",
-            "support": {
-                "source": "https://github.com/pavanraj92/admin-settings/tree/main",
-                "issues": "https://github.com/pavanraj92/admin-settings/issues"
-            },
-            "time": "2025-07-08T13:20:26+00:00"
+            "transport-options": {
+                "relative": true
+            }
+>>>>>>> e19253c (seeder path chnaged)
         },
         {
             "name": "admin/users",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "packages/admin/users",
+                "reference": "f973d8b0ea7dbd9606b86362517b39256875fc20"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "admin\\admin_role_permissions\\AdminRolePermissionServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "admin\\admin_role_permissions\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Manage user accounts, roles, and permissions to control access and maintain user information within the system.",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "admin/admins",
             "version": "dev-main",
             "source": {
                 "type": "git",
-                "url": "https://github.com/pavanraj92/admin-users.git",
-                "reference": "ec6527c69ed7d1194d66d36976df60e2c33f8842"
+                "url": "https://github.com/pavanraj92/admin-admins.git",
+                "reference": "aca2d637ced42699de97c8e0a8d2a6c667ddcb1c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pavanraj92/admin-users/zipball/ec6527c69ed7d1194d66d36976df60e2c33f8842",
-                "reference": "ec6527c69ed7d1194d66d36976df60e2c33f8842",
+                "url": "https://api.github.com/repos/pavanraj92/admin-admins/zipball/aca2d637ced42699de97c8e0a8d2a6c667ddcb1c",
+                "reference": "aca2d637ced42699de97c8e0a8d2a6c667ddcb1c",
                 "shasum": ""
             },
             "default-branch": true,
@@ -329,24 +359,24 @@
             "extra": {
                 "laravel": {
                     "providers": [
-                        "admin\\users\\UserServiceProvider"
+                        "admin\\admins\\AdminServiceProvider"
                     ]
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "admin\\users\\": "src/"
+                    "admin\\admins\\": "src/"
                 }
             },
             "license": [
                 "MIT"
             ],
-            "description": "Manage user accounts, roles, and permissions to control access and maintain user information within the system.",
+            "description": "Manage administrator accounts, assign roles, and control access to backend features and settings.",
             "support": {
-                "source": "https://github.com/pavanraj92/admin-users/tree/main",
-                "issues": "https://github.com/pavanraj92/admin-users/issues"
+                "source": "https://github.com/pavanraj92/admin-admins/tree/main",
+                "issues": "https://github.com/pavanraj92/admin-admins/issues"
             },
-            "time": "2025-07-08T13:22:10+00:00"
+            "time": "2025-07-08T10:12:10+00:00"
         },
         {
             "name": "brick/math",
@@ -6446,16 +6476,16 @@
         },
         {
             "name": "laravel/pint",
-            "version": "v1.23.0",
+            "version": "v1.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/pint.git",
-                "reference": "9ab851dba4faa51a3c3223dd3d07044129021024"
+                "reference": "941d1927c5ca420c22710e98420287169c7bcaf7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pint/zipball/9ab851dba4faa51a3c3223dd3d07044129021024",
-                "reference": "9ab851dba4faa51a3c3223dd3d07044129021024",
+                "url": "https://api.github.com/repos/laravel/pint/zipball/941d1927c5ca420c22710e98420287169c7bcaf7",
+                "reference": "941d1927c5ca420c22710e98420287169c7bcaf7",
                 "shasum": ""
             },
             "require": {
@@ -6466,10 +6496,10 @@
                 "php": "^8.2.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.76.0",
-                "illuminate/view": "^11.45.1",
-                "larastan/larastan": "^3.5.0",
-                "laravel-zero/framework": "^11.45.0",
+                "friendsofphp/php-cs-fixer": "^3.75.0",
+                "illuminate/view": "^11.44.7",
+                "larastan/larastan": "^3.4.0",
+                "laravel-zero/framework": "^11.36.1",
                 "mockery/mockery": "^1.6.12",
                 "nunomaduro/termwind": "^2.3.1",
                 "pestphp/pest": "^2.36.0"
@@ -6479,9 +6509,6 @@
             ],
             "type": "project",
             "autoload": {
-                "files": [
-                    "overrides/Runner/Parallel/ProcessFactory.php"
-                ],
                 "psr-4": {
                     "App\\": "app/",
                     "Database\\Seeders\\": "database/seeders/",
@@ -6511,7 +6538,7 @@
                 "issues": "https://github.com/laravel/pint/issues",
                 "source": "https://github.com/laravel/pint"
             },
-            "time": "2025-07-03T10:37:47+00:00"
+            "time": "2025-05-08T08:38:12+00:00"
         },
         {
             "name": "laravel/sail",
@@ -6661,16 +6688,16 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.13.3",
+            "version": "1.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "faed855a7b5f4d4637717c2b3863e277116beb36"
+                "reference": "1720ddd719e16cf0db4eb1c6eca108031636d46c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/faed855a7b5f4d4637717c2b3863e277116beb36",
-                "reference": "faed855a7b5f4d4637717c2b3863e277116beb36",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/1720ddd719e16cf0db4eb1c6eca108031636d46c",
+                "reference": "1720ddd719e16cf0db4eb1c6eca108031636d46c",
                 "shasum": ""
             },
             "require": {
@@ -6709,7 +6736,7 @@
             ],
             "support": {
                 "issues": "https://github.com/myclabs/DeepCopy/issues",
-                "source": "https://github.com/myclabs/DeepCopy/tree/1.13.3"
+                "source": "https://github.com/myclabs/DeepCopy/tree/1.13.1"
             },
             "funding": [
                 {
@@ -6717,7 +6744,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-07-05T12:25:42+00:00"
+            "time": "2025-04-29T12:36:36+00:00"
         },
         {
             "name": "nunomaduro/collision",
@@ -7273,16 +7300,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "11.5.26",
+            "version": "11.5.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "4ad8fe263a0b55b54a8028c38a18e3c5bef312e0"
+                "reference": "864ab32b3ff52058f917c5b19b3cef821e4a4f1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/4ad8fe263a0b55b54a8028c38a18e3c5bef312e0",
-                "reference": "4ad8fe263a0b55b54a8028c38a18e3c5bef312e0",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/864ab32b3ff52058f917c5b19b3cef821e4a4f1b",
+                "reference": "864ab32b3ff52058f917c5b19b3cef821e4a4f1b",
                 "shasum": ""
             },
             "require": {
@@ -7354,7 +7381,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.26"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.25"
             },
             "funding": [
                 {
@@ -7378,7 +7405,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-07-04T05:58:21+00:00"
+            "time": "2025-06-27T04:36:07+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -8497,6 +8524,10 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "admin/admin_auth": 20,
+<<<<<<< HEAD
+        "admin/admin_role_permissions": 20,
+        "admin/admins": 20
+=======
         "admin/admins": 20,
         "admin/banners": 20,
         "admin/categories": 20,
@@ -8505,6 +8536,7 @@
         "admin/pages": 20,
         "admin/settings": 20,
         "admin/users": 20
+>>>>>>> e19253c (seeder path chnaged)
     },
     "prefer-stable": true,
     "prefer-lowest": false,
