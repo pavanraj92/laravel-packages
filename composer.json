@@ -10,18 +10,10 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "admin/admin_auth": "@dev",
-        "admin/admins": "@dev",
-        "admin/banners": "@dev",
-        "admin/categories": "@dev",
-        "admin/emails": "@dev",
-        "admin/faqs": "@dev",
-        "admin/pages": "@dev",
-        "admin/settings": "@dev",
-        "admin/users": "@dev",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
-        "spatie/laravel-sluggable": "^3.7"
+        "spatie/laravel-sluggable": "^3.7",
+        "nwidart/laravel-modules": "^12.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -35,6 +27,7 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
+            "Modules\\": "Modules/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
             "Packages\\Admin\\AdminRolePermissions\\": "packages/admin/admin_role_permissions/",
@@ -91,7 +84,7 @@
  "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-auth.git"  
+            "url": "https://github.com/pavanraj92/admin-auth.git"
         },
         {
             "type": "vcs",
@@ -108,10 +101,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/pavanraj92/admin-emails.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-pages.git"
         },
         {
             "type": "vcs",

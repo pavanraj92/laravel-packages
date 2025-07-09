@@ -214,11 +214,8 @@
                                                             value="{{ $package['vendor'] }}/{{ $package['name'] }}"
                                                             id="package_{{ $index }}">
                                                         <label class="form-check-label"
-                                                            for="package_{{ $index }}">
-                                                            <strong>{{ $package['display_name'] ?? $package['vendor'] . '/' . $package['name'] }}</strong>
-                                                            @if (isset($package['info']['description']))
-                                                                – {{ $package['info']['description'] }}
-                                                            @endif
+                                                            for="package_{{ $index }}" style="display: inline;" data-toggle="tooltip" data-placement="top" title="{{ (isset($package['info']['description'])) ? $package['info']['description'] : 'No description available' }}">
+                                                            <strong>{{ $package['display_name'] ?? $package['vendor'] . '/' . $package['name'] }}</strong>                                                           
                                                         </label>
                                                     </div>
                                                     <span class="package-status"

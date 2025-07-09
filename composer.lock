@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "content-hash": "97e94bec4f651c289e305e6923704cfc",
-=======
     "content-hash": "eae57ec35405cf4dd6241a6b5b5f13f9",
->>>>>>> e19253c (seeder path chnaged)
     "packages": [
         {
             "name": "admin/admin_auth",
@@ -16,11 +12,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/admin/admin_auth",
-<<<<<<< HEAD
-                "reference": "114b683712214efb5472947bb43b2ff9b6d4220c"
-=======
                 "reference": "74addf205093c816d19ae9faed04f4bb799732d4"
->>>>>>> e19253c (seeder path chnaged)
             },
             "type": "library",
             "extra": {
@@ -48,13 +40,8 @@
             "version": "1.0.0",
             "dist": {
                 "type": "path",
-<<<<<<< HEAD
-                "url": "packages/admin/admin_role_permissions",
-                "reference": "ca76c94b742fa1496c35b89a85f85d0f17ecaa4a"
-=======
                 "url": "packages/admin/admins",
                 "reference": "5e9b391360e325fbe099e56824ef6f6849329fb8"
->>>>>>> e19253c (seeder path chnaged)
             },
             "type": "library",
             "extra": {
@@ -102,8 +89,7 @@
                 "source": "https://github.com/pavanraj92/admin-admins/tree/main",
                 "issues": "https://github.com/pavanraj92/admin-admins/issues"
             },
-            "time": "2025-07-08T10:12:10+00:00"
-=======
+            "time": "2025-07-08T10:12:10+00:00",
             "transport-options": {
                 "relative": true
             }
@@ -8524,10 +8510,6 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "admin/admin_auth": 20,
-<<<<<<< HEAD
-        "admin/admin_role_permissions": 20,
-        "admin/admins": 20
-=======
         "admin/admins": 20,
         "admin/banners": 20,
         "admin/categories": 20,
@@ -8536,7 +8518,6 @@
         "admin/pages": 20,
         "admin/settings": 20,
         "admin/users": 20
->>>>>>> e19253c (seeder path chnaged)
     },
     "prefer-stable": true,
     "prefer-lowest": false,
