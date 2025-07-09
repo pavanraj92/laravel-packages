@@ -6,7 +6,8 @@ use App\Http\Controllers\WizardController;
 Route::middleware('installer.check')->group(function () {
     Route::get('/', function () {
         return view('welcome');
-    });
+    })->name('home');
+    
     Route::get('/wizard-install', [WizardController::class, 'index'])->name('wizard-install');
     Route::post('/store-industry', [WizardController::class, 'storeIndustry'])->name('store-industry');
     Route::post('/create-database', [WizardController::class, 'createDatabase'])->name('create-database');

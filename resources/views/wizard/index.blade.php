@@ -14,6 +14,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- theme CSS -->
+    <link rel="stylesheet" href="{{ asset('backend/custom.css') }}" />
     <link rel="stylesheet" href="{{ asset('backend/theme.css') }}" />
 
     <script>
@@ -52,26 +53,11 @@
 
         .form-step.active {
             display: block;
-        }
+        }        
 
-        .select2-container {
-            width: 100% !important;
-        }
-
-        .select2-container {
-            width: 100% !important;
-        }
-
-        .select2-selection {
-            height: 38px !important;
-            /* Match Bootstrap's default input height */
-            padding: 0.375rem 0.75rem !important;
-            /* Match Bootstrap input padding */
-            border: 1px solid #ced4da !important;
-            border-radius: 0.375rem !important;
-            background-color: #fff !important;
-            display: flex !important;
-            align-items: center !important;
+        /* Prevent body scroll lock */
+        body.select2-open {
+            overflow: visible !important;
         }
 
         .loader {
@@ -124,10 +110,14 @@
             <div class="row">
                 <div class="col-md-8 offset-md-2 mb-5">
                     <div class="card">
+                        <div class="card-header">
+                            <h3 class="text-center mt-3">Laravel Application Setup Wizard</h3>
+                            <p class="text-center text-muted">Follow the steps to set up your Laravel application.</p>
+                        </div>
                         <div class="card-body">                            
                             <form id="multiStepForm" novalidate autocomplete="off">
                                 <!-- Step 1: Industry Selection -->
-                                <div class="form-step @if (empty($industry)) active @endif mt-5"
+                                <div class="form-step @if (empty($industry)) active @endif"
                                     data-step="1">
                                     <h4 class="mb-3">Step 1: Industry Selection</h4>
                                     <div class="mb-3">
@@ -341,7 +331,32 @@
             $('#industry').select2({
                 placeholder: "Select an industry",
                 allowClear: true,
-                minimumResultsForSearch: Infinity
+                minimumResultsForSearch: Infinity,
+                dropdownParent: $('#industry').parent(),
+                width: '100%',
+                dropdownAutoWidth: false,
+                scrollAfterSelect: false,
+                closeOnSelect: true,
+                dropdownCssClass: 'select2-dropdown-custom'
+            });
+
+            // Prevent page scroll when Select2 opens
+            $('#industry').on('select2:open', function (e) {
+                // Prevent default scroll behavior
+                e.preventDefault();
+                
+                // Get current scroll position
+                const scrollTop = $(window).scrollTop();
+                
+                // Keep the scroll position fixed
+                setTimeout(function() {
+                    $(window).scrollTop(scrollTop);
+                }, 1);
+            });
+
+            // Ensure proper focus management
+            $('#industry').on('select2:close', function (e) {
+                $(this).focus();
             });
 
             function showStep(step) {
