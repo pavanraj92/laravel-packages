@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eae57ec35405cf4dd6241a6b5b5f13f9",
+    "content-hash": "aa026ec23c0fcd7fc4f8d40c9031fba6",
     "packages": [
         {
             "name": "admin/admin_auth",
@@ -12,7 +12,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/admin/admin_auth",
-                "reference": "74addf205093c816d19ae9faed04f4bb799732d4"
+                "reference": "2459cbac1cfd058fb963242dcf65436fbcf0c7e6"
             },
             "type": "library",
             "extra": {
@@ -40,271 +40,9 @@
             "version": "1.0.0",
             "dist": {
                 "type": "path",
-                "url": "packages/admin/admins",
-                "reference": "5e9b391360e325fbe099e56824ef6f6849329fb8"
+                "url": "packages/admin/admin_role_permissions",
+                "reference": "82a625761fdc68153eb511a70c8e72af00a2a4d1"
             },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "admin\\admin_role_permissions\\AdminRolePermissionServiceProvider"
-                    ]
-                }
-            },
-            "time": "2025-07-08T10:09:00+00:00"
-        },
-        {
-            "name": "admin/admins",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/pavanraj92/admin-admins.git",
-                "reference": "aca2d637ced42699de97c8e0a8d2a6c667ddcb1c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/pavanraj92/admin-admins/zipball/aca2d637ced42699de97c8e0a8d2a6c667ddcb1c",
-                "reference": "aca2d637ced42699de97c8e0a8d2a6c667ddcb1c",
-                "shasum": ""
-            },
-            "default-branch": true,
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "admin\\admins\\AdminServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "admin\\admins\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Manage administrator accounts, assign roles, and control access to backend features and settings.",
-            "support": {
-                "source": "https://github.com/pavanraj92/admin-admins/tree/main",
-                "issues": "https://github.com/pavanraj92/admin-admins/issues"
-            },
-            "time": "2025-07-08T10:12:10+00:00",
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
-            "name": "admin/banners",
-            "version": "1.0.0",
-            "dist": {
-                "type": "path",
-                "url": "packages/admin/banners",
-                "reference": "8c3d2b0a1ee23530c7dacd92a412e99a59b6f51c"
-            },
-            "default-branch": true,
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Laravel\\Tinker\\TinkerServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Laravel\\Tinker\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Manage promotional banners and visual advertisements displayed throughout the site to enhance marketing and user engagement.",
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
-            "name": "admin/categories",
-            "version": "1.0.0",
-            "dist": {
-                "type": "path",
-                "url": "packages/admin/categories",
-                "reference": "ee3801f0f20ce96d1320d87219d9519b90b428c3"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Carbon\\Laravel\\ServiceProvider"
-                    ]
-                },
-                "phpstan": {
-                    "includes": [
-                        "extension.neon"
-                    ]
-                },
-                "branch-alias": {
-                    "dev-2.x": "2.x-dev",
-                    "dev-master": "3.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Carbon\\": "src/Carbon/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Create, edit, and organize categories to structure content or products for easier navigation and management.",
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
-            "name": "admin/emails",
-            "version": "1.0.0",
-            "dist": {
-                "type": "path",
-                "url": "packages/admin/emails",
-                "reference": "3658bcca1396249653a96874f867a7b3b883019d"
-            },
-            "default-branch": true,
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Termwind\\Laravel\\TermwindServiceProvider"
-                    ]
-                },
-                "branch-alias": {
-                    "dev-2.x": "2.x-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/Functions.php"
-                ],
-                "psr-4": {
-                    "Termwind\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Manage and configure email templates used across the system for various notifications and communications.",
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
-            "name": "admin/faqs",
-            "version": "1.0.0",
-            "dist": {
-                "type": "path",
-                "url": "packages/admin/faqs",
-                "reference": "54631c26333c1a03929b6b8332c8ca07717603b0"
-            },
-            "default-branch": true,
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Laravel\\Pail\\PailServiceProvider"
-                    ]
-                },
-                "branch-alias": {
-                    "dev-main": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Laravel\\Pail\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Add, edit, or remove frequently asked questions to help users quickly find answers to common queries.",
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
-            "name": "admin/pages",
-            "version": "1.0.0",
-            "dist": {
-                "type": "path",
-                "url": "packages/admin/pages",
-                "reference": "862239dee837488192156b93d0453a4f1a168cb8"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Laravel\\Sail\\SailServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Laravel\\Sail\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Create and manage static content pages (e.g., About Us, Terms & Conditions) to keep the site content updated and organized.",
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
-            "name": "admin/settings",
-            "version": "1.0.0",
-            "dist": {
-                "type": "path",
-                "url": "packages/admin/settings",
-                "reference": "d1f17d2ff2591f8964f9b5c475950324f5f8eb23"
-            },
-            "default-branch": true,
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "admin\\admin_auth\\AdminModuleServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "admin\\admin_auth\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Configure general system settings, preferences, and options to customize the application’s behavior and appearance.",
-            "transport-options": {
-                "relative": true
-            }
->>>>>>> e19253c (seeder path chnaged)
-        },
-        {
-            "name": "admin/users",
-            "version": "1.0.0",
-            "dist": {
-                "type": "path",
-                "url": "packages/admin/users",
-                "reference": "f973d8b0ea7dbd9606b86362517b39256875fc20"
-            },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -321,7 +59,7 @@
             "license": [
                 "MIT"
             ],
-            "description": "Manage user accounts, roles, and permissions to control access and maintain user information within the system.",
+            "description": "Manage admins roles and permissions",
             "transport-options": {
                 "relative": true
             }
@@ -332,12 +70,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pavanraj92/admin-admins.git",
-                "reference": "aca2d637ced42699de97c8e0a8d2a6c667ddcb1c"
+                "reference": "e802a53227f6070f085e27780414b50a61cc474c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pavanraj92/admin-admins/zipball/aca2d637ced42699de97c8e0a8d2a6c667ddcb1c",
-                "reference": "aca2d637ced42699de97c8e0a8d2a6c667ddcb1c",
+                "url": "https://api.github.com/repos/pavanraj92/admin-admins/zipball/e802a53227f6070f085e27780414b50a61cc474c",
+                "reference": "e802a53227f6070f085e27780414b50a61cc474c",
                 "shasum": ""
             },
             "default-branch": true,
@@ -362,7 +100,45 @@
                 "source": "https://github.com/pavanraj92/admin-admins/tree/main",
                 "issues": "https://github.com/pavanraj92/admin-admins/issues"
             },
-            "time": "2025-07-08T10:12:10+00:00"
+            "time": "2025-07-08T13:40:59+00:00"
+        },
+        {
+            "name": "admin/pages",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pavanraj92/admin-pages.git",
+                "reference": "e31e9c8e0041a350d5a3c0d20bdaccfde8b075ea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pavanraj92/admin-pages/zipball/e31e9c8e0041a350d5a3c0d20bdaccfde8b075ea",
+                "reference": "e31e9c8e0041a350d5a3c0d20bdaccfde8b075ea",
+                "shasum": ""
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "admin\\pages\\PagesModuleServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "admin\\pages\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Create and manage static content pages (e.g., About Us, Terms & Conditions) to keep the site content updated and organized.",
+            "support": {
+                "source": "https://github.com/pavanraj92/admin-pages/tree/main",
+                "issues": "https://github.com/pavanraj92/admin-pages/issues"
+            },
+            "time": "2025-07-09T09:14:09+00:00"
         },
         {
             "name": "brick/math",
@@ -2864,6 +2640,95 @@
                 }
             ],
             "time": "2025-05-08T08:14:37+00:00"
+        },
+        {
+            "name": "nwidart/laravel-modules",
+            "version": "v12.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nWidart/laravel-modules.git",
+                "reference": "6e1f50de63366206b06ec53bbc823282977ddd06"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nWidart/laravel-modules/zipball/6e1f50de63366206b06ec53bbc823282977ddd06",
+                "reference": "6e1f50de63366206b06ec53bbc823282977ddd06",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-json": "*",
+                "ext-simplexml": "*",
+                "php": ">=8.2",
+                "wikimedia/composer-merge-plugin": "^2.1"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^v3.52",
+                "laravel/framework": "^v12.0",
+                "laravel/pint": "^1.16",
+                "mockery/mockery": "^1.6",
+                "orchestra/testbench": "^v10.0",
+                "phpstan/phpstan": "^2.0",
+                "phpunit/phpunit": "^11.5.3|^12.0.",
+                "spatie/phpunit-snapshot-assertions": "^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Module": "Nwidart\\Modules\\Facades\\Module"
+                    },
+                    "providers": [
+                        "Nwidart\\Modules\\LaravelModulesServiceProvider"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-master": "12.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Nwidart\\Modules\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Widart",
+                    "email": "n.widart@gmail.com",
+                    "homepage": "https://nicolaswidart.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel Module management",
+            "keywords": [
+                "laravel",
+                "module",
+                "modules",
+                "nwidart",
+                "rad"
+            ],
+            "support": {
+                "issues": "https://github.com/nWidart/laravel-modules/issues",
+                "source": "https://github.com/nWidart/laravel-modules/tree/v12.0.4"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/dcblogdev",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nwidart",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-06-29T09:23:53+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -6193,6 +6058,62 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
+        },
+        {
+            "name": "wikimedia/composer-merge-plugin",
+            "version": "v2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wikimedia/composer-merge-plugin.git",
+                "reference": "a03d426c8e9fb2c9c569d9deeb31a083292788bc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wikimedia/composer-merge-plugin/zipball/a03d426c8e9fb2c9c569d9deeb31a083292788bc",
+                "reference": "a03d426c8e9fb2c9c569d9deeb31a083292788bc",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.1||^2.0",
+                "php": ">=7.2.0"
+            },
+            "require-dev": {
+                "composer/composer": "^1.1||^2.0",
+                "ext-json": "*",
+                "mediawiki/mediawiki-phan-config": "0.11.1",
+                "php-parallel-lint/php-parallel-lint": "~1.3.1",
+                "phpspec/prophecy": "~1.15.0",
+                "phpunit/phpunit": "^8.5||^9.0",
+                "squizlabs/php_codesniffer": "~3.7.1"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Wikimedia\\Composer\\Merge\\V2\\MergePlugin",
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Wikimedia\\Composer\\Merge\\V2\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bryan Davis",
+                    "email": "bd808@wikimedia.org"
+                }
+            ],
+            "description": "Composer plugin to merge multiple composer.json files",
+            "support": {
+                "issues": "https://github.com/wikimedia/composer-merge-plugin/issues",
+                "source": "https://github.com/wikimedia/composer-merge-plugin/tree/v2.1.0"
+            },
+            "time": "2023-04-15T19:07:00+00:00"
         }
     ],
     "packages-dev": [
@@ -8509,15 +8430,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "admin/admin_auth": 20,
+        "admin/admin_role_permissions": 20,
         "admin/admins": 20,
-        "admin/banners": 20,
-        "admin/categories": 20,
-        "admin/emails": 20,
-        "admin/faqs": 20,
-        "admin/pages": 20,
-        "admin/settings": 20,
-        "admin/users": 20
+        "admin/pages": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
