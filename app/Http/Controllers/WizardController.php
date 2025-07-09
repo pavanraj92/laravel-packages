@@ -290,7 +290,7 @@ class WizardController extends Controller
 
         if (is_dir(base_path('vendor/admin/admin_role_permissions'))) {
             Artisan::call('db:seed', [
-                '--class' => 'Packages\\Admin\\AdminRolePermissions\\database\\seeders\\AssignAdminRoleSeeder',
+                '--class' => 'Packages\\Admin\\AdminRolePermissions\\database\\seeders\\AdminRolePermissionDatabaseSeeder',
                 '--force' => true,
             ]);
         }
