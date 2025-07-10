@@ -174,7 +174,7 @@ class WizardController extends Controller
         }
 
         $userSelectedPackages = $request->packages;
-        $defaultPackage = ['admin/admin_auth'];
+        $defaultPackage = ['admin/admin_auth', 'admin/settings'];
 
         // Always include default package, but avoid duplicates
         $allPackages = array_unique(array_merge($defaultPackage, $userSelectedPackages));
@@ -286,11 +286,11 @@ class WizardController extends Controller
             '--class' => 'Admin\Settings\Database\Seeders\\SettingSeeder',
             '--force' => true,
             ]);
-        }
+        }        
 
         if (is_dir(base_path('vendor/admin/admin_role_permissions'))) {
             Artisan::call('db:seed', [
-                '--class' => 'Packages\\Admin\\AdminRolePermissions\\database\\seeders\\AssignAdminRoleSeeder',
+                '--class' => 'Admin\AdminRolePermissions\Database\Seeders\\AdminRolePermissionDatabaseSeeder',
                 '--force' => true,
             ]);
         }
