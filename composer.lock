@@ -4,142 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aa026ec23c0fcd7fc4f8d40c9031fba6",
+    "content-hash": "03c2fc3790e8a6ea044014b2683d561e",
     "packages": [
-        {
-            "name": "admin/admin_auth",
-            "version": "1.0.0",
-            "dist": {
-                "type": "path",
-                "url": "packages/admin/admin_auth",
-                "reference": "2459cbac1cfd058fb963242dcf65436fbcf0c7e6"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "admin\\admin_auth\\AdminModuleServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "admin\\admin_auth\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Admin module form package for Laravel",
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
-            "name": "admin/admin_role_permissions",
-            "version": "1.0.0",
-            "dist": {
-                "type": "path",
-                "url": "packages/admin/admin_role_permissions",
-                "reference": "82a625761fdc68153eb511a70c8e72af00a2a4d1"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "admin\\admin_role_permissions\\AdminRolePermissionServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "admin\\admin_role_permissions\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Manage admins roles and permissions",
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
-            "name": "admin/admins",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/pavanraj92/admin-admins.git",
-                "reference": "e802a53227f6070f085e27780414b50a61cc474c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/pavanraj92/admin-admins/zipball/e802a53227f6070f085e27780414b50a61cc474c",
-                "reference": "e802a53227f6070f085e27780414b50a61cc474c",
-                "shasum": ""
-            },
-            "default-branch": true,
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "admin\\admins\\AdminServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "admin\\admins\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Manage administrator accounts, assign roles, and control access to backend features and settings.",
-            "support": {
-                "source": "https://github.com/pavanraj92/admin-admins/tree/main",
-                "issues": "https://github.com/pavanraj92/admin-admins/issues"
-            },
-            "time": "2025-07-08T13:40:59+00:00"
-        },
-        {
-            "name": "admin/pages",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/pavanraj92/admin-pages.git",
-                "reference": "e31e9c8e0041a350d5a3c0d20bdaccfde8b075ea"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/pavanraj92/admin-pages/zipball/e31e9c8e0041a350d5a3c0d20bdaccfde8b075ea",
-                "reference": "e31e9c8e0041a350d5a3c0d20bdaccfde8b075ea",
-                "shasum": ""
-            },
-            "default-branch": true,
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "admin\\pages\\PagesModuleServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "admin\\pages\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Create and manage static content pages (e.g., About Us, Terms & Conditions) to keep the site content updated and organized.",
-            "support": {
-                "source": "https://github.com/pavanraj92/admin-pages/tree/main",
-                "issues": "https://github.com/pavanraj92/admin-pages/issues"
-            },
-            "time": "2025-07-09T09:14:09+00:00"
-        },
         {
             "name": "brick/math",
             "version": "0.13.1",
@@ -8429,16 +8295,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "admin/admin_role_permissions": 20,
-        "admin/admins": 20,
-        "admin/pages": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.2.0"
 }
