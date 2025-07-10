@@ -13,14 +13,14 @@ return [
 
     'package_display_names' => [
         'admin/admins'    => 'Admin Manager',
-        'admin/admin_role_permissions'    => 'Admin Role Permissions Manager',
-        'admin/banners'   => 'Banner Manager',
+        // 'admin/admin_role_permissions'    => 'Admin Role Permissions Manager',
+        'admin/users'     => 'User Manager',
         'admin/categories' => 'Category Manager',
+        'admin/banners'   => 'Banner Manager',
         'admin/emails'    => 'Email Manager',
         'admin/faqs'      => 'Faq Manager',
         'admin/pages'     => 'Page Manager',
         'admin/settings'  => 'General Setting Manager',
-        'admin/users'     => 'User Manager',
     ],
 
     'industry_packages' => [
@@ -48,13 +48,13 @@ return [
         ],
         'healthcare' => [
             'admin/admins',
-            'admin/admin_role_permissions',
-            'admin/banners',
+            // 'admin/admin_role_permissions',
+            'admin/users',
             'admin/categories',
+            'admin/banners',
             'admin/emails',
             'admin/pages',
             'admin/settings',
-            'admin/users',
         ],
         'manufacturing' => [
             'admin/admins',

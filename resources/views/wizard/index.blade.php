@@ -188,7 +188,7 @@
                                     <h4 class="mb-3">Step 3: Package Selection: <small class="theme-text-color">Select at least one package.</small></h4>
                                     <div class="mb-3" style="max-height: 350px; overflow-y: auto;">
                                         <div class="form-check mb-2">
-                                            <input class="form-check-input" type="checkbox" id="selectAllPackages">
+                                            <input class="form-check-input" type="checkbox" id="selectAllPackages" {{ (count(explode(', ', $packages)) == (count($packageList) + 1)) ? 'checked' : '' }}>
                                             <label class="form-check-label fw-bold" for="selectAllPackages">
                                                 Select All
                                             </label>
@@ -387,7 +387,8 @@
                         }
                     });
                 } else if (step === 3) {
-                    if ($('.package-checkbox:checked').length === 0) {
+                    if ($('.package-checkbox:checked').length === 0) {                        
+                        toastr.error('Please select at least one package.');
                         $('#packageError').show();
                         valid = false;
                     } else {
