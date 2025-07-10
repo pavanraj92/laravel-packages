@@ -286,13 +286,6 @@ class WizardController extends Controller
             '--class' => 'Admin\Settings\Database\Seeders\\SettingSeeder',
             '--force' => true,
             ]);
-        }        
-
-        if (is_dir(base_path('vendor/admin/admin_role_permissions'))) {
-            Artisan::call('db:seed', [
-                '--class' => 'Admin\AdminRolePermissions\Database\Seeders\\AdminRolePermissionDatabaseSeeder',
-                '--force' => true,
-            ]);
         }
 
 
@@ -326,6 +319,13 @@ class WizardController extends Controller
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        if (is_dir(base_path('vendor/admin/admin_role_permissions'))) {
+            Artisan::call('db:seed', [
+                '--class' => 'Admin\AdminRolePermissions\Database\Seeders\\AdminRolePermissionDatabaseSeeder',
+                '--force' => true,
+            ]);
+        }
 
         $this->updateEnvDbName(Session::get('db.dbName'));
         // Artisan::call('optimize:clear');
