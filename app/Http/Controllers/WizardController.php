@@ -54,7 +54,7 @@ class WizardController extends Controller
                 'display_name' => $displayName,
             ];
         }
-        
+
         return view('wizard.index', compact('packageList'));
     }
 
@@ -276,21 +276,21 @@ class WizardController extends Controller
         // Only run the seeder if the admin/users package is installed
         if (is_dir(base_path('vendor/admin/users'))) {
             Artisan::call('db:seed', [
-            '--class' => 'packages\\admin\\users\\database\\seeders\\SeedUserRolesSeeder',
+            '--class' => 'Admin\Users\Database\Seeders\\SeedUserRolesSeeder',
             '--force' => true,
             ]);
         }
 
         if (is_dir(base_path('vendor/admin/settings'))) {
             Artisan::call('db:seed', [
-            '--class' => 'packages\\admin\\settings\\database\\seeders\\SettingSeeder',
+            '--class' => 'Admin\Settings\Database\Seeders\\SettingSeeder',
             '--force' => true,
             ]);
         }
 
         if (is_dir(base_path('vendor/admin/admin_role_permissions'))) {
             Artisan::call('db:seed', [
-                '--class' => 'Packages\\Admin\\AdminRolePermissions\\database\\seeders\\AdminRolePermissionDatabaseSeeder',
+                '--class' => 'Packages\\Admin\\AdminRolePermissions\\database\\seeders\\AssignAdminRoleSeeder',
                 '--force' => true,
             ]);
         }
