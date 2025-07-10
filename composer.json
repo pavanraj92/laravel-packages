@@ -33,7 +33,9 @@
             "Packages\\Admin\\AdminRolePermissions\\": "packages/admin/admin_role_permissions/",
             "packages\\admin\\users\\": "packages/admin/users/",
             "packages\\admin\\settings\\": "packages/admin/settings/",
-            "Modules\\Pages\\": "Modules/Pages/app/"
+            "Modules\\Pages\\": "Modules/Pages/app/",
+             "Admin\\Users\\": "vendor/admin/users/",
+              "Admin\\Settings\\": "vendor/admin/settings/"
         }
     },
     "autoload-dev": {

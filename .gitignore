@@ -31,3 +31,4 @@ yarn-error.log
 .composer.lock
 /packages
 /Modules
+composer.lock
