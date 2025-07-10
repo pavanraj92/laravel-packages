@@ -100,7 +100,7 @@
         $packages = implode(', ', $packages);
         $industryAryList = config('constants.industryAryList');
         $strIndustrySelector = '';
-
+        
     @endphp
 
     @include('layouts.nav-header')
@@ -109,7 +109,7 @@
         <div class="container mt-5">
             <div class="row">
                 <div class="col-md-8 offset-md-2 mb-5">
-                    <div class="card">
+                    <div class="card" style="box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); border-radius: 10px;">
                         <div class="card-header">
                             <h3 class="text-center mt-3">Laravel Application Setup Wizard</h3>
                             <p class="text-center text-muted">Follow the steps to set up your Laravel application.</p>
@@ -167,7 +167,7 @@
                                                 class="text-danger">*</span></label>
                                         <input type="text" class="form-control" id="dbUser" name="dbUser"
                                             value="@if (isset($dbUser) && !empty($dbUser)) {{ $dbUser }} @endif"
-                                            required>
+                                            required autocomplete="off">
                                         <div class="invalid-feedback">
                                             Username is required.
                                         </div>
@@ -175,7 +175,7 @@
                                     <div class="mb-3">
                                         <label for="dbPassword" class="form-label">Password</label>
                                         <input type="password" class="form-control" id="dbPassword" name="dbPassword"
-                                            value="@if (isset($dbPassword) && !empty($dbPassword)) {{ $dbPassword }} @endif">
+                                            value="@if (isset($dbPassword) && !empty($dbPassword)) {{ $dbPassword }} @endif" autocomplete="off">
                                         <div class="invalid-feedback">
                                             Password is required.
                                         </div>
@@ -185,8 +185,7 @@
                                 </div>
                                 <!-- Step 3: Package Selection -->
                                 <div class="form-step @if (empty($packages) && !empty($dbName) && !empty($websiteName) && !empty($industry)) active @endif" data-step="3">
-                                    <h4 class="mb-3">Step 3: Package Selection: <small class="text-danger">Select at
-                                            least one package.</small></h4>
+                                    <h4 class="mb-3">Step 3: Package Selection: <small class="theme-text-color">Select at least one package.</small></h4>
                                     <div class="mb-3" style="max-height: 350px; overflow-y: auto;">
                                         <div class="form-check mb-2">
                                             <input class="form-check-input" type="checkbox" id="selectAllPackages">
@@ -194,15 +193,19 @@
                                                 Select All
                                             </label>
                                         </div>
-                                        <ul class="list-group">
+                                        <ul class="list-group">                                            
                                             @forelse($packageList as $index => $package)
+                                                @php
+                                                    $packageName = $package['vendor'] . '/' . $package['name'];
+                                                    $strChecked = in_array($packageName, explode(', ', $packages)) ? 'checked' : '';                                                    
+                                                @endphp                                                    
                                                 <li
                                                     class="list-group-item d-flex align-items-center justify-content-between">
                                                     <div>
                                                         <input class="form-check-input me-2 package-checkbox"
                                                             type="checkbox" name="packages[]"
-                                                            value="{{ $package['vendor'] }}/{{ $package['name'] }}"
-                                                            id="package_{{ $index }}">
+                                                            value="{{ $packageName }}"
+                                                            id="package_{{ $index }}" {{ $strChecked }}>
                                                         <label class="form-check-label"
                                                             for="package_{{ $index }}" style="display: inline;" data-toggle="tooltip" data-placement="top" title="{{ (isset($package['info']['description'])) ? $package['info']['description'] : 'No description available' }}">
                                                             <strong>{{ $package['display_name'] ?? $package['vendor'] . '/' . $package['name'] }}</strong>                                                           
@@ -210,8 +213,8 @@
                                                     </div>
                                                     <span class="package-status"
                                                         id="package_status_{{ $index }}"
-                                                        data-package="{{ $package['vendor'] }}/{{ $package['name'] }}"
-                                                        style="min-width: 100px; display: none;">
+                                                        data-package="{{ $packageName }}"
+                                                        style="display: none;">
                                                     </span>
                                                 </li>
                                             @empty
@@ -294,8 +297,8 @@
                 $(`.package-status[data-package="${packageName}"]`)
                     .show()
                     .removeClass()
-                    .addClass('ms-auto badge bg-warning package-status')
-                    .text('Pending');
+                    .addClass('ms-auto badge theme-bg-color')
+                    .html('Installed');
             });
 
             let packageStatus = {}; // e.g. { 'vendor/name': 'pending'|'in-process'|'installed' }
@@ -303,16 +306,14 @@
             function updatePackageStatus(pkgValue, status) {
                 let $status = $(`.package-status[data-package="${pkgValue}"]`);
                 if (status === 'in-process') {
-                    $status.html('<span class="loader"></span> In Process').show();
+                    $status.html('<span class="loader"></span> Installing...').show();
                 } else if (status === 'installed') {
-                    $status.html('<span class="text-success">&#10003;</span> Installed').show();
+                    //$status.html('<span class="text-success">&#10003;</span> Installed').show();
+                    $status.html('Installed').removeClass().addClass('ms-auto badge theme-bg-color').show();
                 } else {
                     $status.hide();
                 }
             }
-
-
-
 
             // Select All functionality
             $('#selectAllPackages').on('change', function() {
@@ -451,7 +452,7 @@
                                     0]); // Show first error per field
                                 }
                             } else {
-                                toastr.error('Something went wrong. Please try again.');
+                                toastr.error(response.message || 'Something went wrong. Please try again.');
                             }
                         }
                     });
@@ -491,7 +492,7 @@
                                     0]); // Show first error per field
                                 }
                             } else {
-                                toastr.error('Something went wrong. Please try again.');
+                                toastr.error(response.message || 'Something went wrong. Please try again.');
                             }
                         }
                     });
@@ -582,7 +583,7 @@
                                     0]); // Show first error per field
                                 }
                             } else {
-                                toastr.error('Something went wrong. Please try again.');
+                                toastr.error(response.message || 'Something went wrong. Please try again.');
                             }
                         }
                     });
@@ -680,7 +681,7 @@
                                 }
                             }
                         } else {
-                            toastr.error('Something went wrong. Please try again.');
+                            toastr.error(response.message || 'Something went wrong. Please try again.');
                         }
                     }
                 });

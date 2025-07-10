@@ -66,6 +66,17 @@
     color: white !important;
 }
 
+.form-check-input:checked {
+    background-color: #f48120;
+    border-color: #f48120;
+}
+
+.theme-bg-color {
+    background-color: #f48120 !important;
+}
+.theme-text-color {
+    color: #f48120 !important;
+}
 
 /* ckeditor height fixed */
 .ck-editor__editable_inline {
