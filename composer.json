@@ -10,6 +10,14 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "admin/admin_auth": "@dev",
+        "admin/admins": "@dev",
+        "admin/banners": "@dev",
+        "admin/categories": "@dev",
+        "admin/emails": "@dev",
+        "admin/pages": "@dev",
+        "admin/settings": "@dev",
+        "admin/users": "@dev",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
         "nwidart/laravel-modules": "^12.0",
@@ -30,12 +38,10 @@
             "Modules\\": "Modules/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Packages\\Admin\\AdminRolePermissions\\": "packages/admin/admin_role_permissions/",
-            "packages\\admin\\users\\": "packages/admin/users/",
-            "packages\\admin\\settings\\": "packages/admin/settings/",
             "Modules\\Pages\\": "Modules/Pages/app/",
             "Admin\\Users\\": "vendor/admin/users/",
-            "Admin\\Settings\\": "vendor/admin/settings/"
+            "Admin\\Settings\\": "vendor/admin/settings/",
+            "Admin\\AdminRolePermissions\\": "vendor/admin/admin_role_permissions/"
         }
     },
     "autoload-dev": {
@@ -88,31 +94,23 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-auth.git"
+            "url": "https://github.com/pavanraj92/admin-auth.git"           
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-admins.git"
+            "url": "https://github.com/pavanraj92/admin-admins.git"           
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-users.git"
+            "url": "https://github.com/pavanraj92/admin-users.git"           
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-categories.git"
+            "url": "https://github.com/pavanraj92/admin-categories.git"           
         },
         {
-            "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-emails.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-banners.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-faqs.git"
+            "type": "vcs", 
+            "url": "https://github.com/pavanraj92/admin-emails.git"           
         },
         {
             "type": "vcs",
@@ -120,11 +118,20 @@
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-settings.git"
+            "url": "https://github.com/pavanraj92/admin-faqs.git"           
+        },        
+        {
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-banners.git"           
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-role-permission.git"
-        }
+            "url": "https://github.com/pavanraj92/admin-settings.git"           
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-role-permission.git"           
+        }       
     ]
+
 }
