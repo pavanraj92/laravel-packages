@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'installer.check' => \App\Http\Middleware\InstallerCheck::class,
             'admin.auth' => \App\Http\Middleware\RedirectIfAdminUnauthenticated::class,
+            'admincan_permission' => \App\Http\Middleware\AdminCanPermission::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
