@@ -21,12 +21,28 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Custom Blade directive for admin permission checks
-        Blade::if('admincan', function ($permission) {
+        // Custom Blade directive for admin permission checks (single or multiple)
+        Blade::if('admincan', function ($permissions) {
             $hasRolePackage = file_exists(base_path('vendor/admin/admin_role_permissions'));
-            $user = auth('admin')->user();
-            return (!$hasRolePackage && $user)
-                || ($hasRolePackage && $user && method_exists($user, 'hasPermission') && $user->hasPermission($permission));
+            $admin = auth('admin')->user();
+            if (!$admin) {
+                return false;
+            }
+
+            $permissionArray = explode('|', $permissions);
+
+            foreach ($permissionArray as $permission) {
+                $permission = trim($permission);
+                if (!$hasRolePackage) {
+                    return true; // if no role-permission package, allow access
+                }
+
+                if (method_exists($admin, 'hasPermission') && $admin->hasPermission($permission)) {
+                    return true; // allow if user has at least one
+                }
+            }
+
+            return false; // deny if none matched
         });
         try {
             if (Schema::hasTable('settings')) {
