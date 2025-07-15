@@ -32,6 +32,8 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            /* background: linear-gradient(135deg, #f4812033 0%, #f48120cc 100%); */
+            font-family: 'Arial', sans-serif;
         }
 
         /* Main content area should take remaining space */
@@ -220,15 +222,7 @@
                                             @empty
                                                 <li class="list-group-item text-muted">No packages found.</li>
                                             @endforelse
-                                        </ul>
-
-                                        <!-- Example progress bar -->
-                                        <div id="progress-bar-container" class="mt-4 mb-4" style="display:none;">
-                                            <div class="text-center mt-2">
-                                                <div class="spinner-border text-success" role="status"></div>
-                                                <span class="ms-2">Please wait, installation in progress...</span>
-                                            </div>
-                                        </div>
+                                        </ul>                                     
 
                                         <div class="invalid-feedback" id="packageError" style="display:none;">
                                             Please select at least one package.
@@ -507,8 +501,7 @@
                         $('#packageError').show();
                         return;
                     } else {
-                        $('#packageError').hide();
-                        $('#progress-bar-container').css('display', 'block');
+                        $('#packageError').hide();                        
                         activeBtn.attr('disabled', true);
                         activeBtn.text('Installing Packages...');
                     }
@@ -550,8 +543,7 @@
                             packages: packages,
                             _token: $('meta[name="csrf-token"]').attr('content')
                         },
-                        success: function(res) {
-                            $('#progress-bar-container').hide();
+                        success: function(res) {                            
                             let delay = 0;
                             packages.forEach((pkg, index) => {
                                 setTimeout(() => {

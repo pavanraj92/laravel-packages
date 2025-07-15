@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Validator as FacadesValidator;
 
 class WizardController extends Controller
 {
+    
     /**
      * Display a list of installed packages.
      *
@@ -74,11 +75,11 @@ class WizardController extends Controller
         $phpVersion = phpversion();
         $laravelVersion = app()->version();
 
-        if (version_compare($phpVersion, '7.4', '<')) {
-            return response()->json(['status' => 'error', 'message' => 'PHP version must be 7.4 or higher.'], 400);
+        if (version_compare($phpVersion, '8.2', '<=')) {
+            return response()->json(['status' => 'error', 'message' => 'PHP version must be 8.2 or higher.'], 400);
         }
 
-        if (version_compare($laravelVersion, '8.0', '<')) {
+        if (version_compare($laravelVersion, '12.0', '<=')) {
             return response()->json(['status' => 'error', 'message' => 'Laravel version must be 8.0 or higher.'], 400);
         }
 
