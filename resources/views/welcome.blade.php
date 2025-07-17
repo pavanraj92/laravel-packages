@@ -150,51 +150,7 @@
             </div>
         </div>
     </section>
-
-    <!-- Contact Section -->
-    <section class="section-padding bg-light" id="contact">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center mb-5">
-                    <h2>Get Customized Solutions for Your Requirements</h2>
-                    <p class="lead">Ready to transform your business with our Laravel admin panel? Let's discuss your project requirements.</p>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="feature-card">
-                        <form id="contactForm">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="name" class="form-label">Full Name</label>
-                                    <input type="text" class="form-control" id="name" placeholder="John Doe" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="email" class="form-label">Email Address</label>
-                                    <input type="email" class="form-control" id="email" placeholder="john@example.com" required>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="message" class="form-label">Project Requirements</label>
-                                <textarea class="form-control" id="message" rows="5" placeholder="Tell us about your project requirements..." required></textarea>
-                            </div>
-                            <div class="text-center">
-                                <button type="submit" class="btn-outline-success">
-                                    <i class="bi bi-envelope-fill me-2"></i>
-                                    Send Message
-                                </button>
-                            </div>
-                        </form>
-                        <div class="alert alert-success mt-3 d-none" id="successMessage">
-                            <i class="bi bi-check-circle-fill me-2"></i>
-                            Message sent successfully! We'll get back to you soon.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
+        
     @include('layouts.footer')
 
      <!-- jQuery CDN -->
