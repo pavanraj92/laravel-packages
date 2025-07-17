@@ -12,8 +12,7 @@
             @if (Route::currentRouteName() === 'home')
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact" id="contactBtn">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>                    
                 </ul>
             @endif
         </div>
