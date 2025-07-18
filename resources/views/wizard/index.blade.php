@@ -10,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- Toastr CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -78,6 +79,17 @@
             to {
                 transform: rotate(360deg);
             }
+        }
+        .password-toggle {
+            position: relative;
+        }
+        .toggle-password {
+            position: absolute;
+            top: 48px;
+            right: 15px;
+            cursor: pointer;
+            color: #6c757d;
+            z-index: 10; 
         }
     </style>
 </head>
@@ -174,10 +186,11 @@
                                             Username is required.
                                         </div>
                                     </div>
-                                    <div class="mb-3">
+                                    <div class="mb-3 password-toggle">
                                         <label for="dbPassword" class="form-label">Password</label>
                                         <input type="password" class="form-control" id="dbPassword" name="dbPassword"
                                             value="@if (isset($dbPassword) && !empty($dbPassword)) {{ $dbPassword }} @endif" autocomplete="off">
+                                        <span toggle="#dbPassword" class="fa fa-fw fa-eye-slash toggle-password"></span>
                                         <div class="invalid-feedback">
                                             Password is required.
                                         </div>
@@ -190,7 +203,8 @@
                                     <h4 class="mb-3">Step 3: Package Selection: <small class="theme-text-color">Select at least one package.</small></h4>
                                     <div class="mb-3" style="max-height: 350px; overflow-y: auto;">
                                         <div class="form-check mb-2">
-                                            <input class="form-check-input" type="checkbox" id="selectAllPackages" {{ (count(explode(', ', $packages)) == (count($packageList) + 1)) ? 'checked' : '' }}>
+                                            <input class="form-check-input" type="checkbox" id="selectAllPackages"
+                                                {{ count($packageList) > 0 && count(explode(', ', $packages)) === count($packageList) ? 'checked' : '' }}>
                                             <label class="form-check-label fw-bold" for="selectAllPackages">
                                                 Select All
                                             </label>
@@ -244,11 +258,12 @@
                                             Valid admin email is required.
                                         </div>
                                     </div>
-                                    <div class="mb-3">
+                                    <div class="mb-3 password-toggle">
                                         <label for="adminPassword" class="form-label">Admin Password <span
                                                 class="text-danger">*</span></label>
                                         <input type="password" class="form-control" id="adminPassword"
                                             name="adminPassword" required>
+                                        <span toggle="#adminPassword" class="fa fa-fw fa-eye-slash toggle-password"></span>
                                         <div class="invalid-feedback">
                                             Admin password is required.
                                         </div>
@@ -279,7 +294,23 @@
     <!-- Toastr JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const toggles = document.querySelectorAll(".toggle-password");
 
+            toggles.forEach(function (toggle) {
+                toggle.addEventListener("click", function () {
+                    const input = document.querySelector(this.getAttribute("toggle"));
+                    const type = input.getAttribute("type") === "password" ? "text" : "password";
+                    input.setAttribute("type", type);
+
+                    // Toggle icon class
+                    this.classList.toggle("fa-eye");
+                    this.classList.toggle("fa-eye-slash");
+                });
+            });
+        });
+    </script>
     <script>
         $(document).ready(function() {
             let packages = [];
@@ -309,6 +340,14 @@
                 }
             }
 
+            function updateSelectAllCheckbox() {
+                if ($('.package-checkbox:checked').length === $('.package-checkbox').length) {
+                    $('#selectAllPackages').prop('checked', true);
+                } else {
+                    $('#selectAllPackages').prop('checked', false);
+                }
+            }
+
             // Select All functionality
             $('#selectAllPackages').on('change', function() {
                 $('.package-checkbox').prop('checked', this.checked).trigger('change');
@@ -316,11 +355,7 @@
 
             // If any package-checkbox is unchecked, uncheck Select All
             $(document).on('change', '.package-checkbox', function() {
-                if ($('.package-checkbox:checked').length === $('.package-checkbox').length) {
-                    $('#selectAllPackages').prop('checked', true);
-                } else {
-                    $('#selectAllPackages').prop('checked', false);
-                }
+                updateSelectAllCheckbox();
             });
 
             $('#industry').select2({
@@ -355,8 +390,19 @@
             });
 
             function showStep(step) {
+                $('#packageError').hide(); // <-- Always hide at the start
                 $('.form-step').removeClass('active');
                 $('.form-step[data-step="' + step + '"]').addClass('active');
+                if (step === 3) {
+                    updateSelectAllCheckbox();
+                }
+                var $step = $('.form-step[data-step="' + step + '"]');
+                $step.find('input, select').removeClass('is-invalid');
+                $step.find('.invalid-feedback').hide();
+                // Also hide package error if on step 3
+                if (step === 3) {
+                    $('#packageError').hide();
+                }
             }
 
             function validateStep(step) {
@@ -420,6 +466,7 @@
                 var activeBtn = $(this);
                 var $currentStep = $('.form-step.active');
                 var step = parseInt($currentStep.data('step'));
+                $('#packageError').hide(); // <-- Add this line
                 if (!validateStep(step)) return;
 
                 // AJAX per step
@@ -504,6 +551,7 @@
                         $('#packageError').hide();                        
                         activeBtn.attr('disabled', true);
                         activeBtn.text('Installing Packages...');
+                        $('.prev-step').prop('disabled', true); // Disable Previous
                     }
 
                     $('.package-checkbox').each(function(idx) {
@@ -543,28 +591,39 @@
                             packages: packages,
                             _token: $('meta[name="csrf-token"]').attr('content')
                         },
-                        success: function(res) {                            
-                            let delay = 0;
-                            packages.forEach((pkg, index) => {
-                                setTimeout(() => {
-                                    updatePackageStatus(pkg, 'in-process');
+                        success: function(res) {  
+                              if (res.message === 'Packages already installed.' || res.skip_install) {
+        // Immediately proceed to next step
+                                toastr.success(res.message);
+                                activeBtn.prop('disabled', false).text('Next');
+                                $('.prev-step').prop('disabled', false); // Re-enable Previous
+                                showStep(4);
+                                return;
+                            }else{                          
+                                let delay = 0;
+                                packages.forEach((pkg, index) => {
                                     setTimeout(() => {
-                                        updatePackageStatus(pkg,
-                                            'installed');
-                                        if (index === packages.length -
-                                            1) {
-                                            toastr.success(res.message);
-                                            activeBtn.prop('disabled',
-                                                false).text('Next');
-                                            showStep(4);
-                                        }
-                                    }, 1000);
-                                }, index * 1500);
-                            });
+                                        updatePackageStatus(pkg, 'in-process');
+                                        setTimeout(() => {
+                                            updatePackageStatus(pkg,
+                                                'installed');
+                                            if (index === packages.length -
+                                                1) {
+                                                toastr.success(res.message);
+                                                activeBtn.prop('disabled',
+                                                    false).text('Next');
+                                                $('.prev-step').prop('disabled', false); // Re-enable Previous
+                                                showStep(4);
+                                            }
+                                        }, 1000);
+                                    }, index * 1500);
+                                });
+                            }
                         },
                         error: function(xhr, status, error) {
                             activeBtn.attr('disabled', false);
                             activeBtn.text('Next');
+                            $('.prev-step').prop('disabled', false); // Re-enable Previous
                             console.log('❌ Error:', xhr.status, xhr.responseText);
                             response = JSON.parse(xhr.responseText);
                             if (xhr.status === 400) {
@@ -587,6 +646,7 @@
             $('.prev-step').click(function() {
                 var $currentStep = $('.form-step.active');
                 var step = parseInt($currentStep.data('step'));
+                $('#packageError').hide(); // <-- Add this line
                 showStep(step - 1);
             });
 
