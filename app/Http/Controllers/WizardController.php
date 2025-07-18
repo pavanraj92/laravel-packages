@@ -174,14 +174,28 @@ class WizardController extends Controller
             ], 422);
         }
 
+    
         $userSelectedPackages = $request->packages;
         $defaultPackage = ['admin/admin_auth', 'admin/settings'];
 
         // Always include default package, but avoid duplicates
         $allPackages = array_unique(array_merge($defaultPackage, $userSelectedPackages));
-        Session::put('packages', $allPackages);
 
+        $installedPackages = Session::get('installed_packages', []);
         $industryName = Session::get('industry');
+
+        if (!array_diff($allPackages, $installedPackages) && !array_diff($installedPackages, $allPackages)) {
+            // Packages are the same, skip install and redirect to next step
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Packages already installed.',
+                'packages' => $userSelectedPackages,
+                'industry' => $industryName,
+            ]);
+        }
+
+        Session::put('installed_packages', $allPackages);
+        Session::put('packages', $allPackages);
 
         $missingPackages = [];
         foreach ($userSelectedPackages as $fullPackageName) {
