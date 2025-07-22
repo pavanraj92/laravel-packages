@@ -12,8 +12,7 @@ return [
     ],
 
     'package_display_names' => [
-        'admin/admins'    => 'Admin Manager',
-        // 'admin/admin_role_permissions'    => 'Admin Role Permissions Manager',
+        'admin/admin_role_permissions'    => 'Admin Role Permissions Manager',
         'admin/users'     => 'User Manager',
         'admin/categories' => 'Category Manager',
         'admin/banners'   => 'Banner Manager',
@@ -47,8 +46,7 @@ return [
             'admin/users',
         ],
         'healthcare' => [
-            // 'admin/admins',
-            // 'admin/admin_role_permissions',
+            'admin/admin_role_permissions',
             'admin/users',
             'admin/categories',
             'admin/banners',

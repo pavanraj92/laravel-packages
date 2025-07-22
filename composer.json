@@ -11,8 +11,15 @@
     "require": {
         "php": "^8.2",
         "admin/admin_auth": "@dev",
+        "admin/admin_role_permissions": "@dev",
+        "admin/admins": "@dev",
+        "admin/banners": "@dev",
+        "admin/categories": "@dev",
+        "admin/emails": "@dev",
         "admin/pages": "@dev",
         "admin/settings": "@dev",
+        "admin/users": "@dev",
+        "kyslik/column-sortable": "^7.0",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
         "nwidart/laravel-modules": "^12.0",
@@ -89,43 +96,43 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-auth.git"           
+            "url": "packages/admin/admin_auth"           
+        },
+        {
+            "type": "path",
+            "url": "packages/admin/admins"
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-admins.git"           
+            "url": "packages/admin/users"           
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-users.git"           
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-categories.git"           
+            "url": "packages/admin/admin-categories"           
         },
         {
             "type": "vcs", 
-            "url": "https://github.com/pavanraj92/admin-emails.git"           
+            "url": "packages/admin/emails"           
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-pages.git"
+            "url": "packages/admin/pages"
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-faqs.git"           
+            "url": "packages/admin/faqs"           
         },        
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-banners.git"           
+            "url": "packages/admin/banners"           
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-settings.git"           
+            "url": "packages/admin/settings"           
         },
         {
-            "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-role-permission.git"           
+            "type": "path",
+            "url": "packages/admin/admin_role_permissions"           
         }       
     ]
 
