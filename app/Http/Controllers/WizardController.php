@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Validator as FacadesValidator;
 
 class WizardController extends Controller
 {
-    
+
     /**
      * Display a list of installed packages.
      *
@@ -174,13 +174,27 @@ class WizardController extends Controller
             ], 422);
         }
 
-    
+
         $userSelectedPackages = $request->packages;
         $defaultPackage = ['admin/admin_auth', 'admin/settings'];
 
+        // Add conditional dependencies
+        $dependencyMap = [
+            'admin/admin_role_permissions' => ['admin/admins'],
+        ];
+
+        foreach ($userSelectedPackages as $selected) {
+            if (isset($dependencyMap[$selected])) {
+                foreach ($dependencyMap[$selected] as $requiredPackage) {
+                    if (!in_array($requiredPackage, $userSelectedPackages)) {
+                        $userSelectedPackages[] = $requiredPackage;
+                    }
+                }
+            }
+        }
+
         // Always include default package, but avoid duplicates
         $allPackages = array_unique(array_merge($defaultPackage, $userSelectedPackages));
-
         $installedPackages = Session::get('installed_packages', []);
         $industryName = Session::get('industry');
 
@@ -291,15 +305,15 @@ class WizardController extends Controller
         // Only run the seeder if the admin/users package is installed
         if (is_dir(base_path('vendor/admin/users'))) {
             Artisan::call('db:seed', [
-            '--class' => 'Admin\Users\Database\Seeders\\SeedUserRolesSeeder',
-            '--force' => true,
+                '--class' => 'Admin\Users\Database\Seeders\\SeedUserRolesSeeder',
+                '--force' => true,
             ]);
         }
 
         if (is_dir(base_path('vendor/admin/settings'))) {
             Artisan::call('db:seed', [
-            '--class' => 'Admin\Settings\Database\Seeders\\SettingSeeder',
-            '--force' => true,
+                '--class' => 'Admin\Settings\Database\Seeders\\SettingSeeder',
+                '--force' => true,
             ]);
         }
 
