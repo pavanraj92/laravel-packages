@@ -12,14 +12,14 @@ return [
     ],
 
     'package_display_names' => [
-        'admin/admin_role_permissions'    => 'Admin Role Permissions Manager',
+        'admin/admin_role_permissions'    => 'Role Permission Manager',
         'admin/users'     => 'User Manager',
         'admin/categories' => 'Category Manager',
         'admin/banners'   => 'Banner Manager',
-        'admin/emails'    => 'Email Manager',
+        'admin/emails'    => 'Email Template Manager',
         'admin/faqs'      => 'Faq Manager',
-        'admin/pages'     => 'Page Manager',
-        'admin/settings'  => 'General Setting Manager',
+        'admin/pages'     => 'CMS Pages Manager',
+        'admin/settings'  => 'Setting Manager',
     ],
 
     'industry_packages' => [
