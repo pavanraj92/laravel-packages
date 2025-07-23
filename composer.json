@@ -87,44 +87,44 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "packages/admin/admin_auth"           
-        },
-        {
-            "type": "path",
-            "url": "packages/admin/admins"
+            "url": "https://github.com/pavanraj92/admin-auth.git"           
         },
         {
             "type": "vcs",
-            "url": "packages/admin/users"           
+            "url": "https://github.com/pavanraj92/admin-admins.git"           
         },
         {
             "type": "vcs",
-            "url": "packages/admin/admin-categories"           
+            "url": "https://github.com/pavanraj92/admin-users.git"           
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-categories.git"           
         },
         {
             "type": "vcs", 
-            "url": "packages/admin/emails"           
+            "url": "https://github.com/pavanraj92/admin-emails.git"           
         },
         {
             "type": "vcs",
-            "url": "packages/admin/pages"
+            "url": "https://github.com/pavanraj92/admin-pages.git"
         },
         {
             "type": "vcs",
-            "url": "packages/admin/faqs"           
+            "url": "https://github.com/pavanraj92/admin-faqs.git"           
         },        
         {
             "type": "vcs",
-            "url": "packages/admin/banners"           
+            "url": "https://github.com/pavanraj92/admin-banners.git"           
         },
         {
             "type": "vcs",
-            "url": "packages/admin/settings"           
+            "url": "https://github.com/pavanraj92/admin-settings.git"           
         },
         {
-            "type": "path",
-            "url": "packages/admin/admin_role_permissions"           
-        }       
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-role-permission.git"           
+        }        
     ]
 
 }
