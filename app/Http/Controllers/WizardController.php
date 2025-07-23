@@ -176,7 +176,7 @@ class WizardController extends Controller
 
 
         $userSelectedPackages = $request->packages;
-        $defaultPackage = ['admin/admin_auth', 'admin/settings'];
+        $defaultPackage = ['admin/admin_auth', 'admin/settings', 'admin/emails'];
 
         // Add conditional dependencies
         $dependencyMap = [
@@ -317,6 +317,12 @@ class WizardController extends Controller
             ]);
         }
 
+        if (is_dir(base_path('vendor/admin/emails'))) {
+            Artisan::call('db:seed', [
+                '--class' => 'Admin\Emails\Database\Seeders\\MailDatabaseSeeder',
+                '--force' => true,
+            ]);
+        }
 
         // Use the correct connection for schema and queries
         $schema = Schema::connection('mysql');
