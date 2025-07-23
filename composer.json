@@ -11,11 +11,10 @@
     "require": {
         "php": "^8.2",
         "admin/admin_auth": "@dev",
-        "admin/admin_role_permissions": "@dev",
-        "admin/admins": "@dev",
         "admin/banners": "@dev",
         "admin/categories": "@dev",
         "admin/emails": "@dev",
+        "admin/faqs": "@dev",
         "admin/pages": "@dev",
         "admin/settings": "@dev",
         "admin/users": "@dev",
@@ -95,45 +94,43 @@
     "prefer-stable": true,
     "repositories": [
         {
-            "type": "vcs",
-            "url": "packages/admin/admin_auth"           
+            "type": "path",
+            "url": "packages/admin/admin_auth"
+        },
+        {
+            "type": "path",
+            "url": "packages/admin/users"
+        },
+        {
+            "type": "path", 
+            "url": "packages/admin/emails"
+        },
+ 
+        {
+            "type": "path",
+            "url": "packages/admin/pages"
+        },
+        {
+            "type": "path",
+            "url": "packages/admin/faqs"
+        },
+        {
+            "type": "path",
+            "url": "packages/admin/settings"
+        },
+        {
+            "type": "path",
+            "url": "packages/admin/banners"
         },
         {
             "type": "path",
             "url": "packages/admin/admins"
         },
         {
-            "type": "vcs",
-            "url": "packages/admin/users"           
-        },
-        {
-            "type": "vcs",
-            "url": "packages/admin/admin-categories"           
-        },
-        {
-            "type": "vcs", 
-            "url": "packages/admin/emails"           
-        },
-        {
-            "type": "vcs",
-            "url": "packages/admin/pages"
-        },
-        {
-            "type": "vcs",
-            "url": "packages/admin/faqs"           
-        },        
-        {
-            "type": "vcs",
-            "url": "packages/admin/banners"           
-        },
-        {
-            "type": "vcs",
-            "url": "packages/admin/settings"           
-        },
-        {
             "type": "path",
-            "url": "packages/admin/admin_role_permissions"           
-        }       
+            "url": "packages/admin/categories"
+        }
     ]
+
 
 }

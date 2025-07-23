@@ -30,7 +30,7 @@
 }
 
 .select2-container--default .select2-selection--single .select2-selection__rendered {
-    padding-left: 12px !important;
+    padding-left: 0 !important;
     padding-right: 20px !important;
 }
 
