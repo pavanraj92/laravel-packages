@@ -1,1 +1,3 @@
-sdf: fgdsfdx
+admin_page_limit: '10'
+admin_date_format: 'd F, Y'
+admin_date_time_format: 'd F, Y H:i A'
