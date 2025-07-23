@@ -34,7 +34,8 @@
             "Modules\\Pages\\": "Modules/Pages/app/",
             "Admin\\Users\\": "vendor/admin/users/",
             "Admin\\Settings\\": "vendor/admin/settings/",
-            "Admin\\AdminRolePermissions\\": "vendor/admin/admin_role_permissions/"
+            "Admin\\AdminRolePermissions\\": "vendor/admin/admin_role_permissions/",
+            "Admin\\Emails\\": "vendor/admin/emails/"
         }
     },
     "autoload-dev": {
