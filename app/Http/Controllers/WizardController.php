@@ -209,7 +209,7 @@ class WizardController extends Controller
                 'industry' => $industryName,
             ]);
         }
-       
+
         Session::put('installed_packages', $allPackages);
         Session::put('packages', $allPackages);
 
@@ -263,7 +263,7 @@ class WizardController extends Controller
             'message' => $message,
             'packages' => $userSelectedPackages,
             'industry' => $industryName,
-            'installed_packages' => $allPackages, 
+            'installed_packages' => $allPackages,
         ]);
     }
 
@@ -326,6 +326,14 @@ class WizardController extends Controller
                 '--force' => true,
             ]);
         }
+
+        if (is_dir(base_path('vendor/admin/emails'))) {
+            Artisan::call('db:seed', [
+                '--class' => 'Admin\Emails\Database\Seeders\\MailDatabaseSeeder',
+                '--force' => true,
+            ]);
+        }
+
 
         // Use the correct connection for schema and queries
         $schema = Schema::connection('mysql');
@@ -531,5 +539,4 @@ class WizardController extends Controller
             throw new \Exception("❌ Uninstall Exception: " . $e->getMessage());
         }
     }
-
 }
