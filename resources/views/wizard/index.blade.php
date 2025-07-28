@@ -126,7 +126,7 @@
                     <div class="card" style="box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); border-radius: 10px;">
                         <div class="card-header">
                             <h3 class="text-center mt-3">Laravel Admin Panel Setup</h3>
-                            <p class="text-center text-muted">Follow the steps to set up your Laravel application.</p>
+                            <p class="text-center text-muted">Follow the steps to set up your Laravel admin panel.</p>
                         </div>
                         <div class="card-body">                            
                             <form id="multiStepForm" novalidate autocomplete="off">
