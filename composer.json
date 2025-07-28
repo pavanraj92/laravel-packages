@@ -10,11 +10,6 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "admin/admin_auth": "@dev",
-        "admin/banners": "@dev",
-        "admin/emails": "@dev",
-        "admin/pages": "@dev",
-        "admin/settings": "@dev",
         "kyslik/column-sortable": "^7.0",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
@@ -33,14 +28,11 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "Modules\\": "Modules/",
-            "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/",
-            "Modules\\Pages\\": "Modules/Pages/app/",
-            "Admin\\Users\\": "vendor/admin/users/",
-            "Admin\\Settings\\": "vendor/admin/settings/",
-            "Admin\\AdminRolePermissions\\": "vendor/admin/admin_role_permissions/",
-            "Admin\\Emails\\": "vendor/admin/emails/"
+            "Modules\\": "Modules/",         
+            "Admin\\Settings\\Database\\Seeders\\": "vendor/admin/settings/database/seeders/",
+            "Admin\\Users\\Database\\Seeders\\": "vendor/admin/users/database/seeders/",
+            "Admin\\AdminRolePermissions\\Database\\Seeders\\": "vendor/admin/admin_role_permissions/database/seeders/",
+            "Admin\\Emails\\Database\\Seeders\\": "vendor/admin/emails/database/seeders/"
         }
     },
     "autoload-dev": {
