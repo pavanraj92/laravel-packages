@@ -176,11 +176,12 @@ class WizardController extends Controller
 
 
         $userSelectedPackages = $request->packages;
-        $defaultPackage = ['admin/admin_auth', 'admin/settings', 'admin/emails'];
+        $defaultPackage = ['admin/admin_auth', 'admin/settings'];
 
         // Add conditional dependencies
         $dependencyMap = [
             'admin/admin_role_permissions' => ['admin/admins'],
+            'admin/users' => ['admin/user_roles'],
         ];
 
         foreach ($userSelectedPackages as $selected) {
@@ -192,6 +193,7 @@ class WizardController extends Controller
                 }
             }
         }
+        $this->uninstallUnselectedPackages($userSelectedPackages);
 
         // Always include default package, but avoid duplicates
         $allPackages = array_unique(array_merge($defaultPackage, $userSelectedPackages));
@@ -207,7 +209,7 @@ class WizardController extends Controller
                 'industry' => $industryName,
             ]);
         }
-
+       
         Session::put('installed_packages', $allPackages);
         Session::put('packages', $allPackages);
 
@@ -260,7 +262,8 @@ class WizardController extends Controller
             'status' => 'success',
             'message' => $message,
             'packages' => $userSelectedPackages,
-            'industry' => $industryName
+            'industry' => $industryName,
+            'installed_packages' => $allPackages, 
         ]);
     }
 
@@ -351,6 +354,15 @@ class WizardController extends Controller
             'password' => Hash::make($request->admin_password),
             'website_name' => $websiteName,
             'website_slug' => $websiteSlug,
+            'industry' => Session::get('industry', 'ecommerce'),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $settings = DB::table('settings')->insert([
+            'title' => 'industry',
+            'slug' => 'industry',
+            'config_value' => Session::get('industry', 'ecommerce'),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -478,4 +490,46 @@ class WizardController extends Controller
             return response()->json(['status' => 'not_installed']);
         }
     }
+
+    private function uninstallUnselectedPackages(array $selectedPackages)
+    {
+        $defaultPackages = ['admin/admin_auth', 'admin/settings'];
+
+        // Never uninstall default packages
+        $selectedPackages = array_unique(array_merge($defaultPackages, $selectedPackages));
+
+        // Get currently installed packages from session or fallback to empty
+        $currentlyInstalled = Session::get('installed_packages', []);
+
+        // Determine packages to uninstall
+        $packagesToRemove = array_diff($currentlyInstalled, $selectedPackages);
+
+        if (empty($packagesToRemove)) {
+            return;
+        }
+
+        try {
+            set_time_limit(0); // Prevent timeout
+            chdir(base_path());
+
+            $packageString = implode(' ', $packagesToRemove);
+            $command = "composer remove {$packageString}";
+
+            ob_start();
+            passthru($command, $exitCode);
+            $output = ob_get_clean();
+
+            if ($exitCode !== 0) {
+                throw new \Exception("Failed to remove packages: {$output}");
+            }
+
+            // Remove them from session
+            $remainingPackages = array_diff($currentlyInstalled, $packagesToRemove);
+            Session::put('installed_packages', $remainingPackages);
+            Session::put('packages', $remainingPackages);
+        } catch (\Exception $e) {
+            throw new \Exception("❌ Uninstall Exception: " . $e->getMessage());
+        }
+    }
+
 }
