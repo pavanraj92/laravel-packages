@@ -125,8 +125,8 @@
                 <div class="col-md-8 offset-md-2 mb-5">
                     <div class="card" style="box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); border-radius: 10px;">
                         <div class="card-header">
-                            <h3 class="text-center mt-3">Laravel Admin Panel Setup Wizard</h3>
-                            <p class="text-center text-muted">Follow the steps to set up your Laravel admin panel.</p>
+                            <h3 class="text-center mt-3">Laravel Admin Panel Setup</h3>
+                            <p class="text-center text-muted">Follow the steps to set up your Laravel application.</p>
                         </div>
                         <div class="card-body">                            
                             <form id="multiStepForm" novalidate autocomplete="off">
@@ -231,6 +231,7 @@
                                                         id="package_status_{{ $index }}"
                                                         data-package="{{ $packageName }}"
                                                         style="display: none;">
+                                                        <span class="progress-text" style="font-size: 14px; font-weight: bold;">0%</span>
                                                     </span>
                                                 </li>
                                             @empty
@@ -326,19 +327,85 @@
                     .html('Installed');
             });
 
+            let fakeProgressIntervals = {}; // Track fake progress
+            let currentProgress = {}; // Track current % per package
+
+            function startFakeProgress(pkgValue) {
+                let progress = currentProgress[pkgValue] || 0;
+                const $text = $(`.package-status[data-package="${pkgValue}"] .progress-text`);
+
+                // Stop any existing interval
+                if (fakeProgressIntervals[pkgValue]) {
+                    clearInterval(fakeProgressIntervals[pkgValue]);
+                }
+
+                fakeProgressIntervals[pkgValue] = setInterval(() => {
+                    if (progress < 90) {
+                        let increment = Math.floor(Math.random() * 3) + 1; // 1-3%
+                        progress = Math.min(progress + increment, 90);
+                        currentProgress[pkgValue] = progress;
+                        $text.text(progress + '%');
+                    }
+                }, 500 + Math.random() * 500); // Random interval between 300–600ms
+            }
+
+            function completeFakeProgress(pkgValue) {
+                if (fakeProgressIntervals[pkgValue]) {
+                    clearInterval(fakeProgressIntervals[pkgValue]);
+                    delete fakeProgressIntervals[pkgValue];
+                }
+
+                let progress = currentProgress[pkgValue] || 90;
+                const $text = $(`.package-status[data-package="${pkgValue}"] .progress-text`);
+
+                // Don’t restart from 0 — continue where it left off
+                let interval = setInterval(() => {
+                    if (progress < 100) {
+                        progress++;
+                        currentProgress[pkgValue] = progress;
+                        $text.text(progress + '%');
+                    } else {
+                        clearInterval(interval);
+                        $(`.package-status[data-package="${pkgValue}"]`)
+                            .show()
+                            .removeClass()
+                            .addClass('ms-auto badge theme-bg-color')
+                            .html('Installed');
+                    }
+                }, 50); // Smooth finish
+            }
+
+
+
             let packageStatus = {}; // e.g. { 'vendor/name': 'pending'|'in-process'|'installed' }
 
             function updatePackageStatus(pkgValue, status) {
                 let $status = $(`.package-status[data-package="${pkgValue}"]`);
+                let $text = $status.find('.progress-text');
+
                 if (status === 'in-process') {
-                    $status.html('<span class="loader"></span> Installing...').show();
+                    $status.show();
+
+                    // Only initialize to 0 if not already started
+                    if (typeof currentProgress[pkgValue] === 'undefined') {
+                        currentProgress[pkgValue] = 0;
+                        $text.text('0%');
+                        startFakeProgress(pkgValue);
+                    }
+
                 } else if (status === 'installed') {
-                    //$status.html('<span class="text-success">&#10003;</span> Installed').show();
-                    $status.html('Installed').removeClass().addClass('ms-auto badge theme-bg-color').show();
+                    completeFakeProgress(pkgValue);
                 } else {
                     $status.hide();
+                    if (fakeProgressIntervals[pkgValue]) {
+                        clearInterval(fakeProgressIntervals[pkgValue]);
+                        delete fakeProgressIntervals[pkgValue];
+                    }
+                    delete currentProgress[pkgValue];
                 }
             }
+
+
 
             function updateSelectAllCheckbox() {
                 if ($('.package-checkbox:checked').length === $('.package-checkbox').length) {
@@ -618,6 +685,7 @@
                                                 $('.prev-step').prop('disabled', false); // Re-enable Previous
                                                 showStep(4);
                                             }
+                                            window.location.reload();
                                         }, 1000);
                                     }, index * 1500);
                                 });

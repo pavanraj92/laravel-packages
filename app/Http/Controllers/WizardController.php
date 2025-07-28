@@ -213,21 +213,21 @@ class WizardController extends Controller
         Session::put('installed_packages', $allPackages);
         Session::put('packages', $allPackages);
 
-        $missingPackages = [];
-        foreach ($userSelectedPackages as $fullPackageName) {
-            $composerCheck = shell_exec("composer show {$fullPackageName} 2>&1");
-            if (strpos($composerCheck, 'not found') !== false || strpos($composerCheck, 'No package') !== false) {
-                $missingPackages[] = $fullPackageName;
-            }
-        }
+        // $missingPackages = [];
+        // foreach ($userSelectedPackages as $fullPackageName) {
+        //     $composerCheck = shell_exec("composer show {$fullPackageName} 2>&1");
+        //     if (strpos($composerCheck, 'not found') !== false || strpos($composerCheck, 'No package') !== false) {
+        //         $missingPackages[] = $fullPackageName;
+        //     }
+        // }
 
 
-        if (!empty($missingPackages)) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Missing packages: ' . implode(', ', $missingPackages)
-            ], 400);
-        }
+        // if (!empty($missingPackages)) {
+        //     return response()->json([
+        //         'status' => 'error',
+        //         'message' => 'Missing packages: ' . implode(', ', $missingPackages)
+        //     ], 400);
+        // }
 
         try {
             set_time_limit(0); // Extend execution time
