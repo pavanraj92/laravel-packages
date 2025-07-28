@@ -10,6 +10,11 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "admin/admin_auth": "@dev",
+        "admin/banners": "@dev",
+        "admin/emails": "@dev",
+        "admin/pages": "@dev",
+        "admin/settings": "@dev",
         "kyslik/column-sortable": "^7.0",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
