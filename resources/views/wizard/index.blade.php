@@ -125,8 +125,8 @@
                 <div class="col-md-8 offset-md-2 mb-5">
                     <div class="card" style="box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); border-radius: 10px;">
                         <div class="card-header">
-                            <h3 class="text-center mt-3">Laravel Application Setup Wizard</h3>
-                            <p class="text-center text-muted">Follow the steps to set up your Laravel application.</p>
+                            <h3 class="text-center mt-3">Laravel Admin Panel Setup Wizard</h3>
+                            <p class="text-center text-muted">Follow the steps to set up your Laravel admin panel.</p>
                         </div>
                         <div class="card-body">                            
                             <form id="multiStepForm" novalidate autocomplete="off">
@@ -273,7 +273,7 @@
                                 </div>
                             </form>
                             <div class="alert alert-success mt-3" id="formSuccess" style="display:none;">
-                                Your Laravel application has been successfully set up!
+                                Your Laravel admin panel has been successfully set up!
                             </div>
                         </div>
                     </div>
