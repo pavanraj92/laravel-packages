@@ -462,7 +462,8 @@
             };
 
             // Next Step
-            $('.next-step').click(function() {
+            $('.next-step').click(function(event) {
+                event.preventDefault();
                 var activeBtn = $(this);
                 var $currentStep = $('.form-step.active');
                 var step = parseInt($currentStep.data('step'));
@@ -593,11 +594,13 @@
                         },
                         success: function(res) {  
                               if (res.message === 'Packages already installed.' || res.skip_install) {
-        // Immediately proceed to next step
                                 toastr.success(res.message);
-                                activeBtn.prop('disabled', false).text('Next');
-                                $('.prev-step').prop('disabled', false); // Re-enable Previous
-                                showStep(4);
+                                setTimeout(() => {
+                                    window.location.reload(); // 🔄 Refresh the page
+                                }, 100);
+                                // activeBtn.prop('disabled', false).text('Next');
+                                // $('.prev-step').prop('disabled', false); // Re-enable Previous
+                                // showStep(4);
                                 return;
                             }else{                          
                                 let delay = 0;
