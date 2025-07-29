@@ -91,7 +91,15 @@ return [
 
             'Seo Manager' => [
                 ['name' => 'Seo Manager List', 'slug' => 'seo_manager_list']
-           
+
+            ],
+
+            'Enquiry Manager' => [
+                ['name' => 'Enquiry Manager List', 'slug' => 'enquiry_manager_list'],
+                ['name' => 'Enquiry Manager View', 'slug' => 'enquiry_manager_view'],
+                ['name' => 'Enquiry Manager Edit', 'slug' => 'enquiry_manager_edit'],
+                ['name' => 'Enquiry Manager Delete', 'slug' => 'enquiry_manager_delete'],
+                ['name' => 'Enquiry Manager Reply', 'slug' => 'enquiry_manager_reply'],
             ],
         ],
     ],
