@@ -20,6 +20,7 @@ return [
         'admin/faqs'      => 'Faq Manager',
         'admin/pages'     => 'CMS Pages Manager',
         'admin/settings'  => 'Setting Manager',
+        'admin/enquiries'  => 'Enquiry Manager',
     ],
 
     'industry_packages' => [
@@ -53,6 +54,7 @@ return [
             'admin/emails',
             'admin/pages',
             // 'admin/settings',
+            'admin/enquiries',
         ],
         'manufacturing' => [
             // 'admin/admins',
@@ -103,6 +105,9 @@ return [
         // ],
         'admin/admin_role_permissions' => [
             'description' => 'Manage and configure role-based permissions for administrators within the system.',
+        ],
+        'admin/enquiries' => [
+            'description' => 'Manage and configure user enquiries in the system.',
         ],
     ],
 
