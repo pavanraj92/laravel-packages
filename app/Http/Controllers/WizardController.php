@@ -114,6 +114,15 @@ class WizardController extends Controller
         $password = $request->db_password ?? '';
 
         try {
+
+            // connect to the MySQL database using the root user and a password,
+            if (!empty($password)) {
+                config(['database.connections.mysql.username' => $user]);
+                config(['database.connections.mysql.password' => $password]);
+                DB::purge('mysql');
+                DB::reconnect('mysql');
+            }
+            
             // Check if database already exists
             $existingDb = DB::select("SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = ?", [$dbName]);
 
@@ -140,13 +149,17 @@ class WizardController extends Controller
             DB::statement("CREATE DATABASE IF NOT EXISTS `$dbName` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
 
             if (!empty($password)) {
-                DB::statement("CREATE USER IF NOT EXISTS '$user'@'%' IDENTIFIED BY ?", [$password]);
+                //DB::statement("CREATE USER IF NOT EXISTS '$user'@'%' IDENTIFIED BY ?", [$password]); // for windows
+                DB::unprepared("CREATE USER IF NOT EXISTS '$user'@'%' IDENTIFIED BY '$password'"); // for linux OS
             } else {
                 DB::statement("CREATE USER IF NOT EXISTS '$user'@'%'");
             }
 
             DB::statement("GRANT ALL PRIVILEGES ON `$dbName`.* TO '$user'@'%'");
             DB::statement("FLUSH PRIVILEGES");
+
+            // Update MySQL connection config
+            $this->updateEnvDbName(Session::get('db.dbName')); //for linux OS
 
             return response()->json([
                 'status' => 'success',
@@ -243,9 +256,9 @@ class WizardController extends Controller
 
             if ($exitCode === 0) {
                 // Artisan::call('migrate', ['--force' => true]);
-                $message = "✅ All selected packages installed successfully.";
+                $message = " All selected packages installed successfully.";
             } else {
-                $message = "❌ Composer failed. Output:\n" . $output;
+                $message = "Composer failed. Output:\n" . $output;
                 return response()->json([
                     'status' => 'error',
                     'message' => $message
@@ -254,7 +267,7 @@ class WizardController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => "❌ Exception: " . $e->getMessage()
+                'message' => " Exception: " . $e->getMessage()
             ], 500);
         }
 
@@ -308,21 +321,21 @@ class WizardController extends Controller
         // Only run the seeder if the admin/users package is installed
         if (is_dir(base_path('vendor/admin/users'))) {
             Artisan::call('db:seed', [
-                '--class' => 'Admin\Users\Database\Seeders\\SeedUserRolesSeeder',
+                '--class' => 'Admin\\Users\\Database\\Seeders\\SeedUserRolesSeeder',
                 '--force' => true,
             ]);
         }
 
         if (is_dir(base_path('vendor/admin/settings'))) {
             Artisan::call('db:seed', [
-                '--class' => 'Admin\Settings\Database\Seeders\\SettingSeeder',
+                '--class' => 'Admin\\Settings\\Database\\Seeders\\SettingSeeder',
                 '--force' => true,
             ]);
         }
 
-        if (is_dir(base_path('vendor/admin/emails'))) {
+        if (is_dir(base_path('vendor/admin/admin_role_permissions'))) {
             Artisan::call('db:seed', [
-                '--class' => 'Admin\Emails\Database\Seeders\\MailDatabaseSeeder',
+                '--class' => 'Admin\AdminRolePermissions\Database\Seeders\\AdminRolePermissionDatabaseSeeder',
                 '--force' => true,
             ]);
         }
@@ -381,7 +394,6 @@ class WizardController extends Controller
                 '--force' => true,
             ]);
         }
-
         $this->updateEnvDbName(Session::get('db.dbName'));
         // Artisan::call('optimize:clear');
 
@@ -435,7 +447,12 @@ class WizardController extends Controller
      */
     public function clearSession()
     {
-        // Clear all session data        
+        // Clear all session data  
+        config(['database.connections.mysql.username' => '']);
+        config(['database.connections.mysql.password' => '']);
+        DB::purge('mysql');
+        DB::reconnect('mysql');
+
         Session::flush();
         return redirect()->route('wizard-install')->with('success', 'Session cleared successfully.');
     }
@@ -536,7 +553,7 @@ class WizardController extends Controller
             Session::put('installed_packages', $remainingPackages);
             Session::put('packages', $remainingPackages);
         } catch (\Exception $e) {
-            throw new \Exception("❌ Uninstall Exception: " . $e->getMessage());
+            throw new \Exception("Uninstall Exception: " . $e->getMessage());
         }
     }
 }
