@@ -85,15 +85,15 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-auth.git"
+            "url": "https://github.com/pavanraj92/admin-auth.git"           
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-admins.git"
+            "url": "https://github.com/pavanraj92/admin-admins.git"           
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-users.git"
+            "url": "https://github.com/pavanraj92/admin-users.git"           
         },
         {
             "type": "vcs",
@@ -104,8 +104,8 @@
             "url": "https://github.com/pavanraj92/admin-categories.git"           
         },
         {
-            "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-emails.git"
+            "type": "vcs", 
+            "url": "https://github.com/pavanraj92/admin-emails.git"           
         },
         {
             "type": "vcs",
@@ -113,27 +113,28 @@
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-faqs.git"
+            "url": "https://github.com/pavanraj92/admin-faqs.git"           
+        },        
+        {
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-banners.git"           
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-banners.git"
+            "url": "https://github.com/pavanraj92/admin-settings.git"           
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-settings.git"
+            "url": "https://github.com/pavanraj92/admin-role-permission.git"           
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-role-permission.git"
+            "url": "https://github.com/pavanraj92/admin-tags.git"           
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-user-roles.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-contact-enquiry.git"
-        }
+            "url": "https://github.com/pavanraj92/admin-brands.git"           
+        }        
     ]
+
 }
