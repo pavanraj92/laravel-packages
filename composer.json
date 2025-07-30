@@ -129,6 +129,10 @@
         },
         {
             "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-contact-enquiry.git"
+        },
+        {
+            "type": "vcs",
             "url": "https://github.com/pavanraj92/admin-tags.git"           
         },
         {
