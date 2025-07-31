@@ -133,9 +133,9 @@
                                 <!-- Step 1: Industry Selection -->
                                 <div class="form-step @if (empty($industry)) active @endif"
                                     data-step="1">
-                                    <h4 class="mb-3">Step 1: Industry Selection</h4>
+                                    <h4 class="mb-3">Step 1: Select Your Industry</h4>
                                     <div class="mb-3">
-                                        <label for="industry" class="form-label">Choose Industry <span
+                                        <label for="industry" class="form-label">Select Your Industry<span
                                                 class="text-danger">*</span></label>
                                         <select id="industry" name="industry" class="form-select" required>
                                             <option value="">Select an industry</option>
@@ -200,7 +200,7 @@
                                 </div>
                                 <!-- Step 3: Package Selection -->
                                 <div class="form-step @if (empty($packages) && !empty($dbName) && !empty($websiteName) && !empty($industry)) active @endif" data-step="3">
-                                    <h4 class="mb-3">Step 3: Package Selection: <small class="theme-text-color">Select at least one package.</small></h4>
+                                    <h4 class="mb-3">Step 3: Select Packages: <small class="theme-text-color">Select at least one package.</small></h4>
                                     <div class="mb-3" style="max-height: 350px; overflow-y: auto;">
                                         <div class="form-check mb-2">
                                             <input class="form-check-input" type="checkbox" id="selectAllPackages"
@@ -213,10 +213,9 @@
                                             @forelse($packageList as $index => $package)
                                                 @php
                                                     $packageName = $package['vendor'] . '/' . $package['name'];
-                                                    $strChecked = in_array($packageName, explode(', ', $packages)) ? 'checked' : '';                                                    
-                                                @endphp                                                    
-                                                <li
-                                                    class="list-group-item d-flex align-items-center justify-content-between">
+                                                    $strChecked = in_array($packageName, explode(', ', $packages)) ? 'checked' : '';
+                                                @endphp
+                                                <li class="list-group-item d-flex align-items-center justify-content-between">
                                                     <div>
                                                         <input class="form-check-input me-2 package-checkbox"
                                                             type="checkbox" name="packages[]"
@@ -224,14 +223,14 @@
                                                             id="package_{{ $index }}" {{ $strChecked }}>
                                                         <label class="form-check-label"
                                                             for="package_{{ $index }}" style="display: inline;" data-toggle="tooltip" data-placement="top" title="{{ (isset($package['info']['description'])) ? $package['info']['description'] : 'No description available' }}">
-                                                            <strong>{{ $package['display_name'] ?? $package['vendor'] . '/' . $package['name'] }}</strong>                                                           
+                                                            {{ $package['display_name'] ?? $package['vendor'] . '/' . $package['name'] }}                                                         
                                                         </label>
                                                     </div>
                                                     <span class="package-status"
                                                         id="package_status_{{ $index }}"
                                                         data-package="{{ $packageName }}"
                                                         style="display: none;">
-                                                        <span class="progress-text" style="font-size: 14px; font-weight: bold;">0%</span>
+                                                        <span class="progress-text" style="font-size: 14px; font-weight: bold;">Processing...0%</span>
                                                     </span>
                                                 </li>
                                             @empty
@@ -344,7 +343,7 @@
                         let increment = Math.floor(Math.random() * 3) + 1; // 1-3%
                         progress = Math.min(progress + increment, 90);
                         currentProgress[pkgValue] = progress;
-                        $text.text(progress + '%');
+                        $text.text('Processing...' + progress + '%');
                     }
                 }, 500 + Math.random() * 500); // Random interval between 300–600ms
             }
@@ -363,7 +362,7 @@
                     if (progress < 100) {
                         progress++;
                         currentProgress[pkgValue] = progress;
-                        $text.text(progress + '%');
+                        $text.text('Processing...' + progress + '%');
                     } else {
                         clearInterval(interval);
                         $(`.package-status[data-package="${pkgValue}"]`)
