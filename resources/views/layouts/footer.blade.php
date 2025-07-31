@@ -8,7 +8,7 @@
                  </p>
              </div>
              <div class="col-md-6 text-md-end">
-                 <p class="mb-0">Made with by Dotsquares</p>
+                 <p class="mb-0">Designed & Developed by Dotsquares</p>
              </div>
          </div>
      </div>
