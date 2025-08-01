@@ -129,16 +129,19 @@
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-contact-enquiry.git"
-        },
-        {
-            "type": "vcs",
             "url": "https://github.com/pavanraj92/admin-tags.git"           
         },
         {
             "type": "vcs",
             "url": "https://github.com/pavanraj92/admin-brands.git"           
-        }        
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-ratings.git"           
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-contact-enquiry.git"
+        }
     ]
-
 }
