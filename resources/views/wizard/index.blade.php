@@ -201,42 +201,94 @@
                                 <!-- Step 3: Package Selection -->
                                 <div class="form-step @if (empty($packages) && !empty($dbName) && !empty($websiteName) && !empty($industry)) active @endif" data-step="3">
                                     <h4 class="mb-3">Step 3: Select Packages: <small class="theme-text-color">Select at least one package.</small></h4>
-                                    <div class="mb-3" style="max-height: 350px; overflow-y: auto;">
-                                        <div class="form-check mb-2">
-                                            <input class="form-check-input" type="checkbox" id="selectAllPackages"
-                                                {{ count($packageList) > 0 && count(explode(', ', $packages)) === count($packageList) ? 'checked' : '' }}>
-                                            <label class="form-check-label fw-bold" for="selectAllPackages">
-                                                Select All
-                                            </label>
+                                    <div class="mb-3" style="max-height: 500px; overflow-y: auto;">
+                                        
+                                        <!-- Common Packages Section -->
+                                        <div class="mb-4">
+                                            <h5 class="mb-3 text-primary">
+                                                <i class="fas fa-cogs me-2"></i>Common Packages
+                                            </h5>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" id="selectAllCommonPackages">
+                                                <label class="form-check-label fw-bold" for="selectAllCommonPackages">
+                                                    Select All Common Packages
+                                                </label>
+                                            </div>
+                                            <ul class="list-group mb-3">                                            
+                                                @forelse($commonPackageList as $index => $package)
+                                                    @php
+                                                        $packageName = $package['vendor'] . '/' . $package['name'];
+                                                        $strChecked = in_array($packageName, explode(', ', $packages)) ? 'checked' : '';
+                                                    @endphp
+                                                    <li class="list-group-item d-flex align-items-center justify-content-between">
+                                                        <div>
+                                                            <input class="form-check-input me-2 package-checkbox common-package-checkbox"
+                                                                type="checkbox" name="packages[]"
+                                                                value="{{ $packageName }}"
+                                                                id="common_package_{{ $index }}" {{ $strChecked }}>
+                                                            <label class="form-check-label"
+                                                                for="common_package_{{ $index }}" style="display: inline;" data-toggle="tooltip" data-placement="top" title="{{ (isset($package['info']['description'])) ? $package['info']['description'] : 'No description available' }}">
+                                                                {{ $package['display_name'] ?? $package['vendor'] . '/' . $package['name'] }}                                                         
+                                                            </label>
+                                                        </div>
+                                                        <span class="package-status"
+                                                            id="package_status_common_{{ $index }}"
+                                                            data-package="{{ $packageName }}"
+                                                            style="display: none;">
+                                                            <span class="progress-text" style="font-size: 14px; font-weight: bold;">Processing...0%</span>
+                                                        </span>
+                                                    </li>
+                                                @empty
+                                                    <li class="list-group-item text-muted">No common packages found.</li>
+                                                @endforelse
+                                            </ul>
                                         </div>
-                                        <ul class="list-group">                                            
-                                            @forelse($packageList as $index => $package)
-                                                @php
-                                                    $packageName = $package['vendor'] . '/' . $package['name'];
-                                                    $strChecked = in_array($packageName, explode(', ', $packages)) ? 'checked' : '';
-                                                @endphp
-                                                <li class="list-group-item d-flex align-items-center justify-content-between">
-                                                    <div>
-                                                        <input class="form-check-input me-2 package-checkbox"
-                                                            type="checkbox" name="packages[]"
-                                                            value="{{ $packageName }}"
-                                                            id="package_{{ $index }}" {{ $strChecked }}>
-                                                        <label class="form-check-label"
-                                                            for="package_{{ $index }}" style="display: inline;" data-toggle="tooltip" data-placement="top" title="{{ (isset($package['info']['description'])) ? $package['info']['description'] : 'No description available' }}">
-                                                            {{ $package['display_name'] ?? $package['vendor'] . '/' . $package['name'] }}                                                         
-                                                        </label>
-                                                    </div>
-                                                    <span class="package-status"
-                                                        id="package_status_{{ $index }}"
-                                                        data-package="{{ $packageName }}"
-                                                        style="display: none;">
-                                                        <span class="progress-text" style="font-size: 14px; font-weight: bold;">Processing...0%</span>
-                                                    </span>
-                                                </li>
-                                            @empty
-                                                <li class="list-group-item text-muted">No packages found.</li>
-                                            @endforelse
-                                        </ul>                                     
+
+                                        <!-- Industry-Specific Packages Section -->
+                                        @if(!empty($selectedIndustry) && !empty($industryPackageList))
+                                        <div class="mb-4">
+                                            <h5 class="mb-3 text-success">
+                                                <i class="{{ config('constants.industry_icons.' . $selectedIndustry, 'fas fa-industry') }} me-2"></i>{{ config('constants.industryAryList.' . $selectedIndustry, $selectedIndustry) }} Package
+                                            </h5>
+                                            <p class="text-muted mb-3">
+                                                The {{ config('constants.industryAryList.' . $selectedIndustry, $selectedIndustry) }} package provides essential features for building {{ strtolower(config('constants.industryAryList.' . $selectedIndustry, $selectedIndustry)) }} applications.
+                                            </p>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" id="selectAllIndustryPackages">
+                                                <label class="form-check-label fw-bold" for="selectAllIndustryPackages">
+                                                    Select All {{ config('constants.industryAryList.' . $selectedIndustry, $selectedIndustry) }} Packages
+                                                </label>
+                                            </div>
+                                            <ul class="list-group">                                            
+                                                @forelse($industryPackageList as $index => $package)
+                                                    @php
+                                                        $packageName = $package['vendor'] . '/' . $package['name'];
+                                                        $strChecked = in_array($packageName, explode(', ', $packages)) ? 'checked' : '';
+                                                    @endphp
+                                                    <li class="list-group-item d-flex align-items-center justify-content-between">
+                                                        <div>
+                                                            <input class="form-check-input me-2 package-checkbox industry-package-checkbox"
+                                                                type="checkbox" name="packages[]"
+                                                                value="{{ $packageName }}"
+                                                                id="industry_package_{{ $index }}" {{ $strChecked }}>
+                                                            <label class="form-check-label"
+                                                                for="industry_package_{{ $index }}" style="display: inline;" data-toggle="tooltip" data-placement="top" title="{{ (isset($package['info']['description'])) ? $package['info']['description'] : 'No description available' }}">
+                                                                {{ $package['display_name'] ?? $package['vendor'] . '/' . $package['name'] }}                                                         
+                                                            </label>
+                                                        </div>
+                                                        <span class="package-status"
+                                                            id="package_status_industry_{{ $index }}"
+                                                            data-package="{{ $packageName }}"
+                                                            style="display: none;">
+                                                            <span class="progress-text" style="font-size: 14px; font-weight: bold;">Processing...0%</span>
+                                                        </span>
+                                                    </li>
+                                                @empty
+                                                    <li class="list-group-item text-muted">No industry-specific packages found.</li>
+                                                @endforelse
+                                            </ul>
+                                        </div>
+                                        @endif
 
                                         <div class="invalid-feedback" id="packageError" style="display:none;">
                                             Please select at least one package.
@@ -326,6 +378,9 @@
                     .html('Installed');
             });
 
+            // Initialize select all checkboxes
+            updateSelectAllCheckboxes();
+
             let fakeProgressIntervals = {}; // Track fake progress
             let currentProgress = {}; // Track current % per package
 
@@ -406,22 +461,35 @@
 
 
 
-            function updateSelectAllCheckbox() {
-                if ($('.package-checkbox:checked').length === $('.package-checkbox').length) {
-                    $('#selectAllPackages').prop('checked', true);
+            function updateSelectAllCheckboxes() {
+                // Update common packages select all
+                if ($('.common-package-checkbox:checked').length === $('.common-package-checkbox').length && $('.common-package-checkbox').length > 0) {
+                    $('#selectAllCommonPackages').prop('checked', true);
                 } else {
-                    $('#selectAllPackages').prop('checked', false);
+                    $('#selectAllCommonPackages').prop('checked', false);
+                }
+
+                // Update industry packages select all
+                if ($('.industry-package-checkbox:checked').length === $('.industry-package-checkbox').length && $('.industry-package-checkbox').length > 0) {
+                    $('#selectAllIndustryPackages').prop('checked', true);
+                } else {
+                    $('#selectAllIndustryPackages').prop('checked', false);
                 }
             }
 
-            // Select All functionality
-            $('#selectAllPackages').on('change', function() {
-                $('.package-checkbox').prop('checked', this.checked).trigger('change');
+            // Select All Common Packages functionality
+            $('#selectAllCommonPackages').on('change', function() {
+                $('.common-package-checkbox').prop('checked', this.checked).trigger('change');
             });
 
-            // If any package-checkbox is unchecked, uncheck Select All
+            // Select All Industry Packages functionality
+            $('#selectAllIndustryPackages').on('change', function() {
+                $('.industry-package-checkbox').prop('checked', this.checked).trigger('change');
+            });
+
+            // If any package-checkbox is unchecked, uncheck respective Select All
             $(document).on('change', '.package-checkbox', function() {
-                updateSelectAllCheckbox();
+                updateSelectAllCheckboxes();
             });
 
             $('#industry').select2({
@@ -460,7 +528,7 @@
                 $('.form-step').removeClass('active');
                 $('.form-step[data-step="' + step + '"]').addClass('active');
                 if (step === 3) {
-                    updateSelectAllCheckbox();
+                    updateSelectAllCheckboxes();
                 }
                 var $step = $('.form-step[data-step="' + step + '"]');
                 $step.find('input, select').removeClass('is-invalid');

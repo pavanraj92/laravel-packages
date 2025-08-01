@@ -30,25 +30,25 @@ class WizardController extends Controller
         $packageInfoMap = config('constants.package_info');
 
         $selectedIndustry = Session::get('industry');
+        $commonPackages = config('constants.common_packages', []);
         $industryPackages = config('constants.industry_packages.' . $selectedIndustry, []);
 
-        $packageList = [];
+        $commonPackageList = [];
+        $industryPackageList = [];
 
-        foreach ($industryPackages as $fullPackageName) {
-            // Split vendor/package
+        // Process common packages
+        foreach ($commonPackages as $fullPackageName) {
             [$vendorName, $packageName] = explode('/', $fullPackageName);
-
+            
             // Skip excluded package
             if ($vendorName === 'admin' && $packageName === 'admin_auth') {
                 continue;
             }
 
-            // Get display name from config map
             $displayName = $displayNameMap[$fullPackageName] ?? $packageName;
             $packageInfo = $packageInfoMap[$fullPackageName] ?? [];
 
-            // You can optionally load extra info if needed, or leave it blank
-            $packageList[] = [
+            $commonPackageList[] = [
                 'vendor'       => $vendorName,
                 'name'         => $packageName,
                 'info'         => $packageInfo,
@@ -56,7 +56,27 @@ class WizardController extends Controller
             ];
         }
 
-        return view('wizard.index', compact('packageList'));
+        // Process industry-specific packages
+        foreach ($industryPackages as $fullPackageName) {
+            [$vendorName, $packageName] = explode('/', $fullPackageName);
+            
+            // Skip excluded package
+            if ($vendorName === 'admin' && $packageName === 'admin_auth') {
+                continue;
+            }
+
+            $displayName = $displayNameMap[$fullPackageName] ?? $packageName;
+            $packageInfo = $packageInfoMap[$fullPackageName] ?? [];
+
+            $industryPackageList[] = [
+                'vendor'       => $vendorName,
+                'name'         => $packageName,
+                'info'         => $packageInfo,
+                'display_name' => $displayName,
+            ];
+        }
+
+        return view('wizard.index', compact('commonPackageList', 'industryPackageList', 'selectedIndustry'));
     }
 
 
