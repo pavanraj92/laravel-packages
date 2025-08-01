@@ -32,3 +32,4 @@ yarn-error.log
 /packages
 /Modules
 composer.lock
+/storage/config/settings.yml
