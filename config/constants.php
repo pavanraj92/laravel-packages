@@ -82,6 +82,7 @@ return [
         'admin/users'     => 'User Manager',
         'admin/pages'     => 'CMS Pages Manager',
         'admin/emails'    => 'Email Template Manager',
+<<<<<<< HEAD
         'admin/banners'   => 'Banner Manager', 
         'admin/faqs'      => 'Faq Manager',   
         'admin/enquiries' => 'Enquiry Manager',   
@@ -89,7 +90,13 @@ return [
         'admin/tags'      => 'Tag Manager',
         'admin/categories'=> 'Category Manager',
         'admin/ratings'   => 'Rating Manager',
+=======
+        'admin/banners'   => 'Banner Manager',
+        'admin/faqs'      => 'Faq Manager',
+        'admin/enquiries'  => 'Enquiry Manager',
+>>>>>>> ad95855 (add some product related work)
         'admin/settings'  => 'Setting Manager',
+        'admin/products'  => 'Product Manager',
     ],
 
     'common_packages' => [
@@ -107,6 +114,7 @@ return [
             'admin/brands',
             'admin/tags',
             'admin/categories',
+<<<<<<< HEAD
             'admin/ratings',
         ],
         'education' => [
@@ -114,6 +122,26 @@ return [
             'admin/categories',
             'admin/ratings',  
         ],        
+=======
+            'admin/pages',
+            'admin/emails',
+            'admin/banners',
+            'admin/faqs',
+            'admin/enquiries',
+            'admin/products',
+        ],
+        'education' => [
+            'admin/admin_role_permissions',
+            'admin/users',
+            'admin/tags',
+            'admin/categories',
+            'admin/pages',
+            'admin/emails',
+            'admin/banners',
+            'admin/faqs',
+            'admin/enquiries',
+        ],
+>>>>>>> ad95855 (add some product related work)
     ],
     'package_info' => [
         'admin/emails' => [
@@ -155,8 +183,13 @@ return [
         'admin/tags' => [
             'description' => 'Manage tags to categorize and organize content or products, allowing for better filtering and search capabilities.',
         ],
+<<<<<<< HEAD
         'admin/ratings' => [
             'description' => 'Manage user ratings and reviews for products or services, allowing users to provide feedback and ratings.',
+=======
+        'admin/products' => [
+            'description' => 'Manage products by adding, editing, or organizing product information to enhance product categorization and recognition.',
+>>>>>>> ad95855 (add some product related work)
         ],
     ],
 
