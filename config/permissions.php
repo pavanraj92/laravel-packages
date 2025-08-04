@@ -109,7 +109,6 @@ return [
                 ['name' => 'Enquiry Manager Reply', 'slug' => 'enquiry_manager_reply'],
             ],
 
-<<<<<<< HEAD
             'Brand Manager' => [
                 ['name' => 'Brand Manager List', 'slug' => 'brands_manager_list'],
                 ['name' => 'Brand Manager Create', 'slug' => 'brands_manager_create'],
@@ -130,14 +129,14 @@ return [
                 ['name' => 'Rating Manager List', 'slug' => 'ratings_manager_list'],
                 ['name' => 'Rating Manager View', 'slug' => 'ratings_manager_view'],
                 ['name' => 'Rating Manager Delete', 'slug' => 'ratings_manager_delete'],
-=======
+            ],
+
             'Product Manager' => [
                 ['name' => 'Product Manager List', 'slug' => 'products_manager_list'],
                 ['name' => 'Product Manager View', 'slug' => 'products_manager_view'],
                 ['name' => 'Product Manager Edit', 'slug' => 'products_manager_edit'],
                 ['name' => 'Product Manager Delete', 'slug' => 'products_manager_delete'],
                 ['name' => 'Product Manager Reply', 'slug' => 'products_manager_reply'],
->>>>>>> ad95855 (add some product related work)
             ],
         ],
     ],
