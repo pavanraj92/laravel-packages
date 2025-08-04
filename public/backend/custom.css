@@ -71,6 +71,17 @@
     border-color: #f48120;
 }
 
+/* Admin login remember me checkbox styling */
+.admin-login .form-check-input:checked {
+    background-color: #6f42c1;
+    border-color: #6f42c1;
+}
+
+.admin-login .form-check-input:focus {
+    border-color: #6f42c1;
+    box-shadow: 0 0 0 0.2rem rgba(111, 66, 193, 0.25);
+}
+
 /* ckeditor height fixed */
 .ck-editor__editable_inline {
     min-height: 250px !important;
@@ -83,13 +94,16 @@
     background: #263544;
     color: #fff;
 }
+
 .sidebar-bottom-link {
     border-top: 1px solid #2a3f54;
     background: #263544;
 }
+
 .sidebar-bottom-link .sidebar-link {
     color: #fff;
 }
+
 .sidebar-bottom-link .sidebar-link:hover {
     color: #ffffff;
     text-decoration: none;
@@ -107,11 +121,12 @@
 .password-toggle {
     position: relative;
 }
+
 .toggle-password {
     position: absolute;
     top: 38px;
     right: 15px;
     cursor: pointer;
     color: #6c757d;
-    z-index: 10; 
+    z-index: 10;
 }
