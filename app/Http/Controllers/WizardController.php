@@ -338,6 +338,13 @@ class WizardController extends Controller
         // migrate the database
         Artisan::call('migrate', ['--force' => true]);
 
+        // Run the package seeder to populate packages table
+        if (is_dir(base_path('vendor/admin/admin_auth'))) {
+            Artisan::call('db:seed', [
+                '--class' => 'Admin\AdminAuth\Database\Seeders\\PackageSeeder',
+                '--force' => true,
+            ]);
+        }
         // run the package seeder
         // Only run the seeder if the admin/users package is installed
         if (is_dir(base_path('vendor/admin/users'))) {
@@ -415,6 +422,8 @@ class WizardController extends Controller
                 '--force' => true,
             ]);
         }
+
+
         $this->updateEnvDbName(Session::get('db.dbName'));
         // Artisan::call('optimize:clear');
 

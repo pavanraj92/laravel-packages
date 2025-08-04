@@ -77,7 +77,13 @@ return [
         // 'technology'    => 'fas fa-microchip',
     ],
 
+    'auto_install_packages' => [
+        'admin/admin_auth',
+        'admin/settings',
+    ],
+
     'package_display_names' => [
+        'admin/admin_auth' => 'Admin Authentication',
         'admin/admin_role_permissions'    => 'Admin Role & Permission Manager',
         'admin/users'     => 'User Manager',
         'admin/pages'     => 'CMS Pages Manager',
@@ -133,6 +139,10 @@ return [
     ],
 
     'package_info' => [
+        'admin/admin_auth' => [
+            'description' => 'Core authentication system for admin panel with user management and security features.',
+        ],
+
         'admin/emails' => [
             'description' => 'Manage and configure email templates used across the system for various notifications and communications.',
         ],
