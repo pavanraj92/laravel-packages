@@ -138,6 +138,17 @@ return [
                 ['name' => 'Product Manager Delete', 'slug' => 'products_manager_delete'],
                 ['name' => 'Product Manager Reply', 'slug' => 'products_manager_reply'],
             ],
+            'Lecture Manager' => [
+                ['name' => 'Lecture Manager List', 'slug' => 'lectures_manager_list'],
+                ['name' => 'Lecture Manager Create', 'slug' => 'lectures_manager_create'],
+                ['name' => 'Lecture Manager View', 'slug' => 'lectures_manager_view'],
+                ['name' => 'Lecture Manager Edit', 'slug' => 'lectures_manager_edit'],
+                ['name' => 'Lecture Manager Delete', 'slug' => 'lectures_manager_delete'],
+            ],
+            'Product Order Manager' => [
+                ['name' => 'Product Order Manager List', 'slug' => 'product_orders_manager_list'],
+                ['name' => 'Product Order Manager View', 'slug' => 'product_orders_manager_view'],
+            ],
         ],
     ],
 ];

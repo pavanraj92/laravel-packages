@@ -100,6 +100,7 @@ return [
         'admin/enquiries'  => 'Enquiry Manager',
         'admin/settings'  => 'Setting Manager',
         'admin/products'  => 'Product Manager',
+        'admin/product_orders'  => 'Orders Manager',
     ],
 
     'common_packages' => [
@@ -118,24 +119,14 @@ return [
             'admin/tags',
             'admin/categories',
             'admin/ratings',
+            'admin/products',
+            'admin/product_orders'
         ],
         'education' => [
             'admin/tags',
             'admin/categories',
             'admin/ratings',
         ]
-    ],
-
-    'education' => [
-        'admin/admin_role_permissions',
-        'admin/users',
-        'admin/tags',
-        'admin/categories',
-        'admin/pages',
-        'admin/emails',
-        'admin/banners',
-        'admin/faqs',
-        'admin/enquiries',
     ],
 
     'package_info' => [
@@ -187,6 +178,9 @@ return [
         ],
         'admin/products' => [
             'description' => 'Manage products by adding, editing, or organizing product information to enhance product categorization and recognition.',
+        ],
+        'admin/product_orders' => [
+            'description' => 'Manage customer product orders, including creation, tracking, and updating order statuses.',
         ],
     ]
 

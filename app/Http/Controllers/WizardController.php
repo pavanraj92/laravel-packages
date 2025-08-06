@@ -215,7 +215,7 @@ class WizardController extends Controller
         $dependencyMap = [
             'admin/admin_role_permissions' => ['admin/admins'],
             'admin/users' => ['admin/user_roles'],
-            'admin/products' => ['admin/brands', 'admin/categories', 'admin/tags'],
+            'admin/products' => ['admin/brands', 'admin/categories', 'admin/tags', 'admin/product_orders'],
         ];
 
         foreach ($userSelectedPackages as $selected) {
