@@ -33,7 +33,8 @@
             "Admin\\Users\\Database\\Seeders\\": "vendor/admin/users/database/seeders/",
             "Admin\\AdminRolePermissions\\Database\\Seeders\\": "vendor/admin/admin_role_permissions/database/seeders/",
             "Admin\\AdminAuth\\Database\\Seeders\\": "vendor/admin/admin_auth/database/seeders/",
-            "Admin\\Emails\\Database\\Seeders\\": "vendor/admin/emails/database/seeders/"
+            "Admin\\Emails\\Database\\Seeders\\": "vendor/admin/emails/database/seeders/",
+            "Modules\\Orders\\": "Modules/Orders/app/"
         }
     },
     "autoload-dev": {
@@ -86,27 +87,27 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-auth.git"
+            "url": "https://github.com/pavanraj92/admin-auth.git"           
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-admins.git"
+            "url": "https://github.com/pavanraj92/admin-admins.git"           
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-users.git"
+            "url": "https://github.com/pavanraj92/admin-users.git"           
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-user-roles.git"
+            "url": "https://github.com/pavanraj92/admin-user-roles.git"           
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-categories.git"
+            "url": "https://github.com/pavanraj92/admin-categories.git"           
         },
         {
-            "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-emails.git"
+            "type": "vcs", 
+            "url": "https://github.com/pavanraj92/admin-emails.git"           
         },
         {
             "type": "vcs",
@@ -114,39 +115,43 @@
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-faqs.git"
+            "url": "https://github.com/pavanraj92/admin-faqs.git"           
+        },        
+        {
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-banners.git"           
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-banners.git"
+            "url": "https://github.com/pavanraj92/admin-settings.git"           
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-settings.git"
+            "url": "https://github.com/pavanraj92/admin-role-permission.git"           
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-role-permission.git"
+            "url": "https://github.com/pavanraj92/admin-tags.git"           
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-tags.git"
+            "url": "https://github.com/pavanraj92/admin-brands.git"           
         },
         {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-brands.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-ratings.git"
+            "url": "https://github.com/pavanraj92/admin-ratings.git"           
         },
         {
             "type": "vcs",
             "url": "https://github.com/pavanraj92/admin-contact-enquiry.git"
         },
-        {
+	    {
             "type": "vcs",
             "url": "https://github.com/pavanraj92/admin-products.git"
+        },
+	    {
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-product-orders.git"
         }
     ]
 }
