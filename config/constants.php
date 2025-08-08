@@ -100,7 +100,8 @@ return [
         'admin/enquiries'  => 'Enquiry Manager',
         'admin/settings'  => 'Setting Manager',
         'admin/products'  => 'Product Manager',
-        'admin/product_orders'  => 'Orders Manager',
+        'admin/product_orders'   => 'Orders Manager',
+        'admin/shipping_charges' => 'Shipping Charges Manager',
     ],
 
     'common_packages' => [
@@ -120,7 +121,8 @@ return [
             'admin/categories',
             'admin/ratings',
             'admin/products',
-            'admin/product_orders'
+            'admin/product_orders',
+            'admin/shipping_charges',
         ],
         'education' => [
             'admin/tags',

@@ -149,9 +149,9 @@
             "type": "vcs",
             "url": "https://github.com/pavanraj92/admin-products.git"
         },
-	    {
+        {
             "type": "vcs",
-            "url": "https://github.com/pavanraj92/admin-product-orders.git"
+            "url": "https://github.com/pavanraj92/admin-shipping-charges.git"
         }
     ]
 }
