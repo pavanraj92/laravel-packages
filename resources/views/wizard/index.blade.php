@@ -248,7 +248,7 @@
                                         @if(!empty($selectedIndustry) && !empty($industryPackageList))
                                         <div class="mb-4">
                                             <h5 class="mb-3 text-success">
-                                                <i class="{{ config('constants.industry_icons.' . $selectedIndustry, 'fas fa-industry') }} me-2"></i>{{ config('constants.industryAryList.' . $selectedIndustry, $selectedIndustry) }} Package
+                                                <i class="{{ config('constants.industry_icons.' . $selectedIndustry, 'fas fa-industry') }} me-2"></i>{{ config('constants.industryAryList.' . $selectedIndustry, $selectedIndustry) }} Packages
                                             </h5>
                                             <p class="text-muted mb-3">
                                                 The {{ config('constants.industryAryList.' . $selectedIndustry, $selectedIndustry) }} package provides essential features for building {{ strtolower(config('constants.industryAryList.' . $selectedIndustry, $selectedIndustry)) }} applications.

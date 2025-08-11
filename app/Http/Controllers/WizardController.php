@@ -214,19 +214,39 @@ class WizardController extends Controller
         // Add conditional dependencies
         $dependencyMap = [
             'admin/admin_role_permissions' => ['admin/admins'],
+            'admin/products' => ['admin/brands', 'admin/categories', 'admin/tags', 'admin/users'],
             'admin/users' => ['admin/user_roles'],
-            'admin/products' => ['admin/brands', 'admin/categories', 'admin/tags', 'admin/product_orders'],
         ];
 
-        foreach ($userSelectedPackages as $selected) {
-            if (isset($dependencyMap[$selected])) {
-                foreach ($dependencyMap[$selected] as $requiredPackage) {
-                    if (!in_array($requiredPackage, $userSelectedPackages)) {
-                        $userSelectedPackages[] = $requiredPackage;
+        // foreach ($userSelectedPackages as $selected) {
+        //     if (isset($dependencyMap[$selected])) {
+        //         foreach ($dependencyMap[$selected] as $requiredPackage) {
+        //             if (!in_array($requiredPackage, $userSelectedPackages)) {
+        //                 $userSelectedPackages[] = $requiredPackage;
+        //             }
+        //         }
+        //     }
+        // }
+
+        $resolvedPackages = $userSelectedPackages;
+        $changed = true;
+
+        while ($changed) {
+            $changed = false;
+            foreach ($resolvedPackages as $pkg) {
+                if (isset($dependencyMap[$pkg])) {
+                    foreach ($dependencyMap[$pkg] as $dep) {
+                        if (!in_array($dep, $resolvedPackages)) {
+                            $resolvedPackages[] = $dep;
+                            $changed = true; // Found a new package, so run again
+                        }
                     }
                 }
             }
         }
+
+        $userSelectedPackages = $resolvedPackages;
+
         $this->uninstallUnselectedPackages($userSelectedPackages);
 
         // Always include default package, but avoid duplicates

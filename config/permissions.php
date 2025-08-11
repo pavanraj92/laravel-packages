@@ -149,6 +149,25 @@ return [
                 ['name' => 'Product Order Manager List', 'slug' => 'product_orders_manager_list'],
                 ['name' => 'Product Order Manager View', 'slug' => 'product_orders_manager_view'],
             ],
+
+            'Shipping Methods Manager' => [
+                ['name' => 'Shipping Methods Manager List', 'slug' => 'shipping_methods_manager_list'],
+                ['name' => 'Shipping Methods Manager Create', 'slug' => 'shipping_methods_manager_create'],
+                ['name' => 'Shipping Methods Manager View', 'slug' => 'shipping_methods_manager_view'],
+                ['name' => 'Shipping Methods Manager Edit', 'slug' => 'shipping_methods_manager_edit'],
+                ['name' => 'Shipping Methods Manager Delete', 'slug' => 'shipping_methods_manager_delete'],
+
+                ['name' => 'Shipping Rates Manager List', 'slug' => 'shipping_rates_manager_list'],
+                ['name' => 'Shipping Rates Manager Create', 'slug' => 'shipping_rates_manager_create'],
+                ['name' => 'Shipping Rates Manager View', 'slug' => 'shipping_rates_manager_view'],
+                ['name' => 'Shipping Rates Manager Edit', 'slug' => 'shipping_rates_manager_edit'],
+                ['name' => 'Shipping Rates Manager Delete', 'slug' => 'shipping_rates_manager_delete'],
+            ],
+
+            'Return Refund Manager' => [
+                ['name' => 'Return Refund Manager List', 'slug' => 'return_refunds_manager_list'],
+                ['name' => 'Return Refund Manager View', 'slug' => 'return_refunds_manager_view'],
+            ]
         ],
     ],
 ];
