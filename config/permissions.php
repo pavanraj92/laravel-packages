@@ -163,6 +163,11 @@ return [
                 ['name' => 'Shipping Rates Manager Edit', 'slug' => 'shipping_rates_manager_edit'],
                 ['name' => 'Shipping Rates Manager Delete', 'slug' => 'shipping_rates_manager_delete'],
             ],
+
+            'Return Refund Manager' => [
+                ['name' => 'Return Refund Manager List', 'slug' => 'return_refunds_manager_list'],
+                ['name' => 'Return Refund Manager View', 'slug' => 'return_refunds_manager_view'],
+            ]
         ],
     ],
 ];

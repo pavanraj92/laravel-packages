@@ -34,7 +34,7 @@
             "Admin\\AdminRolePermissions\\Database\\Seeders\\": "vendor/admin/admin_role_permissions/database/seeders/",
             "Admin\\AdminAuth\\Database\\Seeders\\": "vendor/admin/admin_auth/database/seeders/",
             "Admin\\Emails\\Database\\Seeders\\": "vendor/admin/emails/database/seeders/",
-            "Modules\\Orders\\": "Modules/Orders/app/"
+            "Admin\\ShippingCharges\\Database\\Seeders\\": "vendor/admin/shipping_charges/database/seeders/"
         }
     },
     "autoload-dev": {
@@ -152,6 +152,14 @@
         {
             "type": "vcs",
             "url": "https://github.com/pavanraj92/admin-shipping-charges.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-course-certificates.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-course-lectures.git"
         }
     ]
 }

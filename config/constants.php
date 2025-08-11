@@ -100,7 +100,7 @@ return [
         'admin/enquiries'  => 'Enquiry Manager',
         'admin/settings'  => 'Setting Manager',
         'admin/products'  => 'Product Manager',
-        'admin/product_orders'   => 'Orders Manager',
+        // 'admin/product_orders'   => 'Orders Manager',
         'admin/shipping_charges' => 'Shipping Charges Manager',
     ],
 
@@ -121,7 +121,7 @@ return [
             'admin/categories',
             'admin/ratings',
             'admin/products',
-            'admin/product_orders',
+            // 'admin/product_orders',
             'admin/shipping_charges',
         ],
         'education' => [
@@ -181,9 +181,9 @@ return [
         'admin/products' => [
             'description' => 'Manage products by adding, editing, or organizing product information to enhance product categorization and recognition.',
         ],
-        'admin/product_orders' => [
-            'description' => 'Manage customer product orders, including creation, tracking, and updating order statuses.',
-        ],
+        // 'admin/product_orders' => [
+        //     'description' => 'Manage customer product orders, including creation, tracking, and updating order statuses.',
+        // ],
     ]
 
 ];
