@@ -216,6 +216,8 @@ class WizardController extends Controller
             'admin/admin_role_permissions' => ['admin/admins'],
             'admin/products' => ['admin/brands', 'admin/categories', 'admin/tags', 'admin/users'],
             'admin/users' => ['admin/user_roles'],
+            'admin/courses' => ['admin/categories', 'admin/tags', 'admin/users'],
+            'admin/coupons' => ['admin/courses'],
         ];
 
         // foreach ($userSelectedPackages as $selected) {
@@ -395,6 +397,12 @@ class WizardController extends Controller
             ]);
         }
 
+        if (is_dir(base_path('vendor/admin/shipping_charges'))) {
+            Artisan::call('db:seed', [
+                '--class' => 'Admin\ShippingCharges\Database\Seeders\\ShippingZoneSeeder',
+                '--force' => true,
+            ]);
+        }
 
         // Use the correct connection for schema and queries
         $schema = Schema::connection('mysql');
