@@ -98,10 +98,12 @@ return [
         'admin/banners'   => 'Banner Manager',
         'admin/faqs'      => 'Faq Manager',
         'admin/enquiries'  => 'Enquiry Manager',
-        'admin/settings'  => 'Setting Manager',
         'admin/products'  => 'Product Manager',
-        // 'admin/product_orders'   => 'Orders Manager',
         'admin/shipping_charges' => 'Shipping Charges Manager',
+        'admin/coupons' => 'Coupon Manager',
+        'admin/courses' => 'Course Manager',
+        'admin/certificates' => 'Certificate Manager',
+        'admin/settings'  => 'Setting Manager',
     ],
 
     'common_packages' => [
@@ -128,6 +130,9 @@ return [
             'admin/tags',
             'admin/categories',
             'admin/ratings',
+            'admin/coupons',
+            'admin/courses',
+            'admin/certificates',
         ]
     ],
 
@@ -181,9 +186,15 @@ return [
         'admin/products' => [
             'description' => 'Manage products by adding, editing, or organizing product information to enhance product categorization and recognition.',
         ],
-        // 'admin/product_orders' => [
-        //     'description' => 'Manage customer product orders, including creation, tracking, and updating order statuses.',
-        // ],
+        'admin/coupons' => [
+            'description' => 'Manage discount coupons to provide promotional offers and incentives to users.',
+        ],
+        'admin/courses' => [
+            'description' => 'Manage courses by adding, editing, or organizing course information to enhance educational offerings.',
+        ],
+        'admin/certificates' => [
+            'description' => 'Manage certificates by adding, editing, or organizing certificate information to enhance educational offerings.',
+        ],
     ]
 
 ];
