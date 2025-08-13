@@ -34,7 +34,12 @@
             "Admin\\AdminRolePermissions\\Database\\Seeders\\": "vendor/admin/admin_role_permissions/database/seeders/",
             "Admin\\AdminAuth\\Database\\Seeders\\": "vendor/admin/admin_auth/database/seeders/",
             "Admin\\Emails\\Database\\Seeders\\": "vendor/admin/emails/database/seeders/",
-            "Admin\\ShippingCharges\\Database\\Seeders\\": "vendor/admin/shipping_charges/database/seeders/"
+            "Admin\\ShippingCharges\\Database\\Seeders\\": "vendor/admin/shipping_charges/database/seeders/",
+            "Modules\\ShippingCharges\\": "Modules/ShippingCharges/app/",
+            "Modules\\Brands\\": "Modules/Brands/app/",
+            "Modules\\Settings\\": "Modules/Settings/app/",
+            "Modules\\Pages\\": "Modules/Pages/app/",
+            "Modules\\Products\\": "Modules/Products/app/"
         }
     },
     "autoload-dev": {
@@ -160,6 +165,18 @@
         {
             "type": "vcs",
             "url": "https://github.com/pavanraj92/admin-course-lectures.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-wishlist.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-coupon-discounts.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-quizzes.git"
         }
     ]
 }

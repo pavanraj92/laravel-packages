@@ -167,7 +167,46 @@ return [
             'Return Refund Manager' => [
                 ['name' => 'Return Refund Manager List', 'slug' => 'return_refunds_manager_list'],
                 ['name' => 'Return Refund Manager View', 'slug' => 'return_refunds_manager_view'],
-            ]
+            ],
+
+            'Wishlist Manager' => [
+                ['name' => 'Wishlist Manager List', 'slug' => 'wishlists_manager_list'],
+                ['name' => 'Wishlist Manager View', 'slug' => 'wishlists_manager_view'],
+            ],
+             
+            'Course Manager' => [
+                ['name' => 'Course Manager List', 'slug' => 'courses_manager_list'],
+                ['name' => 'Course Manager Create', 'slug' => 'courses_manager_create'],
+                ['name' => 'Course Manager View', 'slug' => 'courses_manager_view'],
+                ['name' => 'Course Manager Edit', 'slug' => 'courses_manager_edit'],
+                ['name' => 'Course Manager Delete', 'slug' => 'courses_manager_delete'],
+            ],
+            'Transaction Manager' => [
+                ['name' => 'Transaction Manager List', 'slug' => 'transactions_manager_list'],
+                ['name' => 'Transaction Manager View', 'slug' => 'transactions_manager_view'],
+            ],
+            'Course Purchase Manager' => [
+                ['name' => 'Course Purchase Manager List', 'slug' => 'course_purchases_manager_list'],
+                ['name' => 'Course Purchase Manager View', 'slug' => 'course_purchases_manager_view'],
+            ],
+            'Report Manager' => [
+                ['name' => 'Report Manager List', 'slug' => 'report_manager_list'],
+                ['name' => 'Report Manager View', 'slug' => 'report_manager_view'],
+            ],
+            'Quiz Manager' => [
+                ['name' => 'Quiz Manager List', 'slug' => 'quizzes_manager_list'],
+                ['name' => 'Quiz Manager Create', 'slug' => 'quizzes_manager_create'],
+                ['name' => 'Quiz Manager View', 'slug' => 'quizzes_manager_view'],
+                ['name' => 'Quiz Manager Edit', 'slug' => 'quizzes_manager_edit'],
+                ['name' => 'Quiz Manager Delete', 'slug' => 'quizzes_manager_delete'],
+            ],
+            'Certificate Manager' => [
+                ['name' => 'Certificate Manager List', 'slug' => 'certificates_manager_list'],
+                ['name' => 'Certificate Manager Create', 'slug' => 'certificates_manager_create'],
+                ['name' => 'Certificate Manager View', 'slug' => 'certificates_manager_view'],
+                ['name' => 'Certificate Manager Edit', 'slug' => 'certificates_manager_edit'],
+                ['name' => 'Certificate Manager Delete', 'slug' => 'certificates_manager_delete'],
+            ],
         ],
     ],
 ];

@@ -103,6 +103,7 @@ return [
         'admin/coupons' => 'Coupon Manager',
         'admin/courses' => 'Course Manager',
         'admin/certificates' => 'Certificate Manager',
+        'admin/wishlists' => 'Wishlist Manager',
         'admin/settings'  => 'Setting Manager',
     ],
 
@@ -123,7 +124,7 @@ return [
             'admin/categories',
             'admin/ratings',
             'admin/products',
-            // 'admin/product_orders',
+            'admin/wishlists',
             'admin/shipping_charges',
         ],
         'education' => [
@@ -132,6 +133,7 @@ return [
             'admin/ratings',
             'admin/coupons',
             'admin/courses',
+            'admin/wishlists',
             'admin/certificates',
         ]
     ],
@@ -194,6 +196,9 @@ return [
         ],
         'admin/certificates' => [
             'description' => 'Manage certificates by adding, editing, or organizing certificate information to enhance educational offerings.',
+        ],
+        'admin/wishlists' => [
+            'description' => 'To analyze customer interest trends or enable users to save items they may buy later.',
         ],
     ]
 
