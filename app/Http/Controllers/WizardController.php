@@ -214,21 +214,11 @@ class WizardController extends Controller
         // Add conditional dependencies
         $dependencyMap = [
             'admin/admin_role_permissions' => ['admin/admins'],
-            'admin/products' => ['admin/brands', 'admin/categories', 'admin/tags', 'admin/users'],
+            'admin/products' => ['admin/brands', 'admin/categories', 'admin/tags', 'admin/users', 'admin/wishlists'],
             'admin/users' => ['admin/user_roles'],
-            'admin/courses' => ['admin/categories', 'admin/tags', 'admin/users'],
+            'admin/courses' => ['admin/categories', 'admin/tags', 'admin/users', 'admin/wishlists'],
             'admin/coupons' => ['admin/courses'],
         ];
-
-        // foreach ($userSelectedPackages as $selected) {
-        //     if (isset($dependencyMap[$selected])) {
-        //         foreach ($dependencyMap[$selected] as $requiredPackage) {
-        //             if (!in_array($requiredPackage, $userSelectedPackages)) {
-        //                 $userSelectedPackages[] = $requiredPackage;
-        //             }
-        //         }
-        //     }
-        // }
 
         $resolvedPackages = $userSelectedPackages;
         $changed = true;
