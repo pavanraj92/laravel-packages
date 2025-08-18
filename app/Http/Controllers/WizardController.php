@@ -39,7 +39,7 @@ class WizardController extends Controller
         // Process common packages
         foreach ($commonPackages as $fullPackageName) {
             [$vendorName, $packageName] = explode('/', $fullPackageName);
-            
+
             // Skip excluded package
             if ($vendorName === 'admin' && $packageName === 'admin_auth') {
                 continue;
@@ -59,7 +59,7 @@ class WizardController extends Controller
         // Process industry-specific packages
         foreach ($industryPackages as $fullPackageName) {
             [$vendorName, $packageName] = explode('/', $fullPackageName);
-            
+
             // Skip excluded package
             if ($vendorName === 'admin' && $packageName === 'admin_auth') {
                 continue;
@@ -142,7 +142,7 @@ class WizardController extends Controller
                 DB::purge('mysql');
                 DB::reconnect('mysql');
             }
-            
+
             // Check if database already exists
             $existingDb = DB::select("SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = ?", [$dbName]);
 
@@ -214,7 +214,7 @@ class WizardController extends Controller
         // Add conditional dependencies
         $dependencyMap = [
             'admin/admin_role_permissions' => ['admin/admins'],
-            'admin/products' => ['admin/brands', 'admin/categories', 'admin/tags', 'admin/users', 'admin/wishlists'],
+            'admin/products' => ['admin/brands', 'admin/categories', 'admin/tags', 'admin/users', 'admin/wishlists', 'admin/ratings'],
             'admin/users' => ['admin/user_roles'],
             'admin/courses' => ['admin/categories', 'admin/tags', 'admin/users', 'admin/wishlists', 'admin/quizzes'],
             'admin/coupons' => ['admin/courses'],
