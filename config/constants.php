@@ -104,6 +104,7 @@ return [
         'admin/courses' => 'Course Manager',
         'admin/certificates' => 'Certificate Manager',
         'admin/wishlists' => 'Wishlist Manager',
+        'admin/quizzes' => 'Quiz Manager',
         'admin/settings'  => 'Setting Manager',
     ],
 
@@ -135,6 +136,7 @@ return [
             'admin/courses',
             'admin/wishlists',
             'admin/certificates',
+            'admin/quizzes',
         ]
     ],
 
@@ -199,6 +201,9 @@ return [
         ],
         'admin/wishlists' => [
             'description' => 'To analyze customer interest trends or enable users to save items they may buy later.',
+        ],
+        'admin/quizzes' => [
+            'description' => 'Manage quizzes by adding, editing, or organizing quiz information to enhance educational offerings.',
         ],
     ]
 
