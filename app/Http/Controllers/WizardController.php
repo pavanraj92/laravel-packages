@@ -216,7 +216,7 @@ class WizardController extends Controller
             'admin/admin_role_permissions' => ['admin/admins'],
             'admin/products' => ['admin/brands', 'admin/categories', 'admin/tags', 'admin/users', 'admin/wishlists'],
             'admin/users' => ['admin/user_roles'],
-            'admin/courses' => ['admin/categories', 'admin/tags', 'admin/users', 'admin/wishlists'],
+            'admin/courses' => ['admin/categories', 'admin/tags', 'admin/users', 'admin/wishlists', 'admin/quizzes'],
             'admin/coupons' => ['admin/courses'],
         ];
 
@@ -475,13 +475,14 @@ class WizardController extends Controller
         file_put_contents($envPath, $env);
 
         // Optionally, reload config cache
-        // Artisan::call('config:clear');
-        // Artisan::call('config:cache');
-        // Artisan::call('cache:clear');
+        Artisan::call('config:clear');
+        Artisan::call('config:cache');
+        Artisan::call('cache:clear');
+        Artisan::call('storage:link');
         // Artisan::call('view:clear');
         // Artisan::call('route:clear');
 
-        Artisan::call('optimize:clear');
+        // Artisan::call('optimize:clear');
     }
 
     public function viewThankYouPage()
