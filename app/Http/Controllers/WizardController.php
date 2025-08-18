@@ -216,7 +216,7 @@ class WizardController extends Controller
             'admin/admin_role_permissions' => ['admin/admins'],
             'admin/products' => ['admin/brands', 'admin/categories', 'admin/tags', 'admin/users', 'admin/wishlists', 'admin/ratings'],
             'admin/users' => ['admin/user_roles'],
-            'admin/courses' => ['admin/categories', 'admin/tags', 'admin/users', 'admin/wishlists', 'admin/quizzes'],
+            'admin/courses' => ['admin/categories', 'admin/quizzes',  'admin/ratings', 'admin/tags', 'admin/users', 'admin/wishlists'],
             'admin/coupons' => ['admin/courses'],
         ];
 
