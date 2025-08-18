@@ -8,6 +8,7 @@ $(function () {
 });
 
 $(document).ready(function () {
+   $(".select2").select2();
   //update status using ajax
   $(document).on('click', '.update-status', function () {
     var currentElement = $(this);
@@ -91,12 +92,20 @@ $(document).ready(function () {
             }
           },
           error: function (xhr, status, error) {
-            console.error("Error deleting record:", error);
-            console.error("Status:", status);
-            console.error("Response:", xhr.responseText);
-            toastr.error(
-              "An error occurred while deleting the record. please try again."
-            );
+            let response = xhr.responseJSON;
+            let message =
+                "An error occurred while deleting the record. please try again.";
+            if (response && response.message) {
+                message = response.message;
+            }
+            // Show popup with SweetAlert if it's the specific role assignment error
+            Swal.fire({
+                icon: "error",
+                title: "Delete Failed",
+                text: message,
+                confirmButtonText: "OK",
+                confirmButtonColor: "#3085d6",
+            });
           },
         });
       }
@@ -145,5 +154,28 @@ $(document).ready(function () {
   $(".alphabets-only").on("input", function () {
     this.value = this.value.replace(/[^a-zA-Z\s]/g, "");
   });
+});
+$(document).ready(function () {
+    $(".decimal-only").on("input", function () {
+        // Allow only numbers and one decimal point, with max 2 digits after decimal
+        let value = this.value;
+
+        // Remove invalid characters
+        value = value.replace(/[^0-9.]/g, "");
+
+        // Allow only one decimal point
+        let parts = value.split(".");
+        if (parts.length > 2) {
+            value = parts[0] + "." + parts[1]; // keep only first decimal
+        }
+
+        // Limit to 2 decimal places
+        if (parts[1]) {
+            parts[1] = parts[1].substring(0, 2);
+            value = parts[0] + "." + parts[1];
+        }
+
+        this.value = value;
+    });
 });
 
