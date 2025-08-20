@@ -207,9 +207,9 @@ class WizardController extends Controller
             ], 422);
         }
 
-
         $userSelectedPackages = $request->packages;
         $defaultPackage = ['admin/admin_auth', 'admin/settings'];
+        $industryName = Session::get('industry');
 
         // Add conditional dependencies
         $dependencyMap = [
@@ -217,8 +217,17 @@ class WizardController extends Controller
             'admin/products' => ['admin/brands', 'admin/categories', 'admin/tags', 'admin/users', 'admin/wishlists', 'admin/ratings'],
             'admin/users' => ['admin/user_roles'],
             'admin/courses' => ['admin/categories', 'admin/quizzes',  'admin/ratings', 'admin/tags', 'admin/users', 'admin/wishlists'],
-            'admin/coupons' => ['admin/courses'],
         ];
+
+        // Handle coupon package dependencies based on industry
+        if (in_array('admin/coupons', $userSelectedPackages)) {
+            if ($industryName === 'ecommerce' && !in_array('admin/products', $userSelectedPackages)) {
+                $userSelectedPackages[] = 'admin/products';
+            }
+            if ($industryName === 'education' && !in_array('admin/courses', $userSelectedPackages)) {
+                $userSelectedPackages[] = 'admin/courses';
+            }
+        }
 
         $resolvedPackages = $userSelectedPackages;
         $changed = true;
@@ -230,7 +239,7 @@ class WizardController extends Controller
                     foreach ($dependencyMap[$pkg] as $dep) {
                         if (!in_array($dep, $resolvedPackages)) {
                             $resolvedPackages[] = $dep;
-                            $changed = true; // Found a new package, so run again
+                            $changed = true;
                         }
                     }
                 }
