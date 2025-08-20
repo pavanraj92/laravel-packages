@@ -478,7 +478,7 @@ class WizardController extends Controller
         Artisan::call('config:clear');
         Artisan::call('config:cache');
         Artisan::call('cache:clear');
-        Artisan::call('storage:link');
+        // Artisan::call('storage:link');
         // Artisan::call('view:clear');
         // Artisan::call('route:clear');
 
