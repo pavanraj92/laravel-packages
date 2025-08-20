@@ -127,6 +127,7 @@ return [
             'admin/products',
             'admin/wishlists',
             'admin/shipping_charges',
+            'admin/coupons',
         ],
         'education' => [
             'admin/tags',
