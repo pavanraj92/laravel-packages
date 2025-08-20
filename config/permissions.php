@@ -150,7 +150,7 @@ return [
                 ['name' => 'Product Order Manager View', 'slug' => 'product_orders_manager_view'],
             ],
 
-            'Shipping Methods Manager' => [
+            'Shipping Charges Manager' => [
                 ['name' => 'Shipping Methods Manager List', 'slug' => 'shipping_methods_manager_list'],
                 ['name' => 'Shipping Methods Manager Create', 'slug' => 'shipping_methods_manager_create'],
                 ['name' => 'Shipping Methods Manager View', 'slug' => 'shipping_methods_manager_view'],
