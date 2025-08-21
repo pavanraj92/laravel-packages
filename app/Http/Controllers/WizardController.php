@@ -265,9 +265,6 @@ class WizardController extends Controller
             ]);
         }
 
-        Session::put('installed_packages', $allPackages);
-        Session::put('packages', $allPackages);
-
         // $missingPackages = [];
         // foreach ($userSelectedPackages as $fullPackageName) {
         //     $composerCheck = shell_exec("composer show {$fullPackageName} 2>&1");
@@ -297,8 +294,10 @@ class WizardController extends Controller
             $output = ob_get_clean();
 
             if ($exitCode === 0) {
+                Session::put('installed_packages', $allPackages);
+                Session::put('packages', $allPackages);
                 // Artisan::call('migrate', ['--force' => true]);
-                $message = " All selected packages installed successfully.";
+                $message = "All selected packages installed successfully.";
             } else {
                 $message = "Composer failed. Output:\n" . $output;
                 return response()->json([
