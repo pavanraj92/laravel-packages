@@ -3,209 +3,241 @@
 return [
     'admin' => [
         'permissions' => [
-            'Dashboard' => [
-                ['name' => 'Dashboard', 'slug' => 'dashboard'],
+            'common' => [
+                'Dashboard' => [
+                    ['name' => 'Dashboard', 'slug' => 'dashboard'],
+                ],
+
+                'Admin Manager' => [
+                    ['name' => 'Admin Manager List', 'slug' => 'admin_manager_list'],
+                    ['name' => 'Admin Manager Create', 'slug' => 'admin_manager_create'],
+                    ['name' => 'Admin Manager View', 'slug' => 'admin_manager_view'],
+                    ['name' => 'Admin Manager Edit', 'slug' => 'admin_manager_edit'],
+                    ['name' => 'Admin Manager Delete', 'slug' => 'admin_manager_delete'],
+                ],
+
+                'Roles Manager' => [
+                    ['name' => 'Roles Manager List', 'slug' => 'roles_manager_list'],
+                    ['name' => 'Roles Manager Create', 'slug' => 'roles_manager_create'],
+                    ['name' => 'Roles Manager Edit', 'slug' => 'roles_manager_edit'],
+                    ['name' => 'Roles Manager View', 'slug' => 'roles_manager_view'],
+                    ['name' => 'Roles Manager Delete', 'slug' => 'roles_manager_delete'],
+                    ['name' => 'Assign Permission', 'slug' => 'assign_permission'],
+                    ['name' => 'Assign Roles', 'slug' => 'assign_roles'],
+                ],
+
+                'Permission Manager' => [
+                    ['name' => 'Permission Manager List', 'slug' => 'permission_manager_list'],
+                    ['name' => 'Permission Manager Create', 'slug' => 'permission_manager_create'],
+                    ['name' => 'Permission Manager Edit', 'slug' => 'permission_manager_edit'],
+                    ['name' => 'Permission Manager View', 'slug' => 'permission_manager_view'],
+                    ['name' => 'Permission Manager Delete', 'slug' => 'permission_manager_delete'],
+                ],
+
+                'Pages Manager' => [
+                    ['name' => 'Pages Manager List', 'slug' => 'pages_manager_list'],
+                    ['name' => 'Pages Manager Create', 'slug' => 'pages_manager_create'],
+                    ['name' => 'Pages Manager View', 'slug' => 'pages_manager_view'],
+                    ['name' => 'Pages Manager Edit', 'slug' => 'pages_manager_edit'],
+                    ['name' => 'Pages Manager Delete', 'slug' => 'pages_manager_delete'],
+                ],
+
+                'Emails Manager' => [
+                    ['name' => 'Emails Manager List', 'slug' => 'emails_manager_list'],
+                    ['name' => 'Emails Manager Create', 'slug' => 'emails_manager_create'],
+                    ['name' => 'Emails Manager View', 'slug' => 'emails_manager_view'],
+                    ['name' => 'Emails Manager Edit', 'slug' => 'emails_manager_edit'],
+                    ['name' => 'Emails Manager Delete', 'slug' => 'emails_manager_delete'],
+                ],
+
+                'Faqs Manager' => [
+                    ['name' => 'Faqs Manager List', 'slug' => 'faqs_manager_list'],
+                    ['name' => 'Faqs Manager Create', 'slug' => 'faqs_manager_create'],
+                    ['name' => 'Faqs Manager View', 'slug' => 'faqs_manager_view'],
+                    ['name' => 'Faqs Manager Edit', 'slug' => 'faqs_manager_edit'],
+                    ['name' => 'Faqs Manager Delete', 'slug' => 'faqs_manager_delete'],
+                ],
+
+                'Banners Manager' => [
+                    ['name' => 'Banners Manager List', 'slug' => 'banners_manager_list'],
+                    ['name' => 'Banners Manager Create', 'slug' => 'banners_manager_create'],
+                    ['name' => 'Banners Manager View', 'slug' => 'banners_manager_view'],
+                    ['name' => 'Banners Manager Edit', 'slug' => 'banners_manager_edit'],
+                    ['name' => 'Banners Manager Delete', 'slug' => 'banners_manager_delete'],
+                ],
+
+                'Settings Manager' => [
+                    ['name' => 'Settings Manager', 'slug' => 'settings_manager'],
+                    ['name' => 'Settings Manager List', 'slug' => 'settings_manager_list'],
+                    ['name' => 'Settings Manager Create', 'slug' => 'settings_manager_create'],
+                    ['name' => 'Settings Manager View', 'slug' => 'settings_manager_view'],
+                    ['name' => 'Settings Manager Edit', 'slug' => 'settings_manager_edit'],
+                    ['name' => 'Settings Manager Delete', 'slug' => 'settings_manager_delete'],
+                    ['name' => 'Logo/Favicon Manager View', 'slug' => 'logo_favicon_manager_view'],
+                ],
+
+                'Enquiry Manager' => [
+                    ['name' => 'Enquiry Manager List', 'slug' => 'enquiry_manager_list'],
+                    ['name' => 'Enquiry Manager View', 'slug' => 'enquiry_manager_view'],
+                    ['name' => 'Enquiry Manager Edit', 'slug' => 'enquiry_manager_edit'],
+                    ['name' => 'Enquiry Manager Delete', 'slug' => 'enquiry_manager_delete'],
+                    ['name' => 'Enquiry Manager Reply', 'slug' => 'enquiry_manager_reply'],
+                ],
+
+                'Users Manager' => [
+                    ['name' => 'Users Manager List', 'slug' => 'users_manager_list'],
+                    ['name' => 'Users Manager Create', 'slug' => 'users_manager_create'],
+                    ['name' => 'Users Manager View', 'slug' => 'users_manager_view'],
+                    ['name' => 'Users Manager Edit', 'slug' => 'users_manager_edit'],
+                    ['name' => 'Users Manager Delete', 'slug' => 'users_manager_delete'],
+                    ['name' => 'User Role Manager List', 'slug' => 'user_roles_manager_list'],
+                    ['name' => 'User Role Manager Create', 'slug' => 'user_roles_manager_create'],
+                    ['name' => 'User Role Manager View', 'slug' => 'user_roles_manager_view'],
+                    ['name' => 'User Role Manager Edit', 'slug' => 'user_roles_manager_edit'],
+                    ['name' => 'User Role Manager Delete', 'slug' => 'user_roles_manager_delete'],
+                ],
+
+                'Categories Manager' => [
+                    ['name' => 'Categories Manager List', 'slug' => 'categories_manager_list'],
+                    ['name' => 'Categories Manager Create', 'slug' => 'categories_manager_create'],
+                    ['name' => 'Categories Manager View', 'slug' => 'categories_manager_view'],
+                    ['name' => 'Categories Manager Edit', 'slug' => 'categories_manager_edit'],
+                    ['name' => 'Categories Manager Delete', 'slug' => 'categories_manager_delete'],
+                ],
+
+                'Tag Manager' => [
+                    ['name' => 'Tag Manager List', 'slug' => 'tags_manager_list'],
+                    ['name' => 'Tag Manager Create', 'slug' => 'tags_manager_create'],
+                    ['name' => 'Tag Manager View', 'slug' => 'tags_manager_view'],
+                    ['name' => 'Tag Manager Edit', 'slug' => 'tags_manager_edit'],
+                    ['name' => 'Tag Manager Delete', 'slug' => 'tags_manager_delete'],
+                ],
+
+                'Wishlist Manager' => [
+                    ['name' => 'Wishlist Manager List', 'slug' => 'wishlists_manager_list'],
+                    ['name' => 'Wishlist Manager View', 'slug' => 'wishlists_manager_view'],
+                ],
+
+                'Rating Manager' => [
+                    ['name' => 'Rating Manager List', 'slug' => 'ratings_manager_list'],
+                    ['name' => 'Rating Manager View', 'slug' => 'ratings_manager_view'],
+                    ['name' => 'Rating Manager Delete', 'slug' => 'ratings_manager_delete'],
+                ],
+
+                'Transaction Manager' => [
+                    ['name' => 'Transaction Manager List', 'slug' => 'transactions_manager_list'],
+                    ['name' => 'Transaction Manager View', 'slug' => 'transactions_manager_view'],
+                ],
+
+                'Report Manager' => [
+                    ['name' => 'Report Manager List', 'slug' => 'report_manager_list'],
+                    ['name' => 'Report Manager View', 'slug' => 'report_manager_view'],
+                ],
+
+                'Coupon Manager' => [
+                    ['name' => 'Coupon Manager List', 'slug' => 'product_coupons_manager_list'],
+                    ['name' => 'Coupon Manager Create', 'slug' => 'product_coupons_manager_create'],
+                    ['name' => 'Coupon Manager View', 'slug' => 'product_coupons_manager_view'],
+                    ['name' => 'Coupon Manager Edit', 'slug' => 'product_coupons_manager_edit'],
+                    ['name' => 'Coupon Manager Delete', 'slug' => 'product_coupons_manager_delete'],
+                ],      
             ],
 
-            'Admin Manager' => [
-                ['name' => 'Admin Manager List', 'slug' => 'admin_manager_list'],
-                ['name' => 'Admin Manager Create', 'slug' => 'admin_manager_create'],
-                ['name' => 'Admin Manager View', 'slug' => 'admin_manager_view'],
-                ['name' => 'Admin Manager Edit', 'slug' => 'admin_manager_edit'],
-                ['name' => 'Admin Manager Delete', 'slug' => 'admin_manager_delete'],
+            'ecommerce' => [
+                'Brand Manager' => [
+                    ['name' => 'Brand Manager List', 'slug' => 'brands_manager_list'],
+                    ['name' => 'Brand Manager Create', 'slug' => 'brands_manager_create'],
+                    ['name' => 'Brand Manager View', 'slug' => 'brands_manager_view'],
+                    ['name' => 'Brand Manager Edit', 'slug' => 'brands_manager_edit'],
+                    ['name' => 'Brand Manager Delete', 'slug' => 'brands_manager_delete'],
+                ],
+
+                'Product Manager' => [
+                    ['name' => 'Product Manager List', 'slug' => 'products_manager_list'],
+                    ['name' => 'Product Manager View', 'slug' => 'products_manager_view'],
+                    ['name' => 'Product Manager Edit', 'slug' => 'products_manager_edit'],
+                    ['name' => 'Product Manager Delete', 'slug' => 'products_manager_delete'],
+                    ['name' => 'Product Manager Create', 'slug' => 'products_manager_create'],
+                ],
+
+                'Product Order Manager' => [
+                    ['name' => 'Product Order Manager List', 'slug' => 'product_orders_manager_list'],
+                    ['name' => 'Product Order Manager View', 'slug' => 'product_orders_manager_view'],
+                ],
+
+                'Shipping Charges Manager' => [
+                    ['name' => 'Shipping Methods Manager List', 'slug' => 'shipping_methods_manager_list'],
+                    ['name' => 'Shipping Methods Manager Create', 'slug' => 'shipping_methods_manager_create'],
+                    ['name' => 'Shipping Methods Manager View', 'slug' => 'shipping_methods_manager_view'],
+                    ['name' => 'Shipping Methods Manager Edit', 'slug' => 'shipping_methods_manager_edit'],
+                    ['name' => 'Shipping Methods Manager Delete', 'slug' => 'shipping_methods_manager_delete'],
+
+                    ['name' => 'Shipping Rates Manager List', 'slug' => 'shipping_rates_manager_list'],
+                    ['name' => 'Shipping Rates Manager Create', 'slug' => 'shipping_rates_manager_create'],
+                    ['name' => 'Shipping Rates Manager View', 'slug' => 'shipping_rates_manager_view'],
+                    ['name' => 'Shipping Rates Manager Edit', 'slug' => 'shipping_rates_manager_edit'],
+                    ['name' => 'Shipping Rates Manager Delete', 'slug' => 'shipping_rates_manager_delete'],
+                ],
+
+                'Return Refund Manager' => [
+                    ['name' => 'Return Refund Manager List', 'slug' => 'return_refunds_manager_list'],
+                    ['name' => 'Return Refund Manager View', 'slug' => 'return_refunds_manager_view'],
+                ],
             ],
 
-            'Roles Manager' => [
-                ['name' => 'Roles Manager List', 'slug' => 'roles_manager_list'],
-                ['name' => 'Roles Manager Create', 'slug' => 'roles_manager_create'],
-                ['name' => 'Roles Manager Edit', 'slug' => 'roles_manager_edit'],
-                ['name' => 'Roles Manager View', 'slug' => 'roles_manager_view'],
-                ['name' => 'Roles Manager Delete', 'slug' => 'roles_manager_delete'],
-                ['name' => 'Assign Permission', 'slug' => 'assign_permission'],
-                ['name' => 'Assign Roles', 'slug' => 'assign_roles'],
-            ],
+            'education' => [
+                'Course Manager' => [
+                    ['name' => 'Course Manager List', 'slug' => 'courses_manager_list'],
+                    ['name' => 'Course Manager Create', 'slug' => 'courses_manager_create'],
+                    ['name' => 'Course Manager View', 'slug' => 'courses_manager_view'],
+                    ['name' => 'Course Manager Edit', 'slug' => 'courses_manager_edit'],
+                    ['name' => 'Course Manager Delete', 'slug' => 'courses_manager_delete'],
+                ],
 
-            'Permission Manager' => [
-                ['name' => 'Permission Manager List', 'slug' => 'permission_manager_list'],
-                ['name' => 'Permission Manager Create', 'slug' => 'permission_manager_create'],
-                ['name' => 'Permission Manager Edit', 'slug' => 'permission_manager_edit'],
-                ['name' => 'Permission Manager View', 'slug' => 'permission_manager_view'],
-                ['name' => 'Permission Manager Delete', 'slug' => 'permission_manager_delete'],
-            ],
+                'Lecture Manager' => [
+                    ['name' => 'Lecture Manager List', 'slug' => 'lectures_manager_list'],
+                    ['name' => 'Lecture Manager Create', 'slug' => 'lectures_manager_create'],
+                    ['name' => 'Lecture Manager View', 'slug' => 'lectures_manager_view'],
+                    ['name' => 'Lecture Manager Edit', 'slug' => 'lectures_manager_edit'],
+                    ['name' => 'Lecture Manager Delete', 'slug' => 'lectures_manager_delete'],
+                ],                          
 
-            'Users Manager' => [
-                ['name' => 'Users Manager List', 'slug' => 'users_manager_list'],
-                ['name' => 'Users Manager Create', 'slug' => 'users_manager_create'],
-                ['name' => 'Users Manager View', 'slug' => 'users_manager_view'],
-                ['name' => 'Users Manager Edit', 'slug' => 'users_manager_edit'],
-                ['name' => 'Users Manager Delete', 'slug' => 'users_manager_delete'],
-                ['name' => 'User Role Manager List', 'slug' => 'user_roles_manager_list'],
-                ['name' => 'User Role Manager Create', 'slug' => 'user_roles_manager_create'],
-                ['name' => 'User Role Manager View', 'slug' => 'user_roles_manager_view'],
-                ['name' => 'User Role Manager Edit', 'slug' => 'user_roles_manager_edit'],
-                ['name' => 'User Role Manager Delete', 'slug' => 'user_roles_manager_delete'],
-            ],
+                'Course Purchase Manager' => [
+                    ['name' => 'Course Purchase Manager List', 'slug' => 'course_purchases_manager_list'],
+                    ['name' => 'Course Purchase Manager View', 'slug' => 'course_purchases_manager_view'],
+                ],                
 
-            'Categories Manager' => [
-                ['name' => 'Categories Manager List', 'slug' => 'categories_manager_list'],
-                ['name' => 'Categories Manager Create', 'slug' => 'categories_manager_create'],
-                ['name' => 'Categories Manager View', 'slug' => 'categories_manager_view'],
-                ['name' => 'Categories Manager Edit', 'slug' => 'categories_manager_edit'],
-                ['name' => 'Categories Manager Delete', 'slug' => 'categories_manager_delete'],
-            ],
+                'Quiz Manager' => [
+                    ['name' => 'Quiz Manager List', 'slug' => 'quizzes_manager_list'],
+                    ['name' => 'Quiz Manager Create', 'slug' => 'quizzes_manager_create'],
+                    ['name' => 'Quiz Manager View', 'slug' => 'quizzes_manager_view'],
+                    ['name' => 'Quiz Manager Edit', 'slug' => 'quizzes_manager_edit'],
+                    ['name' => 'Quiz Manager Delete', 'slug' => 'quizzes_manager_delete'],
+                ],
 
-            'Pages Manager' => [
-                ['name' => 'Pages Manager List', 'slug' => 'pages_manager_list'],
-                ['name' => 'Pages Manager Create', 'slug' => 'pages_manager_create'],
-                ['name' => 'Pages Manager View', 'slug' => 'pages_manager_view'],
-                ['name' => 'Pages Manager Edit', 'slug' => 'pages_manager_edit'],
-                ['name' => 'Pages Manager Delete', 'slug' => 'pages_manager_delete'],
-            ],
+                'Question Manager' => [
+                    ['name' => 'Question Manager List', 'slug' => 'questions_manager_list'],
+                    ['name' => 'Question Manager Create', 'slug' => 'questions_manager_create'],
+                    ['name' => 'Question Manager View', 'slug' => 'questions_manager_view'],
+                    ['name' => 'Question Manager Edit', 'slug' => 'questions_manager_edit'],
+                    ['name' => 'Question Manager Delete', 'slug' => 'questions_manager_delete'],
+                ],
 
-            'Emails Manager' => [
-                ['name' => 'Emails Manager List', 'slug' => 'emails_manager_list'],
-                ['name' => 'Emails Manager Create', 'slug' => 'emails_manager_create'],
-                ['name' => 'Emails Manager View', 'slug' => 'emails_manager_view'],
-                ['name' => 'Emails Manager Edit', 'slug' => 'emails_manager_edit'],
-                ['name' => 'Emails Manager Delete', 'slug' => 'emails_manager_delete'],
-            ],
+                'Answer Manager' => [
+                    ['name' => 'Answer Manager List', 'slug' => 'answers_manager_list'],
+                    ['name' => 'Answer Manager Create', 'slug' => 'answers_manager_create'],
+                    ['name' => 'Answer Manager View', 'slug' => 'answers_manager_view'],
+                    ['name' => 'Answer Manager Edit', 'slug' => 'answers_manager_edit'],
+                    ['name' => 'Answer Manager Delete', 'slug' => 'answers_manager_delete'],
+                ],
 
-            'Faqs Manager' => [
-                ['name' => 'Faqs Manager List', 'slug' => 'faqs_manager_list'],
-                ['name' => 'Faqs Manager Create', 'slug' => 'faqs_manager_create'],
-                ['name' => 'Faqs Manager View', 'slug' => 'faqs_manager_view'],
-                ['name' => 'Faqs Manager Edit', 'slug' => 'faqs_manager_edit'],
-                ['name' => 'Faqs Manager Delete', 'slug' => 'faqs_manager_delete'],
-            ],
-
-            'Banners Manager' => [
-                ['name' => 'Banners Manager List', 'slug' => 'banners_manager_list'],
-                ['name' => 'Banners Manager Create', 'slug' => 'banners_manager_create'],
-                ['name' => 'Banners Manager View', 'slug' => 'banners_manager_view'],
-                ['name' => 'Banners Manager Edit', 'slug' => 'banners_manager_edit'],
-                ['name' => 'Banners Manager Delete', 'slug' => 'banners_manager_delete'],
-            ],
-
-            'Settings Manager' => [
-                ['name' => 'Settings Manager', 'slug' => 'settings_manager'],
-                ['name' => 'Settings Manager List', 'slug' => 'settings_manager_list'],
-                ['name' => 'Settings Manager Create', 'slug' => 'settings_manager_create'],
-                ['name' => 'Settings Manager View', 'slug' => 'settings_manager_view'],
-                ['name' => 'Settings Manager Edit', 'slug' => 'settings_manager_edit'],
-                ['name' => 'Settings Manager Delete', 'slug' => 'settings_manager_delete'],
-                ['name' => 'Logo/Favicon Manager View', 'slug' => 'logo_favicon_manager_view'],
-            ],
-
-            'Seo Manager' => [
-                ['name' => 'Seo Manager List', 'slug' => 'seo_manager_list']
-
-            ],
-
-            'Enquiry Manager' => [
-                ['name' => 'Enquiry Manager List', 'slug' => 'enquiry_manager_list'],
-                ['name' => 'Enquiry Manager View', 'slug' => 'enquiry_manager_view'],
-                ['name' => 'Enquiry Manager Edit', 'slug' => 'enquiry_manager_edit'],
-                ['name' => 'Enquiry Manager Delete', 'slug' => 'enquiry_manager_delete'],
-                ['name' => 'Enquiry Manager Reply', 'slug' => 'enquiry_manager_reply'],
-            ],
-
-            'Brand Manager' => [
-                ['name' => 'Brand Manager List', 'slug' => 'brands_manager_list'],
-                ['name' => 'Brand Manager Create', 'slug' => 'brands_manager_create'],
-                ['name' => 'Brand Manager View', 'slug' => 'brands_manager_view'],
-                ['name' => 'Brand Manager Edit', 'slug' => 'brands_manager_edit'],
-                ['name' => 'Brand Manager Delete', 'slug' => 'brands_manager_delete'],
-            ],
-
-            'Tag Manager' => [
-                ['name' => 'Tag Manager List', 'slug' => 'tags_manager_list'],
-                ['name' => 'Tag Manager Create', 'slug' => 'tags_manager_create'],
-                ['name' => 'Tag Manager View', 'slug' => 'tags_manager_view'],
-                ['name' => 'Tag Manager Edit', 'slug' => 'tags_manager_edit'],
-                ['name' => 'Tag Manager Delete', 'slug' => 'tags_manager_delete'],
-            ],
-
-            'Rating Manager' => [
-                ['name' => 'Rating Manager List', 'slug' => 'ratings_manager_list'],
-                ['name' => 'Rating Manager View', 'slug' => 'ratings_manager_view'],
-                ['name' => 'Rating Manager Delete', 'slug' => 'ratings_manager_delete'],
-            ],
-
-            'Product Manager' => [
-                ['name' => 'Product Manager List', 'slug' => 'products_manager_list'],
-                ['name' => 'Product Manager View', 'slug' => 'products_manager_view'],
-                ['name' => 'Product Manager Edit', 'slug' => 'products_manager_edit'],
-                ['name' => 'Product Manager Delete', 'slug' => 'products_manager_delete'],
-                ['name' => 'Product Manager Reply', 'slug' => 'products_manager_reply'],
-            ],
-            'Lecture Manager' => [
-                ['name' => 'Lecture Manager List', 'slug' => 'lectures_manager_list'],
-                ['name' => 'Lecture Manager Create', 'slug' => 'lectures_manager_create'],
-                ['name' => 'Lecture Manager View', 'slug' => 'lectures_manager_view'],
-                ['name' => 'Lecture Manager Edit', 'slug' => 'lectures_manager_edit'],
-                ['name' => 'Lecture Manager Delete', 'slug' => 'lectures_manager_delete'],
-            ],
-            'Product Order Manager' => [
-                ['name' => 'Product Order Manager List', 'slug' => 'product_orders_manager_list'],
-                ['name' => 'Product Order Manager View', 'slug' => 'product_orders_manager_view'],
-            ],
-
-            'Shipping Charges Manager' => [
-                ['name' => 'Shipping Methods Manager List', 'slug' => 'shipping_methods_manager_list'],
-                ['name' => 'Shipping Methods Manager Create', 'slug' => 'shipping_methods_manager_create'],
-                ['name' => 'Shipping Methods Manager View', 'slug' => 'shipping_methods_manager_view'],
-                ['name' => 'Shipping Methods Manager Edit', 'slug' => 'shipping_methods_manager_edit'],
-                ['name' => 'Shipping Methods Manager Delete', 'slug' => 'shipping_methods_manager_delete'],
-
-                ['name' => 'Shipping Rates Manager List', 'slug' => 'shipping_rates_manager_list'],
-                ['name' => 'Shipping Rates Manager Create', 'slug' => 'shipping_rates_manager_create'],
-                ['name' => 'Shipping Rates Manager View', 'slug' => 'shipping_rates_manager_view'],
-                ['name' => 'Shipping Rates Manager Edit', 'slug' => 'shipping_rates_manager_edit'],
-                ['name' => 'Shipping Rates Manager Delete', 'slug' => 'shipping_rates_manager_delete'],
-            ],
-
-            'Return Refund Manager' => [
-                ['name' => 'Return Refund Manager List', 'slug' => 'return_refunds_manager_list'],
-                ['name' => 'Return Refund Manager View', 'slug' => 'return_refunds_manager_view'],
-            ],
-
-            'Wishlist Manager' => [
-                ['name' => 'Wishlist Manager List', 'slug' => 'wishlists_manager_list'],
-                ['name' => 'Wishlist Manager View', 'slug' => 'wishlists_manager_view'],
-            ],
-             
-            'Course Manager' => [
-                ['name' => 'Course Manager List', 'slug' => 'courses_manager_list'],
-                ['name' => 'Course Manager Create', 'slug' => 'courses_manager_create'],
-                ['name' => 'Course Manager View', 'slug' => 'courses_manager_view'],
-                ['name' => 'Course Manager Edit', 'slug' => 'courses_manager_edit'],
-                ['name' => 'Course Manager Delete', 'slug' => 'courses_manager_delete'],
-            ],
-            'Transaction Manager' => [
-                ['name' => 'Transaction Manager List', 'slug' => 'transactions_manager_list'],
-                ['name' => 'Transaction Manager View', 'slug' => 'transactions_manager_view'],
-            ],
-            'Course Purchase Manager' => [
-                ['name' => 'Course Purchase Manager List', 'slug' => 'course_purchases_manager_list'],
-                ['name' => 'Course Purchase Manager View', 'slug' => 'course_purchases_manager_view'],
-            ],
-            'Report Manager' => [
-                ['name' => 'Report Manager List', 'slug' => 'report_manager_list'],
-                ['name' => 'Report Manager View', 'slug' => 'report_manager_view'],
-            ],
-            'Quiz Manager' => [
-                ['name' => 'Quiz Manager List', 'slug' => 'quizzes_manager_list'],
-                ['name' => 'Quiz Manager Create', 'slug' => 'quizzes_manager_create'],
-                ['name' => 'Quiz Manager View', 'slug' => 'quizzes_manager_view'],
-                ['name' => 'Quiz Manager Edit', 'slug' => 'quizzes_manager_edit'],
-                ['name' => 'Quiz Manager Delete', 'slug' => 'quizzes_manager_delete'],
-            ],
-            'Certificate Manager' => [
-                ['name' => 'Certificate Manager List', 'slug' => 'certificates_manager_list'],
-                ['name' => 'Certificate Manager Create', 'slug' => 'certificates_manager_create'],
-                ['name' => 'Certificate Manager View', 'slug' => 'certificates_manager_view'],
-                ['name' => 'Certificate Manager Edit', 'slug' => 'certificates_manager_edit'],
-                ['name' => 'Certificate Manager Delete', 'slug' => 'certificates_manager_delete'],
+                'Certificate Manager' => [
+                    ['name' => 'Certificate Manager List', 'slug' => 'certificates_manager_list'],
+                    ['name' => 'Certificate Manager Create', 'slug' => 'certificates_manager_create'],
+                    ['name' => 'Certificate Manager View', 'slug' => 'certificates_manager_view'],
+                    ['name' => 'Certificate Manager Edit', 'slug' => 'certificates_manager_edit'],
+                    ['name' => 'Certificate Manager Delete', 'slug' => 'certificates_manager_delete'],
+                ],
             ],
         ],
     ],
