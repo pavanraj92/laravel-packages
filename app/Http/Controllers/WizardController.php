@@ -215,8 +215,8 @@ class WizardController extends Controller
         $dependencyMap = [
             'admin/admin_role_permissions' => ['admin/admins'],
             'admin/products' => ['admin/brands', 'admin/categories', 'admin/tags', 'admin/users', 'admin/wishlists', 'admin/ratings'],
-            'admin/users' => ['admin/user_roles'],
             'admin/courses' => ['admin/categories', 'admin/quizzes',  'admin/ratings', 'admin/tags', 'admin/users', 'admin/wishlists'],
+            'admin/users' => ['admin/user_roles'],
         ];
 
         // Handle coupon package dependencies based on industry

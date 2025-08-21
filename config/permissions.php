@@ -130,8 +130,7 @@ return [
                 ],
 
                 'Report Manager' => [
-                    ['name' => 'Report Manager List', 'slug' => 'report_manager_list'],
-                    ['name' => 'Report Manager View', 'slug' => 'report_manager_view'],
+                    ['name' => 'Report Manager List', 'slug' => 'reports_manager_list'],
                 ],
 
                 'Coupon Manager' => [
