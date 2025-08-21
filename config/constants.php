@@ -206,6 +206,9 @@ return [
         'admin/quizzes' => [
             'description' => 'Manage quizzes by adding, editing, or organizing quiz information to enhance educational offerings.',
         ],
+        'admin/shipping_charges' => [
+            'description' => 'Manage shipping charges by adding, editing, or organizing shipping information to enhance product delivery options.',
+        ],
     ]
 
 ];
