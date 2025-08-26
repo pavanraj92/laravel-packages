@@ -11,11 +11,11 @@
     <!-- Toastr CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- theme CSS -->
-    <link rel="stylesheet" href="{{ asset('backend/custom.css') }}" />
     <link rel="stylesheet" href="{{ asset('backend/theme.css') }}" />
 
     <script>
@@ -56,7 +56,7 @@
 
         .form-step.active {
             display: block;
-        }        
+        }
 
         /* Prevent body scroll lock */
         body.select2-open {
@@ -80,41 +80,43 @@
                 transform: rotate(360deg);
             }
         }
+
         .password-toggle {
             position: relative;
         }
+
         .toggle-password {
             position: absolute;
             top: 48px;
             right: 15px;
             cursor: pointer;
             color: #6c757d;
-            z-index: 10; 
+            z-index: 10;
         }
     </style>
 </head>
 
 <body>
     @php
-        use Illuminate\Support\Facades\Session;
-        $industry = Session::get('industry');
-        $websiteName = Session::get('db')['websiteName'] ?? '';
-        $dbName = Session::get('db')['dbName'] ?? '';
-        $dbUser = Session::get('db')['dbUser'] ?? '';
-        $dbPassword = Session::get('db')['dbPassword'] ?? '';
-        $packages = Session::get('packages', []);
-        $adminEmail = Session::get('adminEmail');
-        $adminPassword = Session::get('adminPassword');
-        $packages = is_array($packages) ? $packages : [];
-        $packages = array_map(function ($pkg) {
-            return is_array($pkg) ? $pkg['name'] : $pkg;
-        }, $packages);
-        $packages = array_filter($packages); // Remove empty values
-        $packages = array_unique($packages); // Ensure unique package names
-        $packages = implode(', ', $packages);
-        $industryAryList = config('constants.industryAryList');
-        $strIndustrySelector = '';
-        
+    use Illuminate\Support\Facades\Session;
+    $industry = Session::get('industry');
+    $websiteName = Session::get('db')['websiteName'] ?? '';
+    $dbName = Session::get('db')['dbName'] ?? '';
+    $dbUser = Session::get('db')['dbUser'] ?? '';
+    $dbPassword = Session::get('db')['dbPassword'] ?? '';
+    $packages = Session::get('packages', []);
+    $adminEmail = Session::get('adminEmail');
+    $adminPassword = Session::get('adminPassword');
+    $packages = is_array($packages) ? $packages : [];
+    $packages = array_map(function ($pkg) {
+    return is_array($pkg) ? $pkg['name'] : $pkg;
+    }, $packages);
+    $packages = array_filter($packages); // Remove empty values
+    $packages = array_unique($packages); // Ensure unique package names
+    $packages = implode(', ', $packages);
+    $industryAryList = config('constants.industryAryList');
+    $strIndustrySelector = '';
+
     @endphp
 
     @include('layouts.nav-header')
@@ -128,7 +130,7 @@
                             <h3 class="text-center mt-3">Laravel Admin Panel Setup</h3>
                             <p class="text-center text-muted">Follow the steps to set up your Laravel admin panel.</p>
                         </div>
-                        <div class="card-body">                            
+                        <div class="card-body">
                             <form id="multiStepForm" novalidate autocomplete="off">
                                 <!-- Step 1: Industry Selection -->
                                 <div class="form-step @if (empty($industry)) active @endif"
@@ -140,11 +142,12 @@
                                         <select id="industry" name="industry" class="form-select" required>
                                             <option value="">Select an industry</option>
                                             @if (isset($industryAryList) && !empty($industryAryList))
-                                                @foreach ($industryAryList as $key => $value)
-                                                    <option value="{{ $key }}"
-                                                        @if ($industry == $key) selected @endif>
-                                                        {{ $value }}</option>
-                                                @endforeach
+                                            @foreach ($industryAryList as $key => $value)
+                                            <option value="{{ $key }}"
+                                                @if ($industry==$key) selected @endif>
+                                                {{ $value }}
+                                            </option>
+                                            @endforeach
                                             @endif
                                         </select>
                                         <div class="invalid-feedback">
@@ -202,10 +205,10 @@
                                 <div class="form-step @if (empty($packages) && !empty($dbName) && !empty($websiteName) && !empty($industry)) active @endif" data-step="3">
                                     <h4 class="mb-3">Step 3: Select Packages: <small class="theme-text-color">Select at least one package.</small></h4>
                                     <div class="mb-3" style="max-height: 500px; overflow-y: auto;">
-                                        
+
                                         <!-- Common Packages Section -->
                                         <div class="mb-4">
-                                            <h5 class="mb-3 text-primary">
+                                            <h5 class="mb-3 theme-text-color font-weight-bold">
                                                 <i class="fas fa-cogs me-2"></i>Common Packages
                                             </h5>
                                             <div class="form-check mb-2">
@@ -214,32 +217,33 @@
                                                     Select All Common Packages
                                                 </label>
                                             </div>
-                                            <ul class="list-group mb-3">                                            
+                                            <ul class="list-group mb-3">
                                                 @forelse($commonPackageList as $index => $package)
-                                                    @php
-                                                        $packageName = $package['vendor'] . '/' . $package['name'];
-                                                        $strChecked = in_array($packageName, explode(', ', $packages)) ? 'checked' : '';
-                                                    @endphp
-                                                    <li class="list-group-item d-flex align-items-center justify-content-between">
-                                                        <div>
-                                                            <input class="form-check-input me-2 package-checkbox common-package-checkbox"
-                                                                type="checkbox" name="packages[]"
-                                                                value="{{ $packageName }}"
-                                                                id="common_package_{{ $index }}" {{ $strChecked }}>
-                                                            <label class="form-check-label"
-                                                                for="common_package_{{ $index }}" style="display: inline;" data-toggle="tooltip" data-placement="top" title="{{ (isset($package['info']['description'])) ? $package['info']['description'] : 'No description available' }}">
-                                                                {{ $package['display_name'] ?? $package['vendor'] . '/' . $package['name'] }}                                                         
-                                                            </label>
-                                                        </div>
-                                                        <span class="package-status"
-                                                            id="package_status_common_{{ $index }}"
-                                                            data-package="{{ $packageName }}"
-                                                            style="display: none;">
-                                                            <span class="progress-text" style="font-size: 14px; font-weight: bold;">Processing...0%</span>
-                                                        </span>
-                                                    </li>
+                                                @php
+                                                $packageName = $package['vendor'] . '/' . $package['name'];
+                                                $strChecked = in_array($packageName, explode(', ', $packages)) ? 'checked' : '';
+                                                @endphp
+                                                <li class="list-group-item d-flex align-items-center justify-content-between">
+                                                    <div>
+                                                        <input class="form-check-input me-2 package-checkbox common-package-checkbox"
+                                                            data-package="{{ $package['vendor'].'/'.$package['name'] }}"
+                                                            type="checkbox" name="packages[]"
+                                                            value="{{ $packageName }}"
+                                                            id="common_package_{{ $index }}" {{ $strChecked }}>
+                                                        <label class="form-check-label"
+                                                            for="common_package_{{ $index }}" style="display: inline;" data-toggle="tooltip" data-placement="top" title="{{ (isset($package['info']['description'])) ? $package['info']['description'] : 'No description available' }}">
+                                                            {{ $package['display_name'] ?? $package['vendor'] . '/' . $package['name'] }}
+                                                        </label>
+                                                    </div>
+                                                    <span class="package-status"
+                                                        id="package_status_common_{{ $index }}"
+                                                        data-package="{{ $packageName }}"
+                                                        style="display: none;">
+                                                        <span class="progress-text" style="font-size: 14px; font-weight: bold;">Processing...0%</span>
+                                                    </span>
+                                                </li>
                                                 @empty
-                                                    <li class="list-group-item text-muted">No common packages found.</li>
+                                                <li class="list-group-item text-muted">No common packages found.</li>
                                                 @endforelse
                                             </ul>
                                         </div>
@@ -247,7 +251,7 @@
                                         <!-- Industry-Specific Packages Section -->
                                         @if(!empty($selectedIndustry) && !empty($industryPackageList))
                                         <div class="mb-4">
-                                            <h5 class="mb-3 text-success">
+                                            <h5 class="mb-3 theme-text-color font-weight-bold">
                                                 <i class="{{ config('constants.industry_icons.' . $selectedIndustry, 'fas fa-industry') }} me-2"></i>{{ config('constants.industryAryList.' . $selectedIndustry, $selectedIndustry) }} Packages
                                             </h5>
                                             <p class="text-muted mb-3">
@@ -259,32 +263,33 @@
                                                     Select All {{ config('constants.industryAryList.' . $selectedIndustry, $selectedIndustry) }} Packages
                                                 </label>
                                             </div>
-                                            <ul class="list-group">                                            
+                                            <ul class="list-group">
                                                 @forelse($industryPackageList as $index => $package)
-                                                    @php
-                                                        $packageName = $package['vendor'] . '/' . $package['name'];
-                                                        $strChecked = in_array($packageName, explode(', ', $packages)) ? 'checked' : '';
-                                                    @endphp
-                                                    <li class="list-group-item d-flex align-items-center justify-content-between">
-                                                        <div>
-                                                            <input class="form-check-input me-2 package-checkbox industry-package-checkbox"
-                                                                type="checkbox" name="packages[]"
-                                                                value="{{ $packageName }}"
-                                                                id="industry_package_{{ $index }}" {{ $strChecked }}>
-                                                            <label class="form-check-label"
-                                                                for="industry_package_{{ $index }}" style="display: inline;" data-toggle="tooltip" data-placement="top" title="{{ (isset($package['info']['description'])) ? $package['info']['description'] : 'No description available' }}">
-                                                                {{ $package['display_name'] ?? $package['vendor'] . '/' . $package['name'] }}                                                         
-                                                            </label>
-                                                        </div>
-                                                        <span class="package-status"
-                                                            id="package_status_industry_{{ $index }}"
-                                                            data-package="{{ $packageName }}"
-                                                            style="display: none;">
-                                                            <span class="progress-text" style="font-size: 14px; font-weight: bold;">Processing...0%</span>
-                                                        </span>
-                                                    </li>
+                                                @php
+                                                $packageName = $package['vendor'] . '/' . $package['name'];
+                                                $strChecked = in_array($packageName, explode(', ', $packages)) ? 'checked' : '';
+                                                @endphp
+                                                <li class="list-group-item d-flex align-items-center justify-content-between">
+                                                    <div>
+                                                        <input class="form-check-input me-2 package-checkbox industry-package-checkbox"
+                                                            data-package="{{ $package['vendor'].'/'.$package['name'] }}"
+                                                            type="checkbox" name="packages[]"
+                                                            value="{{ $packageName }}"
+                                                            id="industry_package_{{ $index }}" {{ $strChecked }}>
+                                                        <label class="form-check-label"
+                                                            for="industry_package_{{ $index }}" style="display: inline;" data-toggle="tooltip" data-placement="top" title="{{ (isset($package['info']['description'])) ? $package['info']['description'] : 'No description available' }}">
+                                                            {{ $package['display_name'] ?? $package['vendor'] . '/' . $package['name'] }}
+                                                        </label>
+                                                    </div>
+                                                    <span class="package-status"
+                                                        id="package_status_industry_{{ $index }}"
+                                                        data-package="{{ $packageName }}"
+                                                        style="display: none;">
+                                                        <span class="progress-text" style="font-size: 14px; font-weight: bold;">Processing...0%</span>
+                                                    </span>
+                                                </li>
                                                 @empty
-                                                    <li class="list-group-item text-muted">No industry-specific packages found.</li>
+                                                <li class="list-group-item text-muted">No industry-specific packages found.</li>
                                                 @endforelse
                                             </ul>
                                         </div>
@@ -347,11 +352,78 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        const dependencyMap = @json($dependencyMap);
+        const industry = "{{ $selectedIndustry }}";
+
+        // Map to track which packages depend on which others (reverse dependencies)
+        const reverseDeps = {};
+
+        // Build reverse dependency map
+        Object.keys(dependencyMap).forEach(pkg => {
+            let deps = dependencyMap[pkg] ?? [];
+            if (industry && deps[industry]) deps = deps[industry];
+
+            deps.forEach(dep => {
+                if (!reverseDeps[dep]) reverseDeps[dep] = [];
+                reverseDeps[dep].push(pkg);
+            });
+        });
+
+        // Check all dependencies recursively
+        function checkDependencies(pkg) {
+            let deps = dependencyMap[pkg] ?? [];
+            if (industry && deps[industry]) deps = deps[industry];
+
+            deps.forEach(dep => {
+                const checkbox = document.querySelector(`input[data-package='${dep}']`);
+                if (checkbox && !checkbox.checked) {
+                    checkbox.checked = true;
+                    checkDependencies(dep);
+                }
+            });
+        }
+
+        // Uncheck dependencies if no other parent requires them
+        function uncheckDependencies(pkg) {
+            let deps = dependencyMap[pkg] ?? [];
+            if (industry && deps[industry]) deps = deps[industry];
+
+            deps.forEach(dep => {
+                const checkbox = document.querySelector(`input[data-package='${dep}']`);
+                if (!checkbox) return;
+
+                // Only uncheck if no other selected package depends on it
+                const stillRequired = (reverseDeps[dep] || []).some(parent => {
+                    const parentCheckbox = document.querySelector(`input[data-package='${parent}']`);
+                    return parentCheckbox && parentCheckbox.checked;
+                });
+
+                if (!stillRequired) {
+                    checkbox.checked = false;
+                    uncheckDependencies(dep); // recursively uncheck
+                }
+            });
+        }
+
+        // Attach change listener to all checkboxes
+        document.querySelectorAll('.package-checkbox').forEach(cb => {
+            cb.addEventListener('change', function() {
+                const pkg = this.getAttribute('data-package');
+                if (this.checked) {
+                    checkDependencies(pkg);
+                } else {
+                    uncheckDependencies(pkg);
+                }
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
             const toggles = document.querySelectorAll(".toggle-password");
 
-            toggles.forEach(function (toggle) {
-                toggle.addEventListener("click", function () {
+            toggles.forEach(function(toggle) {
+                toggle.addEventListener("click", function() {
                     const input = document.querySelector(this.getAttribute("toggle"));
                     const type = input.getAttribute("type") === "password" ? "text" : "password";
                     input.setAttribute("type", type);
@@ -505,13 +577,13 @@
             });
 
             // Prevent page scroll when Select2 opens
-            $('#industry').on('select2:open', function (e) {
+            $('#industry').on('select2:open', function(e) {
                 // Prevent default scroll behavior
                 e.preventDefault();
-                
+
                 // Get current scroll position
                 const scrollTop = $(window).scrollTop();
-                
+
                 // Keep the scroll position fixed
                 setTimeout(function() {
                     $(window).scrollTop(scrollTop);
@@ -519,7 +591,7 @@
             });
 
             // Ensure proper focus management
-            $('#industry').on('select2:close', function (e) {
+            $('#industry').on('select2:close', function(e) {
                 $(this).focus();
             });
 
@@ -561,7 +633,7 @@
                         }
                     });
                 } else if (step === 3) {
-                    if ($('.package-checkbox:checked').length === 0) {                        
+                    if ($('.package-checkbox:checked').length === 0) {
                         toastr.error('Please select at least one package.');
                         $('#packageError').show();
                         valid = false;
@@ -626,7 +698,8 @@
                                 let errors = xhr.responseJSON.errors;
                                 for (const field in errors) {
                                     toastr.error(errors[field][
-                                    0]); // Show first error per field
+                                        0
+                                    ]); // Show first error per field
                                 }
                             } else {
                                 toastr.error(response.message || 'Something went wrong. Please try again.');
@@ -666,7 +739,8 @@
                                 let errors = xhr.responseJSON.errors;
                                 for (const field in errors) {
                                     toastr.error(errors[field][
-                                    0]); // Show first error per field
+                                        0
+                                    ]); // Show first error per field
                                 }
                             } else {
                                 toastr.error(response.message || 'Something went wrong. Please try again.');
@@ -683,7 +757,7 @@
                         $('#packageError').show();
                         return;
                     } else {
-                        $('#packageError').hide();                        
+                        $('#packageError').hide();
                         activeBtn.attr('disabled', true);
                         activeBtn.text('Installing Packages...');
                         $('.prev-step').prop('disabled', true); // Disable Previous
@@ -726,8 +800,8 @@
                             packages: packages,
                             _token: $('meta[name="csrf-token"]').attr('content')
                         },
-                        success: function(res) {  
-                              if (res.message === 'Packages already installed.' || res.skip_install) {
+                        success: function(res) {
+                            if (res.message === 'Packages already installed.' || res.skip_install) {
                                 toastr.success(res.message);
                                 setTimeout(() => {
                                     window.location.reload(); // 🔄 Refresh the page
@@ -736,7 +810,7 @@
                                 // $('.prev-step').prop('disabled', false); // Re-enable Previous
                                 // showStep(4);
                                 return;
-                            }else{                          
+                            } else {
                                 let delay = 0;
                                 packages.forEach((pkg, index) => {
                                     setTimeout(() => {
@@ -770,7 +844,8 @@
                                 let errors = xhr.responseJSON.errors;
                                 for (const field in errors) {
                                     toastr.error(errors[field][
-                                    0]); // Show first error per field
+                                        0
+                                    ]); // Show first error per field
                                 }
                             } else {
                                 toastr.error(response.message || 'Something went wrong. Please try again.');
@@ -883,20 +958,20 @@
     <script src="{{ asset('backend/theme.js') }}"></script>
 
     <script>
-        @if (session('success'))
-            toastr.success("{{ session('success') }}");
+        @if(session('success'))
+        toastr.success("{{ session('success') }}");
         @endif
 
-        @if (session('error'))
-            toastr.error("{{ session('error') }}");
+        @if(session('error'))
+        toastr.error("{{ session('error') }}");
         @endif
 
-        @if (session('info'))
-            toastr.info("{{ session('info') }}");
+        @if(session('info'))
+        toastr.info("{{ session('info') }}");
         @endif
 
-        @if (session('warning'))
-            toastr.warning("{{ session('warning') }}");
+        @if(session('warning'))
+        toastr.warning("{{ session('warning') }}");
         @endif
     </script>
 
