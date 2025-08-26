@@ -3,84 +3,58 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Artisan;
-use App\Models\Admin;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator as FacadesValidator;
-
+use Illuminate\Support\Facades\Log;
 
 class WizardController extends Controller
 {
-
     /**
      * Display a list of installed packages.
      *
      * @return \Illuminate\View\View
      */
-
     public function index()
     {
         $displayNameMap = config('constants.package_display_names');
         $packageInfoMap = config('constants.package_info');
-
         $selectedIndustry = Session::get('industry');
+
         $commonPackages = config('constants.common_packages', []);
         $industryPackages = config('constants.industry_packages.' . $selectedIndustry, []);
 
-        $commonPackageList = [];
-        $industryPackageList = [];
+        $commonPackageList   = $this->buildPackageList($commonPackages, $displayNameMap, $packageInfoMap);
+        $industryPackageList = $this->buildPackageList($industryPackages, $displayNameMap, $packageInfoMap);
 
-        // Process common packages
-        foreach ($commonPackages as $fullPackageName) {
-            [$vendorName, $packageName] = explode('/', $fullPackageName);
+        $dependencyMap = [
+            'admin/admin_role_permissions'  => ['admin/admins'],
+            'admin/users'                   => ['admin/user_roles'],
+            'admin/products'                => ['admin/users', 'admin/user_roles', 'admin/brands', 'admin/categories', 'admin/tags'],
+            'admin/courses'                 => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/tags'],
+            'admin/quizzes'                 => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/tags', 'admin/courses'],
+            'admin/coupons'                 => [
+                'ecommerce' => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/tags', 'admin/brands', 'admin/products'],
+                'education' => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/tags', 'admin/courses'],
+            ],
+            'admin/wishlists'               => [
+                'ecommerce' => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/tags', 'admin/brands', 'admin/products'],
+                'education' => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/tags', 'admin/courses'],
+            ],
+            'admin/ratings'                 => [
+                'ecommerce' => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/tags', 'admin/brands', 'admin/products'],
+                'education' => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/tags', 'admin/courses'],
+            ],
+        ];
 
-            // Skip excluded package
-            if ($vendorName === 'admin' && $packageName === 'admin_auth') {
-                continue;
-            }
-
-            $displayName = $displayNameMap[$fullPackageName] ?? $packageName;
-            $packageInfo = $packageInfoMap[$fullPackageName] ?? [];
-
-            $commonPackageList[] = [
-                'vendor'       => $vendorName,
-                'name'         => $packageName,
-                'info'         => $packageInfo,
-                'display_name' => $displayName,
-            ];
-        }
-
-        // Process industry-specific packages
-        foreach ($industryPackages as $fullPackageName) {
-            [$vendorName, $packageName] = explode('/', $fullPackageName);
-
-            // Skip excluded package
-            if ($vendorName === 'admin' && $packageName === 'admin_auth') {
-                continue;
-            }
-
-            $displayName = $displayNameMap[$fullPackageName] ?? $packageName;
-            $packageInfo = $packageInfoMap[$fullPackageName] ?? [];
-
-            $industryPackageList[] = [
-                'vendor'       => $vendorName,
-                'name'         => $packageName,
-                'info'         => $packageInfo,
-                'display_name' => $displayName,
-            ];
-        }
-
-        return view('wizard.index', compact('commonPackageList', 'industryPackageList', 'selectedIndustry'));
+        return view('wizard.index', compact('commonPackageList', 'industryPackageList', 'selectedIndustry', 'dependencyMap'));
     }
 
 
-    // 1. Store industry in session
+    // Store industry in session
     public function storeIndustry(Request $request)
     {
         $validator = FacadesValidator::make($request->all(), [
@@ -91,7 +65,7 @@ class WizardController extends Controller
             return response()->json(['status' => 'success', 'message' => $validator->messages()->first()], 400);
         }
 
-        //check system configuration for valid PHP version and Laravel version
+        // Check system configuration for valid PHP version and Laravel version
         $phpVersion = phpversion();
         $laravelVersion = app()->version();
 
@@ -107,7 +81,7 @@ class WizardController extends Controller
         return response()->json(['status' => 'success']);
     }
 
-    // 2. Create database in MySQL
+    // Create database in MySQL
     public function createDatabase(Request $request)
     {
         $request->merge([
@@ -115,10 +89,10 @@ class WizardController extends Controller
         ]);
 
         $validator = FacadesValidator::make($request->all(), [
-            'website_name' => 'required|string|min:2|max:64',
-            'db_name' => 'required|string|min:2|max:64',
-            'db_user' => 'required|string|min:2|max:64',
-            'db_password' => 'nullable|string|min:8|max:64|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{2,64}$/'
+            'website_name'  => 'required|string|min:2|max:64',
+            'db_name'       => 'required|string|min:2|max:64',
+            'db_user'       => 'required|string|min:2|max:64',
+            'db_password'   => 'nullable|string|min:8|max:64|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{2,64}$/'
         ]);
 
         if ($validator->fails()) {
@@ -128,14 +102,14 @@ class WizardController extends Controller
             ], 400);
         }
 
-        $websiteName = $request->website_name;
-        $dbName = $request->db_name;
-        $user = $request->db_user;
-        $password = $request->db_password ?? '';
+        $websiteName    = $request->website_name;
+        $dbName         = $request->db_name;
+        $user           = $request->db_user;
+        $password       = $request->db_password ?? '';
 
         try {
 
-            // connect to the MySQL database using the root user and a password,
+            // Connect to the MySQL database using the root user and a password,
             if (!empty($password)) {
                 config(['database.connections.mysql.username' => $user]);
                 config(['database.connections.mysql.password' => $password]);
@@ -159,17 +133,16 @@ class WizardController extends Controller
 
             // Store in session
             Session::put('db', [
-                'websiteName' => $websiteName,
-                'dbName' => $dbName,
-                'dbUser' => $user,
-                'dbPassword' => $password
+                'websiteName'   => $websiteName,
+                'dbName'        => $dbName,
+                'dbUser'        => $user,
+                'dbPassword'    => $password
             ]);
 
-            // Execute DB creation and user privileges
+            // Create DB + user + grants, Execute DB creation and user privileges
             DB::statement("CREATE DATABASE IF NOT EXISTS `$dbName` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
 
             if (!empty($password)) {
-                //DB::statement("CREATE USER IF NOT EXISTS '$user'@'%' IDENTIFIED BY ?", [$password]); // for windows
                 DB::unprepared("CREATE USER IF NOT EXISTS '$user'@'%' IDENTIFIED BY '$password'"); // for linux OS
             } else {
                 DB::statement("CREATE USER IF NOT EXISTS '$user'@'%'");
@@ -213,45 +186,45 @@ class WizardController extends Controller
 
         // Add conditional dependencies
         $dependencyMap = [
-            'admin/admin_role_permissions' => ['admin/admins'],
-            'admin/products' => ['admin/brands', 'admin/categories', 'admin/tags', 'admin/users', 'admin/wishlists', 'admin/ratings'],
-            'admin/courses' => ['admin/categories', 'admin/quizzes',  'admin/ratings', 'admin/tags', 'admin/users', 'admin/wishlists'],
-            'admin/users' => ['admin/user_roles'],
+            'admin/admin_role_permissions'  => ['admin/admins'],
+            'admin/users'                   => ['admin/user_roles'],
+            'admin/products'                => ['admin/users', 'admin/user_roles', 'admin/brands', 'admin/categories', 'admin/tags'],
+            'admin/courses'                 => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/tags'],
+            'admin/quizzes'                 => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/tags', 'admin/courses'],
+            'admin/coupons'                 => [
+                'ecommerce' => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/tags', 'admin/brands', 'admin/products'],
+                'education' => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/tags', 'admin/courses'],
+            ],
+            'admin/wishlists'               => [
+                'ecommerce' => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/tags', 'admin/brands', 'admin/products'],
+                'education' => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/tags', 'admin/courses'],
+            ],
+            'admin/ratings'                 => [
+                'ecommerce' => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/tags', 'admin/brands', 'admin/products'],
+                'education' => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/tags', 'admin/courses'],
+            ],
         ];
 
-        // Handle coupon package dependencies based on industry
-        if (in_array('admin/coupons', $userSelectedPackages)) {
-            if ($industryName === 'ecommerce' && !in_array('admin/products', $userSelectedPackages)) {
-                $userSelectedPackages[] = 'admin/products';
-            }
-            if ($industryName === 'education' && !in_array('admin/courses', $userSelectedPackages)) {
-                $userSelectedPackages[] = 'admin/courses';
+        // Collect industry-based dependencies
+        $industryDependencies = [];
+        foreach ($userSelectedPackages as $pkg) {
+            if (isset($dependencyMap[$pkg]) && is_array($dependencyMap[$pkg][$industryName] ?? null)) {
+                $industryDependencies = array_merge($industryDependencies, $dependencyMap[$pkg][$industryName]);
             }
         }
 
-        $resolvedPackages = $userSelectedPackages;
-        $changed = true;
+        // Merge user-selected packages and industry-specific dependencies
+        $allUserPackages = array_unique(array_merge($userSelectedPackages, $industryDependencies));
 
-        while ($changed) {
-            $changed = false;
-            foreach ($resolvedPackages as $pkg) {
-                if (isset($dependencyMap[$pkg])) {
-                    foreach ($dependencyMap[$pkg] as $dep) {
-                        if (!in_array($dep, $resolvedPackages)) {
-                            $resolvedPackages[] = $dep;
-                            $changed = true;
-                        }
-                    }
-                }
-            }
-        }
+        // Resolve any further generic dependencies
+        $allUserPackages = $this->resolveDependencies($allUserPackages, $dependencyMap, $industryName);
 
-        $userSelectedPackages = $resolvedPackages;
+        // Include default packages
+        $allPackages = array_unique(array_merge($defaultPackage, $allUserPackages));
 
-        $this->uninstallUnselectedPackages($userSelectedPackages);
+        // Uninstall unselected packages
+        $this->uninstallUnselectedPackages($allPackages);
 
-        // Always include default package, but avoid duplicates
-        $allPackages = array_unique(array_merge($defaultPackage, $userSelectedPackages));
         $installedPackages = Session::get('installed_packages', []);
         $industryName = Session::get('industry');
 
@@ -265,60 +238,52 @@ class WizardController extends Controller
             ]);
         }
 
-        // $missingPackages = [];
-        // foreach ($userSelectedPackages as $fullPackageName) {
-        //     $composerCheck = shell_exec("composer show {$fullPackageName} 2>&1");
-        //     if (strpos($composerCheck, 'not found') !== false || strpos($composerCheck, 'No package') !== false) {
-        //         $missingPackages[] = $fullPackageName;
-        //     }
-        // }
-
-
-        // if (!empty($missingPackages)) {
-        //     return response()->json([
-        //         'status' => 'error',
-        //         'message' => 'Missing packages: ' . implode(', ', $missingPackages)
-        //     ], 400);
-        // }
-
         try {
-            set_time_limit(0); // Extend execution time
+            set_time_limit(0);
             chdir(base_path());
 
-            // Build composer require command including default package
-            $packageString = implode(' ', array_map(fn($pkg) => "{$pkg}:@dev", $allPackages));
+            $flatPackages = $this->flattenPackages($allPackages);
+            $packageString = implode(' ', array_map(fn($pkg) => "{$pkg}:@dev", $flatPackages));
             $command = "composer require {$packageString}";
 
-            ob_start();
-            passthru($command, $exitCode);
-            $output = ob_get_clean();
+            [$exitCode, $output] = $this->composerPassthru($command);
 
             if ($exitCode === 0) {
                 Session::put('installed_packages', $allPackages);
                 Session::put('packages', $allPackages);
-                // Artisan::call('migrate', ['--force' => true]);
                 $message = "All selected packages installed successfully.";
             } else {
                 $message = "Composer failed. Output:\n" . $output;
                 return response()->json([
-                    'status' => 'error',
-                    'message' => $message
+                    'status'    => 'error',
+                    'message'   => $message
                 ], 500);
             }
         } catch (\Exception $e) {
             return response()->json([
-                'status' => 'error',
-                'message' => " Exception: " . $e->getMessage()
+                'status'    => 'error',
+                'message'   => " Exception: " . $e->getMessage()
             ], 500);
         }
 
         return response()->json([
-            'status' => 'success',
-            'message' => $message,
-            'packages' => $userSelectedPackages,
-            'industry' => $industryName,
-            'installed_packages' => $allPackages,
+            'status'                => 'success',
+            'message'               => $message,
+            'packages'              => $userSelectedPackages,
+            'industry'              => $industryName,
+            'installed_packages'    => $allPackages,
         ]);
+    }
+
+    public function flattenPackages(array $packages): array
+    {
+        $flat = [];
+        array_walk_recursive($packages, function ($item) use (&$flat) {
+            if (is_string($item)) {
+                $flat[] = $item;
+            }
+        });
+        return $flat;
     }
 
     // 4. Create admin table/model/migrate and store admin credentials
@@ -346,74 +311,36 @@ class WizardController extends Controller
             return response()->json(['status' => 'success', 'message' => $validator->messages()->first()], 400);
         }
 
-
-        // Update mysql connection config
-        $connection = config('database.connections.mysql');
-        $connection['database'] = Session::get('db.dbName');
-        config(['database.connections.mysql' => $connection]);
-        // Purge and reconnect to use new database
-        DB::purge('mysql');
-        DB::reconnect('mysql');
+        // Point connection to the session DB
+        $this->reconnectToSessionDb();
 
         // migrate the database
         Artisan::call('migrate', ['--force' => true]);
-
         // Run the package seeder to populate packages table
         if (is_dir(base_path('vendor/admin/admin_auth'))) {
-            Artisan::call('db:seed', [
-                '--class' => 'Admin\AdminAuth\Database\Seeders\\PackageSeeder',
-                '--force' => true,
-            ]);
+            $this->safeArtisanSeed('Admin\AdminAuth\Database\Seeders\\PackageSeeder');
         }
-        // run the package seeder
-        // Only run the seeder if the admin/users package is installed
         if (is_dir(base_path('vendor/admin/users'))) {
-            Artisan::call('db:seed', [
-                '--class' => 'Admin\\Users\\Database\\Seeders\\SeedUserRolesSeeder',
-                '--force' => true,
-            ]);
+            $this->safeArtisanSeed('Admin\\Users\\Database\\Seeders\\SeedUserRolesSeeder');
         }
-
         if (is_dir(base_path('vendor/admin/settings'))) {
-            Artisan::call('db:seed', [
-                '--class' => 'Admin\\Settings\\Database\\Seeders\\SettingSeeder',
-                '--force' => true,
-            ]);
+            $this->safeArtisanSeed('Admin\\Settings\\Database\\Seeders\\SettingSeeder');
         }
-
-        if (is_dir(base_path('vendor/admin/admin_role_permissions'))) {
-            Artisan::call('db:seed', [
-                '--class' => 'Admin\AdminRolePermissions\Database\Seeders\\AdminRolePermissionDatabaseSeeder',
-                '--force' => true,
-            ]);
-        }
-
         if (is_dir(base_path('vendor/admin/emails'))) {
-            Artisan::call('db:seed', [
-                '--class' => 'Admin\Emails\Database\Seeders\\MailDatabaseSeeder',
-                '--force' => true,
-            ]);
+            $this->safeArtisanSeed('Admin\Emails\Database\Seeders\\MailDatabaseSeeder');
         }
-
         if (is_dir(base_path('vendor/admin/shipping_charges'))) {
-            Artisan::call('db:seed', [
-                '--class' => 'Admin\ShippingCharges\Database\Seeders\\ShippingZoneSeeder',
-                '--force' => true,
-            ]);
+            $this->safeArtisanSeed('Admin\ShippingCharges\Database\Seeders\\ShippingZoneSeeder');
         }
 
-        // Use the correct connection for schema and queries
-        $schema = Schema::connection('mysql');
-        $db = DB::connection('mysql');
-
-        // Check if the database is set correctly
+        // Verify DB connection name
         $currentDb = DB::connection()->getDatabaseName();
-
         if ($currentDb !== Session::get('db.dbName')) {
             return response()->json(['status' => 'error', 'message' => 'Database connection is not set correctly.'], 500);
         }
 
-        // Check if admin already exists
+        // Uniqueness check
+        $db = DB::connection('mysql');
         $existingAdmin = $db->table('admins')->where('email', $request->admin_email)->first();
 
         if ($existingAdmin) {
@@ -434,7 +361,8 @@ class WizardController extends Controller
             'updated_at' => now(),
         ]);
 
-        $settings = DB::table('settings')->insert([
+        // Insert setting
+        DB::table('settings')->insert([
             'title' => 'industry',
             'slug' => 'industry',
             'config_value' => Session::get('industry', 'ecommerce'),
@@ -443,36 +371,33 @@ class WizardController extends Controller
         ]);
 
         if (is_dir(base_path('vendor/admin/admin_role_permissions'))) {
-            Artisan::call('db:seed', [
-                '--class' => 'Admin\AdminRolePermissions\Database\Seeders\\AdminRolePermissionDatabaseSeeder',
-                '--force' => true,
-            ]);
+            $this->safeArtisanSeed('Admin\AdminRolePermissions\Database\Seeders\\AdminRolePermissionDatabaseSeeder');
         }
 
-
         $this->updateEnvDbName(Session::get('db.dbName'));
-        // Artisan::call('optimize:clear');
 
-        // forgot all session data
+        // Clear sessions (kept overall effect, removed redundant forget after flush)
         Session::flush();
         Session::forget(['industry', 'db', 'packages']);
-
         $loginUrl = $request->getSchemeAndHttpHost() . route('thankyou', [], false);
-
         return response()->json(['status' => 'success', 'admin_id' => $adminId, 'redirect_url' => $loginUrl]);
     }
 
     public function updateEnvDbName($newDbName)
     {
         $envPath = base_path('.env');
-        $env = file_get_contents($envPath);
+        if (!is_file($envPath)) {
+            // If .env missing, do nothing (behavior remains effectively same for most setups)
+            return;
+        }
 
-        // Replace the current DB_DATABASE value
-        $env = preg_replace('/^DB_DATABASE=.*$/m', 'DB_DATABASE=' . $newDbName, $env);
+        $env = file_get_contents($envPath);
+        $env = preg_replace('/^DB_DATABASE=.*$/m', 'DB_DATABASE=' . $newDbName, $env); // Replace the current DB_DATABASE value
 
         // update  DB_USERNAME and DB_PASSWORD if they are set in the session
         $dbUser = Session::get('db.dbUser');
         $dbPassword = Session::get('db.dbPassword');
+
         if ($dbUser) {
             $env = preg_replace('/^DB_USERNAME=.*$/m', 'DB_USERNAME=' . $dbUser, $env);
         }
@@ -489,13 +414,16 @@ class WizardController extends Controller
         // Artisan::call('storage:link');
         // Artisan::call('view:clear');
         // Artisan::call('route:clear');
-
         // Artisan::call('optimize:clear');
     }
 
     public function viewThankYouPage()
     {
-        return view('thankyou');
+        try {
+            return view('thankyou');
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()], 500);
+        }
     }
 
     /**
@@ -539,24 +467,20 @@ class WizardController extends Controller
     protected function setEnvValue($key, $value)
     {
         $path = base_path('.env');
-
-        if (file_exists($path)) {
-            $envContents = file_get_contents($path);
-
-            if (preg_match("/^{$key}=.*/m", $envContents)) {
-                // Key exists, replace the line
-                $envContents = preg_replace(
-                    "/^{$key}=.*/m",
-                    "{$key}={$value}",
-                    $envContents
-                );
-            } else {
-                // Key does not exist, append it
-                $envContents .= "\n{$key}={$value}";
-            }
-
-            file_put_contents($path, $envContents);
+        if (!file_exists($path)) {
+            return;
         }
+
+        $envContents = file_get_contents($path);
+
+        if (preg_match("/^{$key}=.*/m", $envContents)) {
+            // Key exists, replace the line
+            $envContents = preg_replace("/^{$key}=.*/m", "{$key}={$value}", $envContents);
+        } else {
+            $envContents .= "\n{$key}={$value}";
+        }
+
+        file_put_contents($path, $envContents);
     }
 
     public function checkPackageInstalled(Request $request)
@@ -566,11 +490,7 @@ class WizardController extends Controller
 
         $vendorPath = base_path("vendor/{$vendor}/{$name}");
 
-        if (is_dir($vendorPath)) {
-            return response()->json(['status' => 'installed']);
-        } else {
-            return response()->json(['status' => 'not_installed']);
-        }
+        return response()->json(['status' => is_dir($vendorPath) ? 'installed' : 'not_installed']);
     }
 
     private function uninstallUnselectedPackages(array $selectedPackages)
@@ -597,20 +517,127 @@ class WizardController extends Controller
             $packageString = implode(' ', $packagesToRemove);
             $command = "composer remove {$packageString}";
 
-            ob_start();
-            passthru($command, $exitCode);
-            $output = ob_get_clean();
+            [$exitCode, $output] = $this->composerPassthru($command);
 
             if ($exitCode !== 0) {
                 throw new \Exception("Failed to remove packages: {$output}");
             }
 
             // Remove them from session
-            $remainingPackages = array_diff($currentlyInstalled, $packagesToRemove);
+            $remainingPackages = array_values(array_diff($currentlyInstalled, $packagesToRemove));
             Session::put('installed_packages', $remainingPackages);
             Session::put('packages', $remainingPackages);
         } catch (\Exception $e) {
             throw new \Exception("Uninstall Exception: " . $e->getMessage());
         }
+    }
+
+    /**
+     * Map raw package names into displayable payload, skipping admin/admin_auth.
+     */
+    private function buildPackageList(array $packages, array $displayNameMap, array $packageInfoMap): array
+    {
+        $list = [];
+        foreach ($packages as $fullPackageName) {
+            if (!is_string($fullPackageName)) {
+                Log::error('Invalid package name type', ['value' => $fullPackageName]);
+                continue;
+            }
+
+            $parts = explode('/', $fullPackageName);
+            if (count($parts) !== 2) {
+                Log::error('Malformed package name', ['value' => $fullPackageName]);
+                continue;
+            }
+
+            [$vendorName, $packageName] = $parts;
+
+            if ($vendorName === 'admin' && $packageName === 'admin_auth') {
+                continue;
+            }
+
+            $displayName = $displayNameMap[$fullPackageName] ?? $packageName;
+            $packageInfo = $packageInfoMap[$fullPackageName] ?? [];
+
+            $list[] = [
+                'vendor'       => $vendorName,
+                'name'         => $packageName,
+                'info'         => $packageInfo,
+                'display_name' => $displayName,
+            ];
+        }
+        return $list;
+    }
+
+    /**
+     * Resolve dependencies using the provided map (behavior preserved).
+     */
+    private function resolveDependencies(array $selected, array $dependencyMap, string $industry = null): array
+    {
+        $resolved = $selected;
+        $changed  = true;
+
+        while ($changed) {
+            $changed = false;
+            foreach ($resolved as $pkg) {
+                if (!is_string($pkg)) {
+                    Log::error('Non-string package detected', ['value' => $pkg]);
+                    continue;
+                }
+
+                if (isset($dependencyMap[$pkg])) {
+                    $deps = $dependencyMap[$pkg];
+
+                    // Handle industry-based nested arrays
+                    if ($industry && isset($deps[$industry]) && is_array($deps[$industry])) {
+                        $deps = $deps[$industry];
+                    }
+
+                    foreach ($deps as $dep) {
+                        if (!in_array($dep, $resolved, true)) {
+                            $resolved[] = $dep;
+                            $changed = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        return $resolved;
+    }
+
+
+    /**
+     * Reconnect the default mysql connection to use the database saved in session.
+     */
+    private function reconnectToSessionDb(): void
+    {
+        $connection              = config('database.connections.mysql');
+        $connection['database']  = Session::get('db.dbName');
+        config(['database.connections.mysql' => $connection]);
+        DB::purge('mysql');
+        DB::reconnect('mysql');
+    }
+
+    /**
+     * Safe seeder runner with force flag.
+     */
+    private function safeArtisanSeed(string $seederClass): void
+    {
+        Artisan::call('db:seed', [
+            '--class' => $seederClass,
+            '--force' => true,
+        ]);
+    }
+
+    /**
+     * Execute a composer command and return [exitCode, output].
+     */
+    private function composerPassthru(string $command): array
+    {
+        ob_start();
+        passthru($command, $exitCode);
+        $output = ob_get_clean();
+        return [$exitCode, $output];
     }
 }

@@ -1,29 +1,4 @@
 $(document).ready(function () {
-    // Handle contact button click
-    $("#contactBtn").click(function (e) {
-        e.preventDefault();
-
-        // Get the target section
-        const targetSection = $("#contact");
-
-        // Scroll to the contact section
-        $("html, body").animate(
-            {
-                scrollTop: targetSection.offset().top - 80, // 80px offset for navbar
-            },
-            800,
-            function () {
-                // Add highlight effect after scrolling is complete
-                targetSection.addClass("highlight-section");
-
-                // Remove highlight after animation
-                setTimeout(function () {
-                    targetSection.removeClass("highlight-section");
-                }, 2000);
-            }
-        );
-    });
-
     // Install Wizard button click animation
     $(".install-wizard-btn").click(function (e) {
         e.preventDefault();
