@@ -100,6 +100,9 @@ return [
         'admin/enquiries'  => 'Enquiry Manager',
         'admin/products'  => 'Product Manager',
         'admin/shipping_charges' => 'Shipping Charges Manager',
+        'admin/product_transactions'  => 'Transaction Manager',
+        'admin/product_reports'  => 'Report Manager',
+        'admin/product_return_refunds'  => 'Return Refund Manager',
         'admin/coupons' => 'Coupon Manager',
         'admin/courses' => 'Course Manager',
         'admin/certificates' => 'Certificate Manager',
@@ -128,6 +131,9 @@ return [
             'admin/wishlists',
             'admin/shipping_charges',
             'admin/coupons',
+            'admin/product_reports',
+            'admin/product_transactions',
+            'admin/product_return_refunds'
         ],
         'education' => [
             'admin/tags',
@@ -209,6 +215,16 @@ return [
         'admin/shipping_charges' => [
             'description' => 'Manage shipping charges by adding, editing, or organizing shipping information to enhance product delivery options.',
         ],
+        'admin/product_transactions' => [
+            'description' => 'Handles recording and management of all financial activities related to products.',
+        ],
+        'admin/product_reports' => [
+            'description' => 'Generates insights and analytics for product performance and sales.',
+        ],
+        'admin/product_return_refunds' => [
+            'description' => 'Manages product return requests, refunds, and tracks customer return history efficiently.',
+        ],
+
     ]
 
 ];
