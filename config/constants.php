@@ -112,6 +112,7 @@ return [
         'admin/wishlists' => 'Wishlist Manager',
         'admin/quizzes' => 'Quiz Manager',
         'admin/settings'  => 'Setting Manager',
+        'admin/commissions'  => 'Commission Manager',
     ],
 
     'common_packages' => [
@@ -138,6 +139,7 @@ return [
             'admin/product_reports',
             'admin/product_transactions',
             'admin/product_return_refunds',
+            'admin/commissions',
         ],
         'education' => [
             'admin/tags',
@@ -150,6 +152,7 @@ return [
             'admin/quizzes',
             'admin/course_reports',
             'admin/course_transactions',
+            'admin/commissions',
         ]
     ],
 
@@ -238,6 +241,9 @@ return [
         ],
         'admin/course_transactions' => [
             'description' => 'Handles recording and management of all financial activities related to courses.',
+        ],
+        'admin/commissions' => [
+            'description' => 'Handles commissions on courses.',
         ],
     ]
 
