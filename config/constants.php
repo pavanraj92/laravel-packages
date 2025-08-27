@@ -243,7 +243,7 @@ return [
             'description' => 'Handles recording and management of all financial activities related to courses.',
         ],
         'admin/commissions' => [
-            'description' => 'Handles commissions on courses.',
+            'description' => 'Handles commissions and discounts.',
         ],
     ]
 
