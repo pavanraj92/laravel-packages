@@ -103,6 +103,8 @@ return [
         'admin/product_transactions'  => 'Transaction Manager',
         'admin/product_reports'  => 'Report Manager',
         'admin/product_return_refunds'  => 'Return Refund Manager',
+        'admin/course_reports'  => 'Report Manager',
+        'admin/course_transactions'  => 'Transaction Manager',
         'admin/coupons' => 'Coupon Manager',
         'admin/courses' => 'Course Manager',
         'admin/certificates' => 'Certificate Manager',
@@ -144,6 +146,8 @@ return [
             'admin/wishlists',
             'admin/certificates',
             'admin/quizzes',
+            'admin/course_reports',
+            'admin/course_transactions',
         ]
     ],
 
@@ -224,6 +228,13 @@ return [
         'admin/product_return_refunds' => [
             'description' => 'Manages product return requests, refunds, and tracks customer return history efficiently.',
         ],
+        'admin/course_reports' => [
+            'description' => 'Generates insights and analytics for course performance and sales.',
+        ],
+        'admin/course_transactions' => [
+            'description' => 'Handles recording and management of all financial activities related to courses.',
+        ],
+
 
     ]
 

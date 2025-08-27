@@ -30,26 +30,6 @@ class WizardController extends Controller
         $commonPackageList   = $this->buildPackageList($commonPackages, $displayNameMap, $packageInfoMap);
         $industryPackageList = $this->buildPackageList($industryPackages, $displayNameMap, $packageInfoMap);
 
-        // $dependencyMap = [
-        //     'admin/admin_role_permissions'  => ['admin/admins'],
-        //     'admin/users'                   => ['admin/user_roles'],
-        //     'admin/products'                => ['admin/users', 'admin/user_roles', 'admin/brands', 'admin/categories', 'admin/tags'],
-        //     'admin/courses'                 => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/tags'],
-        //     'admin/quizzes'                 => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/tags', 'admin/courses'],
-        //     'admin/coupons'                 => [
-        //         'ecommerce' => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/tags', 'admin/brands', 'admin/products'],
-        //         'education' => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/tags', 'admin/courses'],
-        //     ],
-        //     'admin/wishlists'               => [
-        //         'ecommerce' => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/tags', 'admin/brands', 'admin/products'],
-        //         'education' => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/tags', 'admin/courses'],
-        //     ],
-        //     'admin/ratings'                 => [
-        //         'ecommerce' => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/tags', 'admin/brands', 'admin/products'],
-        //         'education' => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/tags', 'admin/courses'],
-        //     ],
-        // ];
-
         $dependencyMap = [
             'admin/admin_role_permissions'  => ['admin/admins'],
             'admin/users'                   => ['admin/user_roles'],
@@ -59,6 +39,8 @@ class WizardController extends Controller
             'admin/product_transactions'    => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/brands', 'admin/products'],
             'admin/product_reports'         => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/brands', 'admin/products'],
             'admin/product_return_refunds'  => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/brands', 'admin/products'],
+            'admin/course_reports'          => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/courses'],
+            'admin/course_transactions'     => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/courses'],
             'admin/coupons'                 => [
                 'ecommerce' => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/tags', 'admin/brands', 'admin/products'],
                 'education' => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/tags', 'admin/courses'],
@@ -218,6 +200,11 @@ class WizardController extends Controller
             'admin/products'                => ['admin/users', 'admin/user_roles', 'admin/brands', 'admin/categories'],
             'admin/courses'                 => ['admin/users', 'admin/user_roles', 'admin/categories'],
             'admin/quizzes'                 => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/tags', 'admin/courses'],
+            'admin/product_transactions'    => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/brands', 'admin/products'],
+            'admin/product_reports'         => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/brands', 'admin/products'],
+            'admin/product_return_refunds'  => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/brands', 'admin/products'],
+            'admin/course_reports'          => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/courses'],
+            'admin/course_transactions'     => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/courses'],
             'admin/coupons'                 => [
                 'ecommerce' => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/tags', 'admin/brands', 'admin/products'],
                 'education' => ['admin/users', 'admin/user_roles', 'admin/categories', 'admin/tags', 'admin/courses'],
