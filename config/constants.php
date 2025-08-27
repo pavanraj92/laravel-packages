@@ -99,6 +99,7 @@ return [
         'admin/faqs'      => 'Faq Manager',
         'admin/enquiries'  => 'Enquiry Manager',
         'admin/products'  => 'Product Manager',
+        'admin/product_inventories'  => 'Inventory Manager',
         'admin/shipping_charges' => 'Shipping Charges Manager',
         'admin/product_transactions'  => 'Transaction Manager',
         'admin/product_reports'  => 'Report Manager',
@@ -130,12 +131,13 @@ return [
             'admin/categories',
             'admin/ratings',
             'admin/products',
+            'admin/product_inventories',
             'admin/wishlists',
             'admin/shipping_charges',
             'admin/coupons',
             'admin/product_reports',
             'admin/product_transactions',
-            'admin/product_return_refunds'
+            'admin/product_return_refunds',
         ],
         'education' => [
             'admin/tags',
@@ -222,6 +224,9 @@ return [
         'admin/product_transactions' => [
             'description' => 'Handles recording and management of all financial activities related to products.',
         ],
+        'admin/product_inventories' => [
+            'description' => 'Provides product inventory management, including tracking stock levels, movements, and related financial activities.',
+        ],
         'admin/product_reports' => [
             'description' => 'Generates insights and analytics for product performance and sales.',
         ],
@@ -234,8 +239,6 @@ return [
         'admin/course_transactions' => [
             'description' => 'Handles recording and management of all financial activities related to courses.',
         ],
-
-
     ]
 
 ];
