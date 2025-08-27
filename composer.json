@@ -9,7 +9,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.2",        
+        "php": "^8.2",
         "kyslik/column-sortable": "^7.0",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
@@ -196,6 +196,11 @@
         {
             "type": "vcs",
             "url": "https://github.com/pavanraj92/admin-course-transactions.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-commission.git"
         }
     ]
+
 }
