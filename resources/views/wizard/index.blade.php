@@ -93,6 +93,31 @@
             color: #6c757d;
             z-index: 10;
         }
+
+        .industry-text-color {
+            color: #f48120;
+        }
+
+        #industryDescription .alert {
+            font-size: 0.95rem;
+            background: #e9f5ff;
+            border-color: #b6e0fe;
+            color: #084298;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        #industryDescription i.fa-info-circle {
+            font-size: 1.2rem;
+        }
+
+        #industryDescription .industry-text strong {
+            color: #0d6efd;
+        }
+
+        #industryDescription .industry-text span {
+            color: #0d6efd;
+            font-weight: 500;
+        }
     </style>
 </head>
 
@@ -138,7 +163,7 @@
                                     <h4 class="mb-3">Step 1: Select Your Industry</h4>
                                     <div class="mb-3">
                                         <label for="industry" class="form-label">Select Your Industry<span
-                                                class="text-danger">*</span></label>
+                                                class="text-danger">*</span> (Select an industry to see what packages will be installed.)</label>
                                         <select id="industry" name="industry" class="form-select" required>
                                             <option value="">Select an industry</option>
                                             @if (isset($industryAryList) && !empty($industryAryList))
@@ -150,6 +175,14 @@
                                             @endforeach
                                             @endif
                                         </select>
+                                        <div id="industryDescription" class="form-text text-muted mt-2">
+                                        </div>
+                                        <div class="form-check mt-3">
+                                            <input class="form-check-input" type="checkbox" value="1" id="is_dummy_data" name="is_dummy_data">
+                                            <label class="form-check-label" for="is_dummy_data">
+                                                Insert Dummy Data in Database.
+                                            </label>
+                                        </div>
                                         <div class="invalid-feedback">
                                             Please select an industry.
                                         </div>
@@ -162,7 +195,7 @@
                                     <div class="mb-3">
                                         <label for="websiteName" class="form-label">Website Name <span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="websiteName" name="websiteName"
+                                        <input type="text" class="form-control" id="websiteName" name="websiteName" placeholder="Enter your website name"
                                             value="@if (isset($websiteName) && !empty($websiteName)) {{ $websiteName }} @endif"
                                             required>
                                         <div class="invalid-feedback">
@@ -173,16 +206,16 @@
                                         <label for="dbName" class="form-label">Database Name <span
                                                 class="text-danger">*</span></label>
                                         <input type="text" class="form-control" id="dbName" name="dbName"
-                                            value="@if (isset($dbName) && !empty($dbName)) {{ $dbName }} @endif"
+                                            value="@if (isset($dbName) && !empty($dbName)) {{ $dbName }} @endif" placeholder="Enter your database name"
                                             required>
                                         <div class="invalid-feedback">
                                             Database name is required.
                                         </div>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="dbUser" class="form-label">Username <span
+                                        <label for="dbUser" class="form-label">Database Username <span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="dbUser" name="dbUser"
+                                        <input type="text" class="form-control" id="dbUser" name="dbUser" placeholder="Enter database username (e.g., root)"
                                             value="@if (isset($dbUser) && !empty($dbUser)) {{ $dbUser }} @endif"
                                             required autocomplete="off">
                                         <div class="invalid-feedback">
@@ -190,9 +223,9 @@
                                         </div>
                                     </div>
                                     <div class="mb-3 password-toggle">
-                                        <label for="dbPassword" class="form-label">Password</label>
+                                        <label for="dbPassword" class="form-label">Database Password</label>
                                         <input type="password" class="form-control" id="dbPassword" name="dbPassword"
-                                            value="@if (isset($dbPassword) && !empty($dbPassword)) {{ $dbPassword }} @endif" autocomplete="off">
+                                            value="@if (isset($dbPassword) && !empty($dbPassword)) {{ $dbPassword }} @endif" autocomplete="off" placeholder="Enter database password (leave empty if none)">
                                         <span toggle="#dbPassword" class="fa fa-fw fa-eye-slash toggle-password"></span>
                                         <div class="invalid-feedback">
                                             Password is required.
@@ -201,111 +234,11 @@
                                     <button type="button" class="btn-outline-secondary prev-step">Previous</button>
                                     <button type="button" class="btn-outline-success next-step">Next</button>
                                 </div>
-                                <!-- Step 3: Package Selection -->
-                                <div class="form-step @if (empty($packages) && !empty($dbName) && !empty($websiteName) && !empty($industry)) active @endif" data-step="3">
-                                    <h4 class="mb-3">Step 3: Select Packages: <small class="theme-text-color">Select at least one package.</small></h4>
-                                    <div class="mb-3" style="max-height: 500px; overflow-y: auto;">
 
-                                        <!-- Common Packages Section -->
-                                        <div class="mb-4">
-                                            <h5 class="mb-3 theme-text-color font-weight-bold">
-                                                <i class="fas fa-cogs me-2"></i>Common Packages
-                                            </h5>
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" id="selectAllCommonPackages">
-                                                <label class="form-check-label fw-bold" for="selectAllCommonPackages">
-                                                    Select All Common Packages
-                                                </label>
-                                            </div>
-                                            <ul class="list-group mb-3">
-                                                @forelse($commonPackageList as $index => $package)
-                                                @php
-                                                $packageName = $package['vendor'] . '/' . $package['name'];
-                                                $strChecked = in_array($packageName, explode(', ', $packages)) ? 'checked' : '';
-                                                @endphp
-                                                <li class="list-group-item d-flex align-items-center justify-content-between">
-                                                    <div>
-                                                        <input class="form-check-input me-2 package-checkbox common-package-checkbox"
-                                                            data-package="{{ $package['vendor'].'/'.$package['name'] }}"
-                                                            type="checkbox" name="packages[]"
-                                                            value="{{ $packageName }}"
-                                                            id="common_package_{{ $index }}" {{ $strChecked }}>
-                                                        <label class="form-check-label"
-                                                            for="common_package_{{ $index }}" style="display: inline;" data-toggle="tooltip" data-placement="top" title="{{ (isset($package['info']['description'])) ? $package['info']['description'] : 'No description available' }}">
-                                                            {{ $package['display_name'] ?? $package['vendor'] . '/' . $package['name'] }}
-                                                        </label>
-                                                    </div>
-                                                    <span class="package-status"
-                                                        id="package_status_common_{{ $index }}"
-                                                        data-package="{{ $packageName }}"
-                                                        style="display: none;">
-                                                        <span class="progress-text" style="font-size: 14px; font-weight: bold;">Processing...0%</span>
-                                                    </span>
-                                                </li>
-                                                @empty
-                                                <li class="list-group-item text-muted">No common packages found.</li>
-                                                @endforelse
-                                            </ul>
-                                        </div>
-
-                                        <!-- Industry-Specific Packages Section -->
-                                        @if(!empty($selectedIndustry) && !empty($industryPackageList))
-                                        <div class="mb-4">
-                                            <h5 class="mb-3 theme-text-color font-weight-bold">
-                                                <i class="{{ config('constants.industry_icons.' . $selectedIndustry, 'fas fa-industry') }} me-2"></i>{{ config('constants.industryAryList.' . $selectedIndustry, $selectedIndustry) }} Packages
-                                            </h5>
-                                            <p class="text-muted mb-3">
-                                                The {{ config('constants.industryAryList.' . $selectedIndustry, $selectedIndustry) }} package provides essential features for building {{ strtolower(config('constants.industryAryList.' . $selectedIndustry, $selectedIndustry)) }} applications.
-                                            </p>
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" id="selectAllIndustryPackages">
-                                                <label class="form-check-label fw-bold" for="selectAllIndustryPackages">
-                                                    Select All {{ config('constants.industryAryList.' . $selectedIndustry, $selectedIndustry) }} Packages
-                                                </label>
-                                            </div>
-                                            <ul class="list-group">
-                                                @forelse($industryPackageList as $index => $package)
-                                                @php
-                                                $packageName = $package['vendor'] . '/' . $package['name'];
-                                                $strChecked = in_array($packageName, explode(', ', $packages)) ? 'checked' : '';
-                                                @endphp
-                                                <li class="list-group-item d-flex align-items-center justify-content-between">
-                                                    <div>
-                                                        <input class="form-check-input me-2 package-checkbox industry-package-checkbox"
-                                                            data-package="{{ $package['vendor'].'/'.$package['name'] }}"
-                                                            type="checkbox" name="packages[]"
-                                                            value="{{ $packageName }}"
-                                                            id="industry_package_{{ $index }}" {{ $strChecked }}>
-                                                        <label class="form-check-label"
-                                                            for="industry_package_{{ $index }}" style="display: inline;" data-toggle="tooltip" data-placement="top" title="{{ (isset($package['info']['description'])) ? $package['info']['description'] : 'No description available' }}">
-                                                            {{ $package['display_name'] ?? $package['vendor'] . '/' . $package['name'] }}
-                                                        </label>
-                                                    </div>
-                                                    <span class="package-status"
-                                                        id="package_status_industry_{{ $index }}"
-                                                        data-package="{{ $packageName }}"
-                                                        style="display: none;">
-                                                        <span class="progress-text" style="font-size: 14px; font-weight: bold;">Processing...0%</span>
-                                                    </span>
-                                                </li>
-                                                @empty
-                                                <li class="list-group-item text-muted">No industry-specific packages found.</li>
-                                                @endforelse
-                                            </ul>
-                                        </div>
-                                        @endif
-
-                                        <div class="invalid-feedback" id="packageError" style="display:none;">
-                                            Please select at least one package.
-                                        </div>
-                                    </div>
-                                    <button type="button" class="btn-outline-secondary prev-step">Previous</button>
-                                    <button type="button" class="btn-outline-success next-step">Next</button>
-                                </div>
-                                <!-- Step 4: Admin Credentials -->
+                                <!-- Step 3: Admin Credentials -->
                                 <div class="form-step @if (empty($adminEmail) && !empty($packages) && !empty($dbName) && !empty($websiteName) && !empty($industry)) active @endif"
-                                    data-step="4">
-                                    <h4 class="mb-3">Step 4: Admin Credentials</h4>
+                                    data-step="3">
+                                    <h4 class="mb-3">Step 3: Admin Credentials</h4>
                                     <div class="mb-3">
                                         <label for="adminEmail" class="form-label">Admin Email <span
                                                 class="text-danger">*</span></label>
@@ -351,77 +284,73 @@
     <!-- Toastr JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
+    <script src="{{ asset('backend/theme.js') }}"></script>
+
     <script>
-        const dependencyMap = @json($dependencyMap);
-        const industry = "{{ $selectedIndustry }}";
+        @if(session('success'))
+        toastr.success("{{ session('success') }}");
+        @endif
 
-        // Map to track which packages depend on which others (reverse dependencies)
-        const reverseDeps = {};
+        @if(session('error'))
+        toastr.error("{{ session('error') }}");
+        @endif
 
-        // Build reverse dependency map
-        Object.keys(dependencyMap).forEach(pkg => {
-            let deps = dependencyMap[pkg] ?? [];
-            if (industry && deps[industry]) deps = deps[industry];
+        @if(session('info'))
+        toastr.info("{{ session('info') }}");
+        @endif
 
-            deps.forEach(dep => {
-                if (!reverseDeps[dep]) reverseDeps[dep] = [];
-                reverseDeps[dep].push(pkg);
-            });
-        });
-
-        // Check all dependencies recursively
-        function checkDependencies(pkg) {
-            let deps = dependencyMap[pkg] ?? [];
-            if (industry && deps[industry]) deps = deps[industry];
-
-            deps.forEach(dep => {
-                const checkbox = document.querySelector(`input[data-package='${dep}']`);
-                if (checkbox && !checkbox.checked) {
-                    checkbox.checked = true;
-                    checkDependencies(dep);
-                }
-            });
-        }
-
-        // Uncheck dependencies if no other parent requires them
-        function uncheckDependencies(pkg) {
-            let deps = dependencyMap[pkg] ?? [];
-            if (industry && deps[industry]) deps = deps[industry];
-
-            deps.forEach(dep => {
-                const checkbox = document.querySelector(`input[data-package='${dep}']`);
-                if (!checkbox) return;
-
-                // Only uncheck if no other selected package depends on it
-                const stillRequired = (reverseDeps[dep] || []).some(parent => {
-                    const parentCheckbox = document.querySelector(`input[data-package='${parent}']`);
-                    return parentCheckbox && parentCheckbox.checked;
-                });
-
-                if (!stillRequired) {
-                    checkbox.checked = false;
-                    uncheckDependencies(dep); // recursively uncheck
-                }
-            });
-        }
-
-        // Attach change listener to all checkboxes
-        document.querySelectorAll('.package-checkbox').forEach(cb => {
-            cb.addEventListener('change', function() {
-                const pkg = this.getAttribute('data-package');
-                if (this.checked) {
-                    checkDependencies(pkg);
-                } else {
-                    uncheckDependencies(pkg);
-                }
-            });
-        });
+        @if(session('warning'))
+        toastr.warning("{{ session('warning') }}");
+        @endif
     </script>
 
     <script>
+        const industrySelect = $('#industry');
+        const descriptionDiv = $('#industryDescription');
+
+
+        const industryDescriptions = {
+            'ecommerce': `<div class="alert alert-gradient d-flex align-items-start p-3 rounded-4 shadow-sm" role="alert" style="border-color:#b6e0fe ;background: background: #e9f5ff;">
+            <i class="fa fa-shopping-cart fa-2x me-3 mt-1" aria-hidden="true"></i>
+            <div class="industry-text">
+                <h5 class="mb-1 fw-bold">Basic Packages</h5>
+                <p class="mb-0">
+                    Includes <strong>Admin Auth, User, User Roles, Settings</strong> packages installed automatically.
+                </p>
+                <h5 class="my-1 fw-bold">E-commerce Packages</h5>
+                <p class="mb-0">
+                    Includes <strong>Brand, Category, Product</strong> packages installed automatically.
+                </p>
+            </div>
+        </div>`,
+            'education': `<div class="alert alert-gradient d-flex align-items-start p-3 rounded-4 shadow-sm" role="alert" style="style="background: background: #e9f5ff; color: #fff;">
+            <i class="fa fa-graduation-cap fa-2x me-3 mt-1" aria-hidden="true"></i>
+            <div class="industry-text">
+                <h5 class="mb-1 fw-bold">Basic Packages</h5>
+                <p class="mb-0">
+                    Includes <strong>Admin Auth, User, User Roles, Settings</strong> packages installed automatically.
+                </p>
+                <h5 class="my-1 fw-bold">Education Packages</h5>
+                <p class="mb-0">
+                    Includes <strong>Category, Course & Lecture</strong> packages installed automatically.
+                </p>
+            </div>
+        </div>`
+        };
+
+        // Listen to Select2 change
+        industrySelect.on('change', function() {
+            const selected = $(this).val();
+            if (selected && industryDescriptions[selected]) {
+                descriptionDiv.html(industryDescriptions[selected]);
+            } else {
+                descriptionDiv.html('Select an industry to see what packages will be installed.');
+            }
+        });
+
+        // Trigger change on page load to set initial description
         document.addEventListener("DOMContentLoaded", function() {
             const toggles = document.querySelectorAll(".toggle-password");
-
             toggles.forEach(function(toggle) {
                 toggle.addEventListener("click", function() {
                     const input = document.querySelector(this.getAttribute("toggle"));
@@ -434,25 +363,8 @@
                 });
             });
         });
-    </script>
-    <script>
+
         $(document).ready(function() {
-            let packages = [];
-            $('.package-checkbox:checked').each(function() {
-                const packageName = $(this).val();
-                console.log('Selected:', packageName);
-                packages.push(packageName);
-
-                $(`.package-status[data-package="${packageName}"]`)
-                    .show()
-                    .removeClass()
-                    .addClass('ms-auto badge theme-bg-color')
-                    .html('Installed');
-            });
-
-            // Initialize select all checkboxes
-            updateSelectAllCheckboxes();
-
             let fakeProgressIntervals = {}; // Track fake progress
             let currentProgress = {}; // Track current % per package
 
@@ -501,68 +413,7 @@
                 }, 50); // Smooth finish
             }
 
-
-
             let packageStatus = {}; // e.g. { 'vendor/name': 'pending'|'in-process'|'installed' }
-
-            function updatePackageStatus(pkgValue, status) {
-                let $status = $(`.package-status[data-package="${pkgValue}"]`);
-                let $text = $status.find('.progress-text');
-
-                if (status === 'in-process') {
-                    $status.show();
-
-                    // Only initialize to 0 if not already started
-                    if (typeof currentProgress[pkgValue] === 'undefined') {
-                        currentProgress[pkgValue] = 0;
-                        $text.text('0%');
-                        startFakeProgress(pkgValue);
-                    }
-
-                } else if (status === 'installed') {
-                    completeFakeProgress(pkgValue);
-                } else {
-                    $status.hide();
-                    if (fakeProgressIntervals[pkgValue]) {
-                        clearInterval(fakeProgressIntervals[pkgValue]);
-                        delete fakeProgressIntervals[pkgValue];
-                    }
-                    delete currentProgress[pkgValue];
-                }
-            }
-
-
-
-            function updateSelectAllCheckboxes() {
-                // Update common packages select all
-                if ($('.common-package-checkbox:checked').length === $('.common-package-checkbox').length && $('.common-package-checkbox').length > 0) {
-                    $('#selectAllCommonPackages').prop('checked', true);
-                } else {
-                    $('#selectAllCommonPackages').prop('checked', false);
-                }
-
-                // Update industry packages select all
-                if ($('.industry-package-checkbox:checked').length === $('.industry-package-checkbox').length && $('.industry-package-checkbox').length > 0) {
-                    $('#selectAllIndustryPackages').prop('checked', true);
-                } else {
-                    $('#selectAllIndustryPackages').prop('checked', false);
-                }
-            }
-
-            // Select All Common Packages functionality
-            $('#selectAllCommonPackages').on('change', function() {
-                $('.common-package-checkbox').prop('checked', this.checked).trigger('change');
-            });
-
-            // Select All Industry Packages functionality
-            $('#selectAllIndustryPackages').on('change', function() {
-                $('.industry-package-checkbox').prop('checked', this.checked).trigger('change');
-            });
-
-            // If any package-checkbox is unchecked, uncheck respective Select All
-            $(document).on('change', '.package-checkbox', function() {
-                updateSelectAllCheckboxes();
-            });
 
             $('#industry').select2({
                 placeholder: "Select an industry",
@@ -599,16 +450,9 @@
                 $('#packageError').hide(); // <-- Always hide at the start
                 $('.form-step').removeClass('active');
                 $('.form-step[data-step="' + step + '"]').addClass('active');
-                if (step === 3) {
-                    updateSelectAllCheckboxes();
-                }
                 var $step = $('.form-step[data-step="' + step + '"]');
                 $step.find('input, select').removeClass('is-invalid');
                 $step.find('.invalid-feedback').hide();
-                // Also hide package error if on step 3
-                if (step === 3) {
-                    $('#packageError').hide();
-                }
             }
 
             function validateStep(step) {
@@ -633,14 +477,6 @@
                         }
                     });
                 } else if (step === 3) {
-                    if ($('.package-checkbox:checked').length === 0) {
-                        toastr.error('Please select at least one package.');
-                        $('#packageError').show();
-                        valid = false;
-                    } else {
-                        $('#packageError').hide();
-                    }
-                } else if (step === 4) {
                     $step.find('input[required], select[required]').each(function() {
                         if (!this.value) {
                             $(this).addClass('is-invalid');
@@ -663,7 +499,6 @@
             const endpoints = {
                 industry: base_url + '/store-industry',
                 database: base_url + '/create-database',
-                packages: base_url + '/store-packages',
                 admin: base_url + '/store-admin-credentails'
             };
 
@@ -683,15 +518,23 @@
                         method: 'POST',
                         data: {
                             industry: $('#industry').val(),
+                            insert_dummy_data: $('#is_dummy_data').is(':checked') ? 1 : 0,
                             _token: $('meta[name="csrf-token"]').attr('content') // If using Laravel
                         },
                         success: function(res) {
-                            window.location.reload();
+                            // window.location.reload();
                             showStep(2);
                         },
                         error: function(xhr, status, error) {
                             console.log('❌ Error:', xhr.status, xhr.responseText);
-                            response = JSON.parse(xhr.responseText);
+                            let response = {};
+                            try {
+                                if (xhr.responseText) {
+                                    response = JSON.parse(xhr.responseText);
+                                }
+                            } catch (e) {
+                                console.error('Invalid JSON response', e);
+                            }
                             if (xhr.status === 400) {
                                 toastr.error(response.message);
                             } else if (xhr.status === 422) {
@@ -707,6 +550,10 @@
                         }
                     });
                 } else if (step === 2) {
+                    let $btn = $(this);
+                    $btn.prop('disabled', true).text('Processing...');
+
+                    // 1️⃣ Create Database
                     $.ajax({
                         url: endpoints.database,
                         method: 'POST',
@@ -718,138 +565,41 @@
                             _token: $('meta[name="csrf-token"]').attr('content')
                         },
                         success: function(res) {
-                            if (res.status === 'error') {
-                                toastr.error(res.message);
-                                return;
-                            }
-
-                            if (res.error) {
-                                toastr.error(res.error);
+                            if (res.status === 'error' || res.error) {
+                                toastr.error(res.message || res.error);
+                                $btn.prop('disabled', false).text('Next');
                                 return;
                             }
                             toastr.success(res.message);
-                            showStep(3);
-                        },
-                        error: function(xhr, status, error) {
-                            console.log('❌ Error:', xhr.status, xhr.responseText);
-                            response = JSON.parse(xhr.responseText);
-                            if (xhr.status === 400) {
-                                toastr.error(response.message);
-                            } else if (xhr.status === 422) {
-                                let errors = xhr.responseJSON.errors;
-                                for (const field in errors) {
-                                    toastr.error(errors[field][
-                                        0
-                                    ]); // Show first error per field
-                                }
-                            } else {
-                                toastr.error(response.message || 'Something went wrong. Please try again.');
-                            }
-                        }
-                    });
-                } else if (step === 3) {
-                    endpoints.checkPackage = "{{ route('check.package') }}";
-                    let packages = [];
-                    $('.package-checkbox:checked').each(function() {
-                        packages.push($(this).val());
-                    });
-                    if (packages.length === 0) {
-                        $('#packageError').show();
-                        return;
-                    } else {
-                        $('#packageError').hide();
-                        activeBtn.attr('disabled', true);
-                        activeBtn.text('Installing Packages...');
-                        $('.prev-step').prop('disabled', true); // Disable Previous
-                    }
+                            $btn.prop('disabled', true).text('Installing...');
 
-                    $('.package-checkbox').each(function(idx) {
-                        let pkg = $(this).val();
-                        if ($(this).is(':checked')) {
-                            packageStatus[pkg] = 'in-process';
-                            updatePackageStatus(pkg, 'in-process'); // show spinner
-
-                            // Immediately check via AJAX if already installed
-                            $.ajax({
-                                url: endpoints.checkPackage, // define this endpoint
-                                method: 'POST',
-                                data: {
-                                    package: pkg,
-                                    _token: $('meta[name="csrf-token"]').attr('content')
-                                },
-                                success: function(res) {
-                                    if (res.status === 'installed') {
-                                        updatePackageStatus(pkg, 'installed');
+                            // 2️⃣ Install Packages only after DB creation success
+                            setTimeout(function() {
+                                $.ajax({
+                                    url: "{{ route('store-packages') }}",
+                                    method: 'POST',
+                                    data: {
+                                        _token: $('meta[name="csrf-token"]').attr('content')
+                                    },
+                                    success: function(res) {
+                                        alert("success");
+                                        toastr.success(res.message || 'Packages installed successfully!');
+                                        // ✅ Show Step 3 only after packages installed
+                                        showStep(3);
+                                        $btn.prop('disabled', false).text('Next');
+                                    },
+                                    error: function(xhr) {
+                                        alert("error");
+                                        toastr.error(xhr.responseJSON?.message || 'Error installing packages.');
+                                        $btn.prop('disabled', false).text('Next');
                                     }
-                                },
-                                error: function(xhr) {
-                                    console.error('Check install error for', pkg, xhr
-                                        .responseText);
-                                }
-                            });
-
-                        } else {
-                            updatePackageStatus(pkg, ''); // Hide for unselected
-                        }
-                    });
-
-                    $.ajax({
-                        url: endpoints.packages,
-                        method: 'POST',
-                        data: {
-                            packages: packages,
-                            _token: $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function(res) {
-                            if (res.message === 'Packages already installed.' || res.skip_install) {
-                                toastr.success(res.message);
-                                setTimeout(() => {
-                                    window.location.reload(); // 🔄 Refresh the page
-                                }, 100);
-                                // activeBtn.prop('disabled', false).text('Next');
-                                // $('.prev-step').prop('disabled', false); // Re-enable Previous
-                                // showStep(4);
-                                return;
-                            } else {
-                                let delay = 0;
-                                packages.forEach((pkg, index) => {
-                                    setTimeout(() => {
-                                        updatePackageStatus(pkg, 'in-process');
-                                        setTimeout(() => {
-                                            updatePackageStatus(pkg,
-                                                'installed');
-                                            if (index === packages.length -
-                                                1) {
-                                                toastr.success(res.message);
-                                                activeBtn.prop('disabled',
-                                                    false).text('Next');
-                                                $('.prev-step').prop('disabled', false); // Re-enable Previous
-                                                showStep(4);
-                                            }
-                                            window.location.reload();
-                                        }, 1000);
-                                    }, index * 1500);
                                 });
-                            }
+                            }, 10000);
+
                         },
-                        error: function(xhr, status, error) {
-                            activeBtn.attr('disabled', false);
-                            activeBtn.text('Next');
-                            $('.prev-step').prop('disabled', false); // Re-enable Previous
-                            console.log('❌ Error:', xhr.status, xhr.responseText);
-                            response = JSON.parse(xhr.responseText);
-                            if (xhr.status === 400) {
-                                toastr.error(response.message);
-                            } else if (xhr.status === 422) {
-                                let errors = xhr.responseJSON.errors;
-                                for (const field in errors) {
-                                    toastr.error(errors[field][
-                                        0
-                                    ]); // Show first error per field
-                                }
-                            } else {
-                                toastr.error(response.message || 'Something went wrong. Please try again.');
-                            }
+                        error: function(xhr) {
+                            toastr.error(xhr.responseJSON?.message || 'Database creation failed.');
+                            $btn.prop('disabled', false).text('Next');
                         }
                     });
                 }
@@ -861,6 +611,11 @@
                 var step = parseInt($currentStep.data('step'));
                 $('#packageError').hide(); // <-- Add this line
                 showStep(step - 1);
+                if (step === 3) {
+                    showStep(2);
+                } else {
+                    showStep(step - 1);
+                }
             });
 
             // Remove validation error on change/input
@@ -875,26 +630,20 @@
                 }
             });
 
-            $('.package-checkbox').on('change', function() {
-                console.log('Package checkbox changed:', $('.package-checkbox:checked').length);
-
-                if ($('.package-checkbox:checked').length > 0) {
-                    $('#packageError').css('display', 'none');
-                } else {
-                    $('#packageError').css('display', 'block');
-                }
-            });
-
             // Final Submit (Admin Credentials)
             $('#multiStepForm').on('submit', function(e) {
                 e.preventDefault();
-                if (!validateStep(4)) return;
+                if (!validateStep(3)) return;
+
+                // Get dummy data flag from session (or hidden input)
+                let insertDummy = "{{ session('insert_dummy_data', 0) }}"; // 0 if not set
                 $.ajax({
                     url: endpoints.admin,
                     method: 'POST',
                     data: {
                         admin_email: $('#adminEmail').val(),
                         admin_password: $('#adminPassword').val(),
+                        is_dummy_data: insertDummy,
                         _token: $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function(res) {
@@ -902,18 +651,21 @@
                         setTimeout(function() {
                             $('#formSuccess').fadeOut();
                             $('#multiStepForm')[0].reset();
-                            // showStep(1);
                             $('#industry').val(null).trigger('change');
 
                             window.location.href = res.redirect_url;
                         }, 1500);
                     },
                     error: function(xhr, status, error) {
+                        console.log('❌ Error:', xhr.status, xhr.responseText);
                         let response = {};
                         try {
-                            response = JSON.parse(xhr.responseText);
-                        } catch (e) {}
-
+                            if (xhr.responseText) {
+                                response = JSON.parse(xhr.responseText);
+                            }
+                        } catch (e) {
+                            console.error('Invalid JSON response', e);
+                        }
                         // Remove previous errors
                         $('#adminEmail, #adminPassword').removeClass('is-invalid');
                         $('#adminEmail').siblings('.invalid-feedback').hide();
@@ -955,25 +707,7 @@
         });
     </script>
 
-    <script src="{{ asset('backend/theme.js') }}"></script>
 
-    <script>
-        @if(session('success'))
-        toastr.success("{{ session('success') }}");
-        @endif
-
-        @if(session('error'))
-        toastr.error("{{ session('error') }}");
-        @endif
-
-        @if(session('info'))
-        toastr.info("{{ session('info') }}");
-        @endif
-
-        @if(session('warning'))
-        toastr.warning("{{ session('warning') }}");
-        @endif
-    </script>
 
 
 </body>
