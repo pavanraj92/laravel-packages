@@ -518,7 +518,7 @@
                         method: 'POST',
                         data: {
                             industry: $('#industry').val(),
-                            insert_dummy_data: $('#is_dummy_data').is(':checked') ? 1 : 0,
+                            is_dummy_data: $('#is_dummy_data').is(':checked') ? 1 : 0,
                             _token: $('meta[name="csrf-token"]').attr('content') // If using Laravel
                         },
                         success: function(res) {
@@ -582,14 +582,12 @@
                                         _token: $('meta[name="csrf-token"]').attr('content')
                                     },
                                     success: function(res) {
-                                        alert("success");
                                         toastr.success(res.message || 'Packages installed successfully!');
                                         // ✅ Show Step 3 only after packages installed
                                         showStep(3);
                                         $btn.prop('disabled', false).text('Next');
                                     },
                                     error: function(xhr) {
-                                        alert("error");
                                         toastr.error(xhr.responseJSON?.message || 'Error installing packages.');
                                         $btn.prop('disabled', false).text('Next');
                                     }
