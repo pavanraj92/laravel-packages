@@ -73,7 +73,7 @@ class WizardController extends Controller
     {
         $validator = FacadesValidator::make($request->all(), [
             'industry' => 'required|string',
-            'is_dummy_data' => 'nullable|boolean',
+            'is_dummy_data' => 'nullable',
         ]);
 
         if ($validator->fails()) {
@@ -196,7 +196,7 @@ class WizardController extends Controller
                 'max:255',
                 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).+$/',
             ],
-            'is_dummy_data' => 'nullable|boolean',
+            'is_dummy_data' => 'nullable',
         ], [
             'admin_password.regex' => 'Password must be at least 8 characters and include at least one uppercase letter, one lowercase letter, one number, and one special character.',
         ]);
@@ -210,7 +210,7 @@ class WizardController extends Controller
 
         // migrate the database
         Artisan::call('migrate', ['--force' => true]);
-        $isDummyData = $request->input('is_dummy_data', false);
+        $isDummyData =  Session::get('insert_dummy_data') ?? 0;
 
         $websiteName = Session::get('db.websiteName');
         $websiteSlug = Str::slug($websiteName);
@@ -236,6 +236,27 @@ class WizardController extends Controller
         }
         if (is_dir(base_path('vendor/admin/settings'))) {
             $this->safeArtisanSeed('Admin\\Settings\\Database\\Seeders\\SettingSeeder');
+        }
+
+        if(Session::get('insert_dummy_data') == 1){
+            if (is_dir(base_path('vendor/admin/users'))) {
+                $this->safeArtisanSeed('Admin\\Users\\Database\\Seeders\\UserSeeder');
+            }
+            if (is_dir(base_path('vendor/admin/categories'))) {
+                $this->safeArtisanSeed('Admin\Categories\Database\Seeders\\CategorySeeder');
+            }
+            if(Session::get('industry') == 'ecommerce'){
+                if (is_dir(base_path('vendor/admin/brands'))) {
+                    $this->safeArtisanSeed('Admin\Brands\Database\Seeders\\BrandSeeder');
+                }
+                if (is_dir(base_path('vendor/admin/products'))) {
+                    $this->safeArtisanSeed('Admin\Products\Database\Seeders\\ProductSeeder');
+                }
+            }elseif(Session::get('industry') == 'education'){
+                if (is_dir(base_path('vendor/admin/courses'))) {
+                    $this->safeArtisanSeed('Admin\Courses\Database\Seeders\\CourseWithLecturesSeeder');
+                }
+            }
         }
         // if (is_dir(base_path('vendor/admin/emails'))) {
         //     $this->safeArtisanSeed('Admin\Emails\Database\Seeders\\MailDatabaseSeeder');
@@ -527,13 +548,15 @@ class WizardController extends Controller
 
         // Full PHP path on Windows (adjust if needed)
         $phpPath = PHP_BINARY;
-        $composerPath = $isWindows ? 'C:\\composer\\composer.phar' : 'composer';
+        // $composerPath = $isWindows ? 'C:\\composer\\composer.phar' : 'composer';
+        $composerPath = $this->detectComposerPath();
 
         foreach ($packages as $pkg) {
             $packageString = "{$pkg}:@dev";
-            $command = $isWindows
-                ? "\"$phpPath\" \"$composerPath\" require $packageString"
-                : "$composerPath require $packageString";
+            // $command = $isWindows
+            //     ? "\"$phpPath\" \"$composerPath\" require $packageString"
+            //     : "$composerPath require $packageString";
+              $command = "$composerPath require $packageString --no-interaction";
 
             $outputMessages[] = "Installing $pkg ...";
 
@@ -549,4 +572,24 @@ class WizardController extends Controller
 
         return [$exitCode, implode("\n", $outputMessages)];
     }
+
+    private function detectComposerPath(): string
+    {
+        $phpPath = PHP_BINARY;
+
+        // Check if composer is installed globally
+        $globalComposer = trim(shell_exec("where composer 2>NUL") ?: shell_exec("which composer"));
+        if (!empty($globalComposer)) {
+            return "composer"; // no php prefix needed
+        }
+
+        // Check for composer.phar in project root
+        $projectComposer = base_path('composer.phar');
+        if (file_exists($projectComposer)) {
+            return "\"$phpPath\" \"$projectComposer\"";
+        }
+
+        throw new \RuntimeException("Composer not found. Install Composer globally or place composer.phar in project root.");
+    }
+
 }

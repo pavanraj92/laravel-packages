@@ -34,7 +34,12 @@
             "Admin\\AdminRolePermissions\\Database\\Seeders\\": "vendor/admin/admin_role_permissions/database/seeders/",
             "Admin\\AdminAuth\\Database\\Seeders\\": "vendor/admin/admin_auth/database/seeders/",
             "Admin\\Emails\\Database\\Seeders\\": "vendor/admin/emails/database/seeders/",
-            "Admin\\ShippingCharges\\Database\\Seeders\\": "vendor/admin/shipping_charges/database/seeders/"
+            "Admin\\ShippingCharges\\Database\\Seeders\\": "vendor/admin/shipping_charges/database/seeders/",
+            "Admin\\Categories\\Database\\Seeders\\": "vendor/admin/categories/database/seeders/",
+            "Admin\\Brands\\Database\\Seeders\\": "vendor/admin/brands/database/seeders/",
+            "Admin\\Products\\Database\\Seeders\\": "vendor/admin/products/database/seeders/",
+            "Admin\\Courses\\Database\\Seeders\\": "vendor/admin/courses/database/seeders/",
+            "Admin\\Quizzes\\Database\\Seeders\\": "vendor/admin/quizzes/database/seeders/"
         }
     },
     "autoload-dev": {
