@@ -315,11 +315,7 @@
             <div class="industry-text">
                 <h5 class="mb-1 fw-bold">Basic Packages</h5>
                 <p class="mb-0">
-                    Includes <strong>Admin Auth, User, User Roles, Settings</strong> packages installed automatically.
-                </p>
-                <h5 class="my-1 fw-bold">E-commerce Packages</h5>
-                <p class="mb-0">
-                    Includes <strong>Brand, Category, Product</strong> packages installed automatically.
+                    Includes <strong>Admin Auth and Settings</strong> packages installed automatically.
                 </p>
             </div>
         </div>`,
@@ -328,11 +324,7 @@
             <div class="industry-text">
                 <h5 class="mb-1 fw-bold">Basic Packages</h5>
                 <p class="mb-0">
-                    Includes <strong>Admin Auth, User, User Roles, Settings</strong> packages installed automatically.
-                </p>
-                <h5 class="my-1 fw-bold">Education Packages</h5>
-                <p class="mb-0">
-                    Includes <strong>Category, Course & Lecture</strong> packages installed automatically.
+                    Includes <strong>Admin Auth and Settings</strong> packages installed automatically.
                 </p>
             </div>
         </div>`

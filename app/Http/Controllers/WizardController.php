@@ -293,22 +293,22 @@ class WizardController extends Controller
         // $defaultPackage = ['admin/admin_auth', 'admin/settings'];
         $defaultPackages = [
             'admin/admin_auth',
-            'admin/users',
-            'admin/user_roles',
+            // 'admin/users',
+            // 'admin/user_roles',
             'admin/settings',
         ];
 
-        $industryPackagesMap = [
-            'ecommerce' => [
-                'admin/categories',
-                'admin/brands',
-                'admin/products',
-            ],
-            'education' => [
-                'admin/categories',
-                'admin/courses',
-            ],
-        ];
+        // $industryPackagesMap = [
+        //     'ecommerce' => [
+        //         'admin/categories',
+        //         'admin/brands',
+        //         'admin/products',
+        //     ],
+        //     'education' => [
+        //         'admin/categories',
+        //         'admin/courses',
+        //     ],
+        // ];
 
         $industry = Session::get('industry', 'ecommerce');
         $industryPackages = $industryPackagesMap[$industry] ?? [];
@@ -318,18 +318,18 @@ class WizardController extends Controller
 
         // Already installed?
         $installedPackages = Session::get('installed_packages', []);
-        if (!array_diff($packagesToInstall, $installedPackages)) {
+        if (!array_diff($defaultPackages, $installedPackages)) {
             return response()->json([
                 'status'   => 'success',
                 'message'  => 'Packages already installed.',
-                'packages' => $packagesToInstall,
+                'packages' => $defaultPackages,
             ]);
         }
 
         try {
             set_time_limit(0);
             chdir(base_path());
-            [$exitCode, $output] = $this->composerPassthru($packagesToInstall);
+            [$exitCode, $output] = $this->composerPassthru($defaultPackages);
 
             if ($exitCode !== 0) {
                 return response()->json([
@@ -338,7 +338,7 @@ class WizardController extends Controller
                 ], 500);
             }
 
-            Session::put('installed_packages', $packagesToInstall);
+            Session::put('installed_packages', $defaultPackages);
 
             return response()->json([
                 'status'  => 'success',
