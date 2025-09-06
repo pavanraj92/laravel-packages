@@ -10,9 +10,6 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "admin/admin_auth": "@dev",
-        "admin/faqs": "@dev",
-        "admin/settings": "@dev",
         "kyslik/column-sortable": "^7.0",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
@@ -94,100 +91,120 @@
     "prefer-stable": true,
     "repositories": [
         {
-            "type": "path",
-            "url": "packages/admin/admin_auth"
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-auth.git"
         },
         {
-            "type": "path",
-            "url": "packages/admin/admins"
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-admins.git"
         },
         {
-            "type": "path",
-            "url": "packages/admin/users"
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-users.git"
         },
         {
-            "type": "path",
-            "url": "packages/admin/user-roles"
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-user-roles.git"
         },
         {
-            "type": "path",
-            "url": "packages/admin/categories"
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-categories.git"
         },
         {
-            "type": "path",
-            "url": "packages/admin/emails"
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-emails.git"
         },
         {
-            "type": "path",
-            "url": "packages/admin/pages"
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-pages.git"
         },
         {
-            "type": "path",
-            "url": "packages/admin/faqs"
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-faqs.git"
         },
         {
-            "type": "path",
-            "url": "packages/admin/banners"
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-banners.git"
         },
         {
-            "type": "path",
-            "url": "packages/admin/settings"
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-settings.git"
         },
         {
-            "type": "path",
-            "url": "packages/admin/admin-role-permission"
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-role-permission.git"
         },
         {
-            "type": "path",
-            "url": "packages/admin/tags"
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-tags.git"
         },
         {
-            "type": "path",
-            "url": "packages/admin/brands"
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-brands.git"
         },
         {
-            "type": "path",
-            "url": "packages/admin/ratings"
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-ratings.git"
         },
         {
-            "type": "path",
-            "url": "packages/admin/enquiry"
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-contact-enquiry.git"
         },
         {
-            "type": "path",
-            "url": "packages/admin/products"
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-products.git"
         },
         {
-            "type": "path",
-            "url": "packages/admin/certificates"
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-shipping-charges.git"
         },
         {
-            "type": "path",
-            "url": "packages/admin/courses"
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-course-certificates.git"
         },
         {
-            "type": "path",
-            "url": "packages/admin/wishlists"
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-course-lectures.git"
         },
         {
-            "type": "path",
-            "url": "packages/admin/coupons"
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-wishlist.git"
         },
         {
-            "type": "path",
-            "url": "packages/admin/quizzes"
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-coupon-discounts.git"
         },
         {
-            "type": "path",
-            "url": "packages/admin/course-reports"
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-quizzes.git"
         },
         {
-            "type": "path",
-            "url": "packages/admin/course-transactions"
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-product-return-refunds.git"
         },
         {
-            "type": "path",
-            "url": "packages/admin/commission"
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-product-transactions.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-product-reports.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-product-inventories.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-course-reports.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-course-transactions.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/pavanraj92/admin-commission.git"
         }
     ]
 }
