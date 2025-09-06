@@ -92,32 +92,7 @@
             cursor: pointer;
             color: #6c757d;
             z-index: 10;
-        }
-
-        .industry-text-color {
-            color: #f48120;
-        }
-
-        #industryDescription .alert {
-            font-size: 0.95rem;
-            background: #e9f5ff;
-            border-color: #b6e0fe;
-            color: #084298;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-        }
-
-        #industryDescription i.fa-info-circle {
-            font-size: 1.2rem;
-        }
-
-        #industryDescription .industry-text strong {
-            color: #0d6efd;
-        }
-
-        #industryDescription .industry-text span {
-            color: #0d6efd;
-            font-weight: 500;
-        }
+        }        
     </style>
 </head>
 
@@ -174,9 +149,7 @@
                                             </option>
                                             @endforeach
                                             @endif
-                                        </select>
-                                        <div id="industryDescription" class="form-text text-muted mt-2">
-                                        </div>
+                                        </select>                                        
                                         <div class="form-check mt-3">
                                             <input class="form-check-input" type="checkbox" value="1" id="is_dummy_data" name="is_dummy_data">
                                             <label class="form-check-label" for="is_dummy_data">
@@ -262,9 +235,6 @@
                                     <button type="submit" class="btn-outline-success">Submit</button>
                                 </div>
                             </form>
-                            <div class="alert alert-success mt-3" id="formSuccess" style="display:none;">
-                                Your Laravel admin panel has been successfully set up!
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -305,41 +275,6 @@
     </script>
 
     <script>
-        const industrySelect = $('#industry');
-        const descriptionDiv = $('#industryDescription');
-
-
-        const industryDescriptions = {
-            'ecommerce': `<div class="alert alert-gradient d-flex align-items-start p-3 rounded-4 shadow-sm" role="alert" style="border-color:#b6e0fe ;background: background: #e9f5ff;">
-            <i class="fa fa-shopping-cart fa-2x me-3 mt-1" aria-hidden="true"></i>
-            <div class="industry-text">
-                <h5 class="mb-1 fw-bold">Basic Packages</h5>
-                <p class="mb-0">
-                    Includes <strong>Admin Auth and Settings</strong> packages installed automatically.
-                </p>
-            </div>
-        </div>`,
-            'education': `<div class="alert alert-gradient d-flex align-items-start p-3 rounded-4 shadow-sm" role="alert" style="style="background: background: #e9f5ff; color: #fff;">
-            <i class="fa fa-graduation-cap fa-2x me-3 mt-1" aria-hidden="true"></i>
-            <div class="industry-text">
-                <h5 class="mb-1 fw-bold">Basic Packages</h5>
-                <p class="mb-0">
-                    Includes <strong>Admin Auth and Settings</strong> packages installed automatically.
-                </p>
-            </div>
-        </div>`
-        };
-
-        // Listen to Select2 change
-        industrySelect.on('change', function() {
-            const selected = $(this).val();
-            if (selected && industryDescriptions[selected]) {
-                descriptionDiv.html(industryDescriptions[selected]);
-            } else {
-                descriptionDiv.html('Select an industry to see what packages will be installed.');
-            }
-        });
-
         // Trigger change on page load to set initial description
         document.addEventListener("DOMContentLoaded", function() {
             const toggles = document.querySelectorAll(".toggle-password");
@@ -584,7 +519,7 @@
                                         $btn.prop('disabled', false).text('Next');
                                     }
                                 });
-                            }, 10000);
+                            }, 2000);
 
                         },
                         error: function(xhr) {
@@ -637,9 +572,7 @@
                         _token: $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function(res) {
-                        $('#formSuccess').show();
                         setTimeout(function() {
-                            $('#formSuccess').fadeOut();
                             $('#multiStepForm')[0].reset();
                             $('#industry').val(null).trigger('change');
 
