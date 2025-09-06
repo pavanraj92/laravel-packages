@@ -84,8 +84,10 @@ return [
 
     'package_display_names' => [
         'admin/admin_auth' => 'Admin Authentication',
+        'admin/admins' => 'Admin Manager',
         'admin/admin_role_permissions'    => 'Admin Role & Permission Manager',
         'admin/users'     => 'User Manager',
+        'admin/user_roles'     => 'User Role Manager',
         'admin/pages'     => 'CMS Pages Manager',
         'admin/emails'    => 'Email Template Manager',
         'admin/banners'   => 'Banner Manager',
