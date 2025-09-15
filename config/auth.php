@@ -71,7 +71,9 @@ return [
 
         'admins' => [
             'driver' => 'eloquent',
-            'model' => admin\admin_auth\Models\Admin::class,
+            'model' => class_exists(\Modules\AdminAuth\app\Models\Admin::class)
+                ? \Modules\AdminAuth\app\Models\Admin::class
+                : \admin\admin_auth\Models\Admin::class,
         ],
 
         // 'users' => [
